@@ -1,0 +1,149 @@
+programme (dict)
+  cached (bool) = 'False'
+  date (int) = '1777154400000'
+  timezoneOffset (int) = '7200000'
+  reunions (list)
+    [15 items, first shown]
+      cached (bool) = 'False'
+      timezoneOffset (int) = '7200000'
+      dateReunion (int) = '1777154400000'
+      numOfficiel (int) = '1'
+      numOfficielReunionPrecedente (NoneType) = 'None'
+      numOfficielReunionSuivante (int) = '2'
+      numExterne (int) = '1'
+      nature (str) = 'DIURNE'
+      hippodrome (dict)
+        code (str) = 'LON'
+        libelleCourt (str) = 'ParisLongchamp'
+        libelleLong (str) = 'HIPPODROME DE PARISLONGCHAMP'
+      pays (dict)
+        code (str) = 'FRA'
+        libelle (str) = 'FRANCE'
+      courses (list)
+        [8 items, first shown]
+          cached (bool) = 'False'
+          departImminent (bool) = 'False'
+          arriveeDefinitive (bool) = 'True'
+          timezoneOffset (int) = '7200000'
+          numReunion (int) = '1'
+          numExterneReunion (int) = '1'
+          numOrdre (int) = '1'
+          numExterne (int) = '1'
+          heureDepart (int) = '1777204680000'
+          libelle (str) = 'PRIX DE BARBEVILLE'
+          libelleCourt (str) = 'DE BARBEVILLE'
+          montantPrix (int) = '73200'
+          parcours (str) = '3000 M. (GRANDE PISTE)'
+          distance (int) = '3000'
+          distanceUnit (str) = 'METRE'
+          corde (str) = 'CORDE_DROITE'
+          discipline (str) = 'PLAT'
+          specialite (str) = 'PLAT'
+          categorieParticularite (str) = 'GROUPE_III'
+          conditionAge (str) = 'QUATRE_ANS_ET_PLUS'
+          conditionSexe (str) = 'TOUS_CHEVAUX'
+          nombreDeclaresPartants (int) = '5'
+          grandPrixNationalTrot (bool) = 'False'
+          numSocieteMere (int) = '383'
+          pariMultiCourses (bool) = 'False'
+          pariSpecial (bool) = 'False'
+          montantTotalOffert (int) = '73200'
+          montantOffert1er (int) = '36600'
+          montantOffert2eme (int) = '14640'
+          montantOffert3eme (int) = '10980'
+          montantOffert4eme (int) = '7320'
+          montantOffert5eme (int) = '3660'
+          conditions (str) = 'Pour tous chevaux de 4 ans et au-dessus. Poids : 4 ans, 57 k'
+          numCourseDedoublee (int) = '0'
+          paris (list)
+            [12 items, first shown]
+              typePari (str) = 'SIMPLE_GAGNANT'
+              miseBase (int) = '200'
+              enVente (bool) = 'False'
+              audience (str) = 'NATIONAL'
+              reportable (bool) = 'True'
+              misEnPaiement (bool) = 'True'
+              codePari (str) = 'SIMPLE_GAGNANT'
+              spotAutorise (bool) = 'True'
+              nbChevauxReglementaire (int) = '1'
+              ordre (bool) = 'False'
+              combine (bool) = 'True'
+              complement (bool) = 'False'
+              infosJackpot (dict)
+                .programme.reunions[0].courses[0].paris[0].infosJackpot ...
+          typePiste (str) = 'HERBE'
+          statut (str) = 'FIN_COURSE'
+          categorieStatut (str) = 'ARRIVEE'
+          dureeCourse (int) = '201030'
+          participants (list)
+            [0 items, first shown]
+          ecuries (list)
+            [0 items, first shown]
+          penetrometre (dict)
+            valeurMesure (str) = '3,2'
+            heureMesure (str) = '2026-04-26T10:00'
+            intitule (str) = 'Bon'
+            commentaire (str) = ''
+          incidents (list)
+            [1 items, first shown]
+              type (str) = 'NON_PARTANT'
+              numeroParticipants (list)
+                .programme.reunions[0].courses[0].incidents[0].numeroParticipants ...
+          rapportsDefinitifsDisponibles (bool) = 'True'
+          isArriveeDefinitive (bool) = 'True'
+          isDepartImminent (bool) = 'False'
+          isDepartAJPlusUn (bool) = 'False'
+          cagnottes (list)
+            [0 items, first shown]
+          pronosticsExpires (bool) = 'True'
+          replayDisponible (bool) = 'True'
+          hippodrome (dict)
+            codeHippodrome (str) = 'LON'
+            libelleCourt (str) = 'ParisLongchamp'
+            libelleLong (str) = 'HIPPODROME DE PARISLONGCHAMP'
+          epcPourTousParis (bool) = 'True'
+          courseTrackee (bool) = 'False'
+          courseExclusiveInternet (bool) = 'False'
+          formuleChampLibreIndisponible (bool) = 'False'
+          ordreArrivee (list)
+            [4 items, first shown]
+              [1 items, first shown]
+                .programme.reunions[0].courses[0].ordreArrivee[0][0] ...
+          hasEParis (bool) = 'True'
+      audience (str) = 'NATIONAL'
+      statut (str) = 'TERMINEE'
+      disciplinesMere (list)
+        [1 items, first shown]
+      specialites (list)
+        [1 items, first shown]
+      derniereReunion (bool) = 'False'
+      parisEvenement (list)
+        [7 items, first shown]
+          codePari (str) = 'QUINTE_PLUS'
+          course (dict)
+            dateProgramme (int) = '1777154400000'
+            numReunion (int) = '1'
+            numOrdre (int) = '3'
+      meteo (dict)
+        datePrevision (int) = '1777187700000'
+        nebulositeCode (str) = 'P4'
+        nebulositeLibelleCourt (str) = 'Peu Nuageux'
+        nebulositeLibelleLong (str) = "Le soleil l'emportera et les nuages resteront discrets."
+        temperature (int) = '19'
+        forceVent (int) = '9'
+        directionVent (str) = 'NE'
+      offresInternet (bool) = 'False'
+      cagnottes (list)
+        [12 items, first shown]
+          numCourse (int) = '5'
+          typePari (str) = 'SIMPLE_PLACE'
+          montant (int) = '100000'
+          cagnotteInternet (bool) = 'False'
+      reportPlusFpaMax (int) = '20'
+  prochainesCoursesAPartir (list)
+    [0 items, first shown]
+  datesProgrammesDisponibles (list)
+    [3 items, first shown]
+timestampPMU (dict)
+  timestamp (int) = '1793055332150'
+  timezoneOffset (int) = '3600000'
