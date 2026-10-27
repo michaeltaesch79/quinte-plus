@@ -89,7 +89,7 @@ def catch_up(start, end):
 def bootstrap(today):
     log("bootstrap: downloading 12 months of Quinté data")
     ok = (catch_up(today - timedelta(days=366), today - timedelta(days=1))
-          and run("build_dataset.py") and run("backtest.py", timeout=3 * 3600))
+          and run("build_dataset.py") and run("features.py") and run("backtest.py", timeout=3 * 3600))
     if ok:
         BOOTSTRAPPED.write_text(today.isoformat(), encoding="utf-8")
     return ok
