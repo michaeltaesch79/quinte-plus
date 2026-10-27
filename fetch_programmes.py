@@ -17,7 +17,8 @@ import time
 import urllib.error
 import urllib.request
 from datetime import date, timedelta
-from pathlib import Path
+
+from paths import DATA
 
 # Both hosts appear in public examples. Which one keeps older days is not
 # documented, so we try "online" first and fall back to "offline".
@@ -25,7 +26,8 @@ HOSTS = [
     "https://online.turfinfo.api.pmu.fr/rest/client/7/programme/",
     "https://offline.turfinfo.api.pmu.fr/rest/client/7/programme/",
 ]
-OUT = Path(__file__).parent / "data" / "raw" / "programme"
+
+OUT = DATA / "raw" / "programme"
 PAUSE_S = 1.0
 MAX_MISSING_STREAK = 10  # stop rather than hammer the API if a whole range is gone
 HEADERS = {"User-Agent": "quinte-perso/0.1 (usage personnel)", "Accept": "application/json"}

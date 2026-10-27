@@ -12,12 +12,12 @@ Usage (Python 3.9+, no extra packages):
 Re-running skips races already downloaded, so it is safe to stop and restart.
 Personal use only: one request per second, no parallel calls.
 """
-from pathlib import Path
 
 from fetch_participants import download, parse_scope
+from paths import DATA
 
 ENDPOINT = "rapports-definitifs"
-OUT = Path(__file__).parent / "data" / "raw" / "rapports"
+OUT = DATA / "raw" / "rapports"
 
 if __name__ == "__main__":
     download(parse_scope(__doc__), ENDPOINT, OUT)

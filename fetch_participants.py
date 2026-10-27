@@ -18,8 +18,9 @@ import time
 from pathlib import Path
 
 from fetch_programmes import HOSTS, PAUSE_S, MAX_MISSING_STREAK, fetch
+from paths import DATA
 
-ROOT = Path(__file__).parent / "data" / "raw"
+ROOT = DATA / "raw"
 PROG = ROOT / "programme"
 OUT = ROOT / "participants"
 
