@@ -110,7 +110,8 @@ Mode object:
 1. New Railway project → Deploy from GitHub repo `quinte-plus`. Railway builds the `Dockerfile`.
 2. Add a **volume** to the service (mount path e.g. `/data`, 1 GB is plenty). Railway sets
    `RAILWAY_VOLUME_MOUNT_PATH`, which the scripts use for all data.
-3. Variables: `APP_PASSWORD` = a password (the phone asks for it once; any user name).
+3. Optional variable: `APP_PASSWORD` = a password (the phone asks for it once; any user name).
+   Without it the app is open to anyone who has the URL.
 4. Settings → Networking → Generate domain. Keep the URL private.
 
 First start on the empty volume: the server downloads 12 months of Quinté data (~1,460 requests,
