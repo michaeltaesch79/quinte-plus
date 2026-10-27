@@ -1,0 +1,8 @@
+.git
+data/
+app/data/
+__pycache__/
+*.out
+structure_*.txt
+HANDOVER.md
+BRIEF.md
