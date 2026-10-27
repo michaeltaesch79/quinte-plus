@@ -2,8 +2,7 @@
 Convert the pipeline's daily record (data/daily/YYYY-MM-DD.json, written by daily.py) into the
 app's data file app/data/today.json, schema_version 1 (format in app/README.md).
 
-Also uses data/backtest_summary.json (test results), data/payouts.csv + data/runners.csv
-(usual payout ranges) and the earlier daily records (yesterday's result and the season score).
+Also uses data/payouts.csv + data/runners.csv (usual payout ranges) and the earlier daily records (yesterday's result and the season score).
 
 Usage (Python 3.9+, no extra packages):
     python app_export.py 2026-10-28     # normally called by daily.py
@@ -36,7 +35,6 @@ FACTOR_TITLE = {
 }
 BET_LABEL = [("QUINTE_PLUS:ORDRE", "Quinté+ dans l'ordre"), ("QUINTE_PLUS:DESORDRE", "Quinté+ dans le désordre"),
              ("QUINTE_PLUS:BONUS_4SUR5", "Bonus 4 sur 5"), ("QUINTE_PLUS:BONUS_3", "Bonus 3")]
-STRATEGY = {"avec": "IA avec cotes", "sans": "IA sans cotes", "fav": "Favoris (cotes)", "value": "Bon rapport"}
 
 
 def date_label(iso):
@@ -159,16 +157,6 @@ def runner(h, rider, has_odds, non_runner=False):
     }
 
 
-def summary():
-    f = DATA / "backtest_summary.json"
-    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else None
-
-
-def test_line(s, key):
-    x = s["strategies"][STRATEGY[key]]
-    return f"{round(x['rendu_euros'])} € rendus pour {round(x['mise_euros'])} € misés"
-
-
 def ticket(nums, title, note=None):
     lines = [{"bet": "Quinté+ unitaire", "nums": nums, "price_eur": STAKE}] if len(nums) == 5 else []
     t = {"title": title, "lines": lines, "total_eur": STAKE if lines else 0}
@@ -177,17 +165,14 @@ def ticket(nums, title, note=None):
     return t
 
 
-def modes(rec, s, payouts):
-    with_odds = rec["modele"]["avec_cotes"]
-    test = (f"Sur {s['courses_testees']} Quintés passés (test), ce ticket : {test_line(s, 'avec' if with_odds else 'sans')}. "
-            f"Les 5 favoris : {test_line(s, 'fav')}." if s else None)
+def modes(rec, payouts):
     prono = {
         "title": "Mes 5 chevaux pour l'arrivée",
         "intro": rec["modele"]["note"],
         "picks": rec["prono"],
         "ticket": ticket(rec["prono"], "Mon ticket conseillé", "Dans l'ordre de préférence de l'IA."),
         "payouts": payouts,
-        "notices": [x for x in (test,) if x],
+        "notices": [],
     }
     if rec["bon_rapport"]:
         value = {
@@ -196,8 +181,7 @@ def modes(rec, s, payouts):
             "picks": rec["bon_rapport"],
             "ticket": ticket(rec["bon_rapport"], "Ticket bon rapport"),
             "payouts": payouts,
-            "notices": [f"Attention : sur nos tests, cette méthode a fait moins bien que les favoris "
-                        f"({test_line(s, 'value')})."] if s else [],
+            "notices": [],
         }
     else:
         value = {
@@ -265,7 +249,7 @@ def build(iso):
             "runners_count": c["partants"],
         },
         "runners": runners,
-        "modes": modes(rec, summary(), payout_ranges(c["specialite"])),
+        "modes": modes(rec, payout_ranges(c["specialite"])),
         "other_tips": {"sources": [], "note": "Les pronos de la presse ne sont pas encore récupérés automatiquement."},
         "yesterday": yesterday(history),
         "season": season(history),
