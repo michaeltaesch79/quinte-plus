@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1d5a39">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Quinté">
+<title>Le Quinté du Jour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  :root{padding-top:env(safe-area-inset-top,0px)}
+  body{margin:0}
+  [hidden]{display:none!important}
+  .load-error{max-width:480px;margin:40px auto;padding:16px;border-radius:14px;background:var(--warn-bg);color:var(--warn-ink)}
+  .load-error code{font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ ÉCRAN 1 : LE QUINTÉ ============ -->
+  <section id="v-quinte" class="view">
+    <div class="race">
+      <div class="eyebrow" id="race-eyebrow"></div>
+      <h1 id="race-title"></h1>
+      <div class="facts" id="race-facts"></div>
+    </div>
+
+    <div class="mode" role="group" aria-label="Type de conseil">
+      <button id="m-prono" aria-pressed="true">L'IA qui parle aux chevaux</button>
+      <button id="m-value" aria-pressed="false">Le bon rapport</button>
+    </div>
+
+    <div id="mode-prono" class="view"></div>
+    <div id="mode-value" class="view" hidden></div>
+
+    <div class="card">
+      <h2>Tous les partants</h2>
+      <div class="runners" id="runners"></div>
+      <div class="tap-hint">Touchez n'importe quel cheval.</div>
+    </div>
+
+    <div class="card">
+      <h2>Les autres pronos</h2>
+      <table class="compare"><tbody id="cmp"></tbody></table>
+      <div class="small muted" id="cmp-note"></div>
+    </div>
+  </section>
+
+  <!-- ============ ÉCRAN 2 : MES NUMÉROS ============ -->
+  <section id="v-saisie" class="view" hidden>
+    <div class="race">
+      <div class="eyebrow" id="saisie-eyebrow"></div>
+      <h1>Mes numéros</h1>
+    </div>
+    <div class="card">
+      <div class="seg" role="group" aria-label="Quel prono saisir">
+        <button id="who-veinard" aria-pressed="true">Le Veinard</button>
+        <button id="who-moi" aria-pressed="false">Mon jeu</button>
+      </div>
+      <div class="small muted" id="pad-help"></div>
+      <div class="pad" id="pad"></div>
+      <div class="chips" id="pick-chips" aria-live="polite"></div>
+      <div class="row"><button class="btn" id="clear">Effacer</button><button class="btn primary" id="save">Enregistrer</button></div>
+      <div class="saved" id="saved" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ============ ÉCRAN 3 : LE MATCH ============ -->
+  <section id="v-match" class="view" hidden>
+    <div class="race">
+      <div class="eyebrow">Qui joue le mieux ?</div>
+      <h1>Le match</h1>
+    </div>
+    <div class="card">
+      <div class="eyebrow" id="y-label"></div>
+      <div class="small muted">Arrivée du Quinté+</div>
+      <div class="chips" id="arr-chips"></div>
+      <table class="compare"><tbody id="yesterday"></tbody></table>
+      <div class="small muted">En vert : les chevaux trouvés parmi les 5 premiers.</div>
+    </div>
+    <div class="card">
+      <h2>La saison</h2>
+      <div class="score" id="season"></div>
+      <div class="small muted" id="season-note"></div>
+    </div>
+    <div class="card">
+      <h2>Comment l'IA apprend</h2>
+      <ul class="plain small">
+        <li>Chaque soir, l'appli note l'arrivée et les rapports.</li>
+        <li>Elle regarde ce qui a compté : la forme, le parcours, le poids, l'avis de la presse, la cote.</li>
+        <li>Après une trentaine de courses, elle ajuste ses réglages selon ce qui a marché.</li>
+      </ul>
+      <div class="preview">Le PMU garde environ un quart des mises. On joue pour le plaisir, avec un budget fixe.</div>
+    </div>
+  </section>
+</div>
+
+<div class="load-error" id="load-error" hidden></div>
+
+<div class="tabs"><nav role="tablist">
+  <button role="tab" aria-selected="true" data-v="v-quinte">Le Quinté</button>
+  <button role="tab" aria-selected="false" data-v="v-saisie">Mes numéros</button>
+  <button role="tab" aria-selected="false" data-v="v-match">Le match</button>
+</nav></div>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-name" hidden>
+  <div class="in" id="sheet-in"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
