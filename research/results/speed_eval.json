@@ -1,0 +1,91 @@
+{
+ "no odds": {
+  "validation": {
+   "mean_ll_gain": 0.0115,
+   "ci95": [
+    -0.0061,
+    0.0299
+   ],
+   "races": 119,
+   "trot_only_gain": 0.0292,
+   "trot_ci95": [
+    -0.0058,
+    0.0601
+   ],
+   "trot_races": 55
+  },
+  "test": {
+   "mean_ll_gain": 0.0162,
+   "ci95": [
+    -0.0302,
+    0.0674
+   ],
+   "races": 150,
+   "trot_only_gain": 0.0217,
+   "trot_ci95": [
+    -0.083,
+    0.1388
+   ],
+   "trot_races": 68
+  },
+  "hold-out": {
+   "mean_ll_gain": 0.0127,
+   "ci95": [
+    -0.005,
+    0.0296
+   ],
+   "races": 364,
+   "trot_only_gain": 0.0258,
+   "trot_ci95": [
+    -0.0084,
+    0.0582
+   ],
+   "trot_races": 181
+  }
+ },
+ "with odds": {
+  "validation": {
+   "mean_ll_gain": -0.0018,
+   "ci95": [
+    -0.0093,
+    0.0057
+   ],
+   "races": 119,
+   "trot_only_gain": -0.0005,
+   "trot_ci95": [
+    -0.0154,
+    0.014
+   ],
+   "trot_races": 55
+  },
+  "test": {
+   "mean_ll_gain": -0.003,
+   "ci95": [
+    -0.0226,
+    0.0161
+   ],
+   "races": 150,
+   "trot_only_gain": -0.008,
+   "trot_ci95": [
+    -0.0511,
+    0.0356
+   ],
+   "trot_races": 68
+  },
+  "hold-out": {
+   "mean_ll_gain": 0.0024,
+   "ci95": [
+    -0.0057,
+    0.0099
+   ],
+   "races": 364,
+   "trot_only_gain": 0.0038,
+   "trot_ci95": [
+    -0.0134,
+    0.0199
+   ],
+   "trot_races": 181
+  }
+ },
+ "adopt_in_production": false
+}

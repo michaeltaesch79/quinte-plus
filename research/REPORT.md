@@ -325,6 +325,53 @@ differences are within luck. **No change in profitability is demonstrated.**
 - The research protocol keeps its frozen v2 features: `evaluate.frozen_v2` rebuilds the old `f_avis`.
   Tested: identical to the previous code on all 1,096 races.
 
+## 13. Trot speed figures (not adopted)
+
+`speed_eval.py` tests two trot-only features from past times (centiseconds in the feed):
+- `f_trot_gap`: seconds per km behind the winner, mean of the last 5 trot runs, capped at 4.
+- `f_trot_best_rel`: best time per km of the last 5 trot runs minus the field's median best, clipped to ±5 s
+  (a few records are tens of seconds off).
+
+Flat and jumps margins exist for about 7% of runs only, so those disciplines are not covered.
+
+Rule, declared before running: a positive gain in all three periods for both models.
+
+| | Validation | Test | Hold-out year |
+|---|---|---|---|
+| No odds, all races | +0.012 [−0.006, 0.030] | +0.016 [−0.030, 0.067] | +0.013 [−0.005, 0.030] |
+| No odds, trot races only | +0.029 | +0.022 | +0.026 |
+| With odds, all races | −0.002 | −0.003 | +0.002 |
+
+**Not adopted.** The market already prices recent speed. The no-odds model gains in all three periods
+but never conclusively: re-test it with more months. Production is unchanged: the code lives in
+`speed_eval.py` only (checked identical to the version tested).
+
+## 14. Avoiding the crowd with the Quinté+ stakes (not adopted)
+
+`fetch_combinaisons.py` saves, per race, the online Quinté+ stakes: the total (median about €240,000,
+online only) and the 12 most-played 5-horse sets. These are final stakes.
+
+| Winning set | Races | Median Désordre per €1 |
+|---|---|---|
+| Among the 12 most played | 87 | **€9.3** |
+| Not among them | 1,009 | **€240** |
+
+The production top-5 ticket (with odds) was itself among the 12 most-played sets in **335 of 364**
+(hold-out) and **237 of 269** (2026) races. So the prono is the crowd's ticket, and its Désordres pay little.
+
+`crowd_eval.py` tested a variant: when the top-5 set is among the most played, play instead the most likely
+set of 5 among the model's top 7 that is not. Rule, declared before running: the race-by-race return
+difference must be positive with a 95% interval above 0 in both periods.
+
+| | Top 5 | Avoid the crowd | Difference per race |
+|---|---|---|---|
+| Hold-out 2024-25 (364 races, €728) | €325 back | €313 back | −€0.03 [−0.36, +0.34] |
+| 2026 (269 races, €538) | €343 back | €328 back | −€0.06 [−0.57, +0.50] |
+
+**Not adopted:** fewer hits, same money back, within luck. The structural lesson stands. The model agrees
+with the crowd, and consensus outcomes pay little, so an edge would need the model to disagree with the
+crowd and be right, which no test has shown.
+
 ## Reproduce
 
 ```

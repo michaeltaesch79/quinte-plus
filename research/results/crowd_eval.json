@@ -1,0 +1,237 @@
+{
+ "desordre_dividend": {
+  "in the 12 most played": {
+   "races": 87,
+   "median_eur_per_1": 9.3
+  },
+  "not among them": {
+   "races": 1009,
+   "median_eur_per_1": 240.2
+  }
+ },
+ "hold-out 2024-25": {
+  "races": 364,
+  "top5_ticket_among_12_most_played": 335,
+  "top 5": {
+   "races": 364,
+   "bets": 364,
+   "staked": 728.0,
+   "returned": 325.2,
+   "net": -402.8,
+   "roi": -0.553,
+   "hits": {
+    "BONUS_4SUR5": 45,
+    "BONUS_3": 28,
+    "DESORDRE": 5
+   },
+   "max_drawdown": -409.4,
+   "roi_without_top1": -0.569,
+   "roi_without_top3": -0.598,
+   "largest_returns": [
+    12.0,
+    11.8,
+    11.4
+   ],
+   "roi_ci95_week_blocks": [
+    -0.6643,
+    -0.4388
+   ],
+   "by_family": {
+    "PLAT": {
+     "bets": 141,
+     "roi": -0.628
+    },
+    "TROT": {
+     "bets": 181,
+     "roi": -0.469
+    },
+    "OBSTACLE": {
+     "bets": 42,
+     "roi": -0.664
+    }
+   },
+   "by_month": {
+    "2024-11": -37.0,
+    "2024-12": -43.0,
+    "2025-01": -2.8,
+    "2025-02": -49.2,
+    "2025-03": -18.2,
+    "2025-04": -42.8,
+    "2025-05": -46.4,
+    "2025-06": -21.4,
+    "2025-07": -38.6,
+    "2025-08": -49.0,
+    "2025-09": -22.8,
+    "2025-10": -31.6
+   }
+  },
+  "avoid the crowd": {
+   "races": 364,
+   "bets": 364,
+   "staked": 728.0,
+   "returned": 313.0,
+   "net": -415.0,
+   "roi": -0.57,
+   "hits": {
+    "BONUS_3": 18,
+    "BONUS_4SUR5": 38,
+    "DESORDRE": 1
+   },
+   "max_drawdown": -418.8,
+   "roi_without_top1": -0.646,
+   "roi_without_top3": -0.674,
+   "largest_returns": [
+    55.8,
+    11.4,
+    10.6
+   ],
+   "roi_ci95_week_blocks": [
+    -0.7299,
+    -0.3459
+   ],
+   "by_family": {
+    "PLAT": {
+     "bets": 141,
+     "roi": -0.681
+    },
+    "TROT": {
+     "bets": 181,
+     "roi": -0.456
+    },
+    "OBSTACLE": {
+     "bets": 42,
+     "roi": -0.688
+    }
+   },
+   "by_month": {
+    "2024-11": -47.4,
+    "2024-12": -24.4,
+    "2025-01": 32.0,
+    "2025-02": -51.2,
+    "2025-03": -20.2,
+    "2025-04": -36.6,
+    "2025-05": -45.0,
+    "2025-06": -43.4,
+    "2025-07": -35.8,
+    "2025-08": -53.2,
+    "2025-09": -44.6,
+    "2025-10": -45.2
+   }
+  },
+  "difference_eur_per_race": -0.034,
+  "difference_ci95": [
+   -0.36,
+   0.3377
+  ]
+ },
+ "2026": {
+  "races": 269,
+  "top5_ticket_among_12_most_played": 237,
+  "top 5": {
+   "races": 269,
+   "bets": 269,
+   "staked": 538.0,
+   "returned": 343.4,
+   "net": -194.6,
+   "roi": -0.362,
+   "hits": {
+    "BONUS_4SUR5": 39,
+    "BONUS_3": 26,
+    "DESORDRE": 4
+   },
+   "max_drawdown": -232.0,
+   "roi_without_top1": -0.429,
+   "roi_without_top3": -0.489,
+   "largest_returns": [
+    37.6,
+    19.4,
+    14.6
+   ],
+   "roi_ci95_week_blocks": [
+    -0.5278,
+    -0.1572
+   ],
+   "by_family": {
+    "PLAT": {
+     "bets": 116,
+     "roi": -0.37
+    },
+    "TROT": {
+     "bets": 123,
+     "roi": -0.381
+    },
+    "OBSTACLE": {
+     "bets": 30,
+     "roi": -0.25
+    }
+   },
+   "by_month": {
+    "2026-02": -17.0,
+    "2026-03": -20.8,
+    "2026-04": -24.6,
+    "2026-05": -22.8,
+    "2026-06": -13.2,
+    "2026-07": -35.6,
+    "2026-08": -47.0,
+    "2026-09": -22.0,
+    "2026-10": 8.4
+   }
+  },
+  "avoid the crowd": {
+   "races": 269,
+   "bets": 269,
+   "staked": 538.0,
+   "returned": 327.8,
+   "net": -210.2,
+   "roi": -0.391,
+   "hits": {
+    "BONUS_4SUR5": 28,
+    "BONUS_3": 20,
+    "DESORDRE": 2
+   },
+   "max_drawdown": -234.6,
+   "roi_without_top1": -0.453,
+   "roi_without_top3": -0.534,
+   "largest_returns": [
+    34.4,
+    25.8,
+    19.8
+   ],
+   "roi_ci95_week_blocks": [
+    -0.611,
+    -0.1224
+   ],
+   "by_family": {
+    "PLAT": {
+     "bets": 116,
+     "roi": -0.403
+    },
+    "TROT": {
+     "bets": 123,
+     "roi": -0.392
+    },
+    "OBSTACLE": {
+     "bets": 30,
+     "roi": -0.34
+    }
+   },
+   "by_month": {
+    "2026-02": -29.6,
+    "2026-03": -32.0,
+    "2026-04": -32.8,
+    "2026-05": -40.8,
+    "2026-06": -20.2,
+    "2026-07": -34.6,
+    "2026-08": -30.2,
+    "2026-09": 35.2,
+    "2026-10": -25.2
+   }
+  },
+  "difference_eur_per_race": -0.058,
+  "difference_ci95": [
+   -0.5749,
+   0.4959
+  ]
+ },
+ "adopt": false
+}
