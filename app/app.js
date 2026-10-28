@@ -168,15 +168,29 @@ function renderInput() {
   renderPad();
 }
 
+const euros = v => `${Number(v).toLocaleString("fr-FR", { maximumFractionDigits: 2 })} €`;
+function ticketRows(sources, arrival) {
+  return sources.map(s => {
+    if (!s.picks.length) return `<tr><td class="src">${esc(s.source)}</td><td><span class="pill grey">Pas de prono</span></td></tr>`;
+    const k = s.picks.filter(n => arrival.includes(n)).length;
+    const won = s.won_eur == null ? "" : ` · gagné ${euros(s.won_eur)}`;
+    return `<tr><td class="src">${esc(s.source)}<br><span class="pill ${k || s.won_eur ? "" : "grey"}">${k} sur ${s.picks.length}${won}</span></td><td>${minis(s.picks, arrival)}</td></tr>`;
+  }).join("");
+}
+
+function renderHistory() {
+  el("history").innerHTML = (D.history || []).map(d => `<div class="day"><div class="eyebrow">${esc(d.label)}</div>
+    ${d.cancelled ? `<div class="small muted">Course annulée : mises remboursées.</div>`
+      : `<div class="small muted">Arrivée</div>${minis(d.arrival)}<table class="compare"><tbody>${ticketRows(d.tickets, d.arrival)}</tbody></table>`}</div>`).join("")
+    || `<div class="small muted">Pas encore de résultat.</div>`;
+}
+
 function renderMatch() {
   const y = D.yesterday;
-  el("y-label").textContent = `Hier · ${y.label}`;
+  el("y-label").textContent = y.label;
   el("arr-chips").innerHTML = y.arrival.map(n => cloth(n)).join("");
-  el("yesterday").innerHTML = y.sources.map(s => {
-    if (!s.picks.length) return `<tr><td class="src">${esc(s.source)}</td><td><span class="pill grey">Pas de prono</span></td></tr>`;
-    const k = s.picks.filter(n => y.arrival.includes(n)).length;
-    return `<tr><td class="src">${esc(s.source)}<br><span class="pill ${k ? "" : "grey"}">${k} sur ${s.picks.length}</span></td><td>${minis(s.picks, y.arrival)}</td></tr>`;
-  }).join("");
+  el("yesterday").innerHTML = ticketRows(y.sources, y.arrival);
+  renderHistory();
   el("season").innerHTML = `<span class="h">Joueur</span><span class="h" style="text-align:right">Misé</span><span class="h" style="text-align:right">Gagné</span>`
     + D.season.players.map(p => `<span><b>${esc(p.name)}</b></span><span class="v">${p.bet_eur} €</span><span class="v">${p.won_eur} €</span>`).join("");
   el("season-note").textContent = D.season.note || "";

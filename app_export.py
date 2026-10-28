@@ -2,7 +2,8 @@
 Convert the pipeline's daily record (data/daily/YYYY-MM-DD.json, written by daily.py) into the
 app's data file app/data/today.json, schema_version 1 (format in app/README.md).
 
-Also uses data/payouts.csv + data/runners.csv (usual payout ranges) and the earlier daily records (yesterday's result and the season score).
+Also uses data/payouts.csv + data/runners.csv (usual payout ranges) and the daily records with a result
+(latest result, season score and history, the day itself included once its race is over).
 
 Usage (Python 3.9+, no extra packages):
     python app_export.py 2026-10-28     # normally called by daily.py
@@ -12,13 +13,14 @@ import json
 import re
 import sys
 from collections import defaultdict
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 from paths import APP_JSON, DATA
 
 DAILY = DATA / "daily"
 OUT = APP_JSON
 AI_NAME = "L'IA qui parle aux chevaux"
+VALUE_NAME = "Le bon rapport"
 STAKE = 2
 
 DAYS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
@@ -194,33 +196,56 @@ def modes(rec, payouts):
     return {"prono": prono, "value": value}
 
 
-def settled(before):
-    """Earlier daily records that have a result, oldest first."""
+def settled(last):
+    """Daily records up to `last` (included) that have a result, oldest first."""
     out = []
     for f in sorted(DAILY.glob("????-??-??.json")):
-        if f.stem < before:
+        if f.stem <= last:
             rec = json.loads(f.read_text(encoding="utf-8"))
             if rec.get("resultat"):
                 out.append(rec)
     return out
 
 
-def yesterday(history):
+def day_label(iso, today):
+    when = {today: "Aujourd'hui", (date.fromisoformat(today) - timedelta(days=1)).isoformat(): "Hier"}.get(iso)
+    return f"{when} · {date_label(iso)}" if when else date_label(iso)
+
+
+def tickets(r):
+    """The day's tickets with what they won: the AI's prono, and the bon rapport when there was one."""
+    res = r["resultat"]
+    out = [{"source": AI_NAME, "picks": r["prono"], "won_eur": res["gain_euros"]}]
+    if r.get("bon_rapport"):
+        out.append({"source": VALUE_NAME, "picks": r["bon_rapport"], "won_eur": (res.get("bon_rapport") or {}).get("gain_euros")})
+    return out
+
+
+def latest(history, today):
     done = [r for r in history if not r["resultat"].get("annulee")]
     if not done:
         return {"label": "Pas encore de résultat", "arrival": [], "sources": []}
     r = done[-1]
-    return {"label": f"{date_label(r['date'])} · {nice(r['course']['hippodrome'])}",
-            "arrival": r["resultat"]["arrivee"], "sources": [{"source": AI_NAME, "picks": r["prono"]}]}
+    return {"label": f"{day_label(r['date'], today)} · {nice(r['course']['hippodrome'])}",
+            "arrival": r["resultat"]["arrivee"], "sources": tickets(r)}
+
+
+def past_days(history, today):
+    """Every settled day, newest first."""
+    return [{"date": r["date"], "label": f"{day_label(r['date'], today)} · {nice(r['course']['hippodrome'])}",
+             "cancelled": bool(r["resultat"].get("annulee")), "arrival": r["resultat"].get("arrivee", []),
+             "tickets": [] if r["resultat"].get("annulee") else tickets(r)} for r in reversed(history)]
 
 
 def season(history):
     played = [r for r in history if not r["resultat"].get("annulee")]
-    bet = sum(r["resultat"]["mise_euros"] for r in played)
-    won = round(sum(r["resultat"]["gain_euros"] for r in played), 2)
+    players = []
+    for name in (AI_NAME, VALUE_NAME):
+        won = [t["won_eur"] for r in played for t in tickets(r) if t["source"] == name and t["won_eur"] is not None]
+        players.append({"name": name, "bet_eur": STAKE * len(won), "won_eur": round(sum(won), 2)})
     since = f"depuis le {date_label(played[0]['date']).split(' ', 1)[1]}" if played else "pas encore commencé"
-    return {"players": [{"name": AI_NAME, "bet_eur": bet, "won_eur": won}],
-            "note": f"Un ticket Quinté+ à {STAKE} € par jour sur le prono de l'IA, {since}. "
+    return {"players": players,
+            "note": f"Un ticket Quinté+ à {STAKE} € par jour sur chaque liste, {since}. "
                     f"Les gains comptent les vrais rapports du PMU."}
 
 
@@ -252,8 +277,9 @@ def build(iso):
         "runners": runners,
         "modes": modes(rec, payout_ranges(c["specialite"])),
         "other_tips": {"sources": [], "note": "Les pronos de la presse ne sont pas encore récupérés automatiquement."},
-        "yesterday": yesterday(history),
+        "yesterday": latest(history, iso),
         "season": season(history),
+        "history": past_days(history, iso),
     }
 
 

@@ -15,6 +15,7 @@ Usage (Python 3.9+, no extra packages):
     python daily.py               # today
     python daily.py 2026-10-28    # another day (for testing)
     python daily.py --refresh 2026-10-28   # same tips with the latest odds (no refit, one request)
+    python daily.py --settle 2026-10-28    # record that day's result once the race is over
 
 Personal use only: one request per second, no parallel calls.
 """
@@ -24,7 +25,7 @@ import math
 import random
 import sys
 import time
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 import app_export
 import backtest as bt
@@ -94,12 +95,20 @@ def saved_or_get(target, path):
     return data, True
 
 
-def settle(today):
-    """Add the result to earlier daily files. Returns True if new raw files were saved."""
+def ticket_result(nums, arrival, rows):
+    rank, eur = bt.ticket_return(nums, rows)
+    return {"chevaux_trouves": len(set(arrival) & set(nums)), "rang": rank,
+            "gain_euros": round(bt.STAKE * eur, 2), "mise_euros": bt.STAKE}
+
+
+def settle(last):
+    """Add the result to the daily files dated up to `last` (included) whose race is over.
+    Returns True if new raw files were saved."""
     saved = False
     for f in sorted(DAILY.glob("????-??-??.json")):
         tip = json.loads(f.read_text(encoding="utf-8"))
-        if tip.get("resultat") or not tip.get("course") or f.stem >= today:
+        res = tip.get("resultat") or {}
+        if res.get("annulee") or "bon_rapport" in res or not tip.get("course") or f.stem > last:
             continue
         iso, r, c = f.stem, tip["course"]["reunion"], tip["course"]["course"]
         key = f"{iso[8:10]}{iso[5:7]}{iso[:4]}"
@@ -124,9 +133,9 @@ def settle(today):
             rows = [(p["pari"], [int(x) for x in p["combinaison"].split("-")], p["euros_pour_1_euro"])
                     for p in bd.payout_rows(tip["course"]["race_id"], rap) if p["pari"] in bt.BET_RANKS]
             arrival = [n for group in course.get("ordreArrivee", []) for n in group][:5]
-            rank, eur = bt.ticket_return(tip["prono"], rows)
-            tip["resultat"] = {"arrivee": arrival, "chevaux_trouves": len(set(arrival) & set(tip["prono"])),
-                               "rang": rank, "gain_euros": round(bt.STAKE * eur, 2), "mise_euros": bt.STAKE}
+            tip["resultat"] = {"arrivee": arrival, **ticket_result(tip["prono"], arrival, rows),
+                               "bon_rapport": (ticket_result(tip["bon_rapport"], arrival, rows)
+                                               if tip.get("bon_rapport") else None)}
         f.write_text(json.dumps(tip, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"{iso}: result recorded {tip['resultat']}")
     return saved
@@ -386,9 +395,14 @@ def runner_info(r):
 def main():
     if sys.argv[1:2] == ["--refresh"]:
         return refresh(sys.argv[2] if len(sys.argv) > 2 else paris_now().date().isoformat())
+    if sys.argv[1:2] == ["--settle"]:
+        iso = sys.argv[2] if len(sys.argv) > 2 else paris_now().date().isoformat()
+        if settle(iso):
+            bd.main()
+        return app_export.write(iso)
     iso = sys.argv[1] if len(sys.argv) > 1 else date.today().isoformat()
     DAILY.mkdir(parents=True, exist_ok=True)
-    if settle(min(iso, date.today().isoformat())):
+    if settle((date.fromisoformat(min(iso, date.today().isoformat())) - timedelta(days=1)).isoformat()):
         bd.main()
     got = today_rows(iso)
     out = {"genere_le": datetime.now().isoformat(timespec="seconds"), "date": iso, "avertissement": WARNING}

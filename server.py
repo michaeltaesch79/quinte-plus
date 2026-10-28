@@ -9,7 +9,7 @@ Railway service: serves the phone app (app/) and runs the daily job at 06:00 Par
 First start on an empty volume: downloads 12 months of Quinté data (~1,460 requests at one per
 second, ~25 min), builds the tables and runs the backtest, then the day's job. Every day at 06:00
 (Paris): catches up the last 7 days of raw files (skips what is saved), rebuilds the tables, runs
-daily.py. If a run fails it retries every 30 minutes until noon.
+daily.py. After the race it records the result (daily.py --settle) so the app shows it the same day. If a run fails it retries every 30 minutes until noon.
 
 Environment (all optional):
     PORT                       set by Railway
@@ -40,6 +40,7 @@ BOOTSTRAPPED = DATA / "bootstrap_done.txt"
 LAST_RUN = DATA / "last_run.txt"
 RUN_AT_HOUR, GIVE_UP_HOUR, RETRY_MIN = 6, 12, 30
 REFRESH_MIN_S = 60  # a refresh within a minute of the last one is not sent to the feed
+SETTLE_AFTER_MIN, SETTLE_EVERY_MIN = 20, 15  # result: first try 20 min after the start, then every 15 min
 JOB = threading.Lock()  # one job at a time: the daily run and refreshes write the same files
 last_refresh = 0.0
 PASSWORD = os.environ.get("APP_PASSWORD", "")
@@ -95,8 +96,20 @@ def daily(today):
     return ok
 
 
+def awaiting_result(iso, now):
+    """True when the day's race started a while ago and its result is not recorded yet."""
+    f = DATA / "daily" / f"{iso}.json"
+    if not f.exists():
+        return False
+    rec = json.loads(f.read_text(encoding="utf-8"))
+    c = rec.get("course")
+    if not c or rec.get("resultat"):
+        return False
+    return now >= datetime.strptime(c["heure_depart"], "%Y-%m-%d %H:%M") + timedelta(minutes=SETTLE_AFTER_MIN)
+
+
 def scheduler():
-    next_try = datetime.min
+    next_try = next_settle = datetime.min
     while True:
         now = paris_now()
         today = now.date()
@@ -112,6 +125,10 @@ def scheduler():
                     ok = daily(today)
                 if not ok:
                     next_try = now + timedelta(minutes=RETRY_MIN)
+        if now >= next_settle and awaiting_result(today.isoformat(), now):
+            with JOB:
+                run("daily.py", "--settle", today.isoformat(), timeout=600)
+            next_settle = now + timedelta(minutes=SETTLE_EVERY_MIN)
         time.sleep(30)
 
 

@@ -62,11 +62,16 @@ ranks, chances, verdicts and factor explanations all come from the pipeline.
     "value": { /* mode object */ }
   },
   "other_tips": { "sources": [{ "source": "Zone-Turf", "picks": [4, 9, 2, 7, 13] }], "note": "..." },
-  "yesterday": {
-    "label": "Lundi 26 octobre · Chantilly",
+  "yesterday": {                     // latest result: the day itself once its race is over
+    "label": "Hier · Lundi 26 octobre · Chantilly",
     "arrival": [12, 3, 10, 13, 9],
-    "sources": [{ "source": "Zone-Turf", "picks": [13, 12, 3, 16, 1] }]  // empty picks = "Pas de prono"
+    "sources": [{ "source": "Le bon rapport", "picks": [13, 12, 3, 16, 1], "won_eur": 0 }]  // empty picks = "Pas de prono"; won_eur optional
   },
+  "history": [{                      // every settled day, newest first
+    "date": "2026-10-26", "label": "Lundi 26 octobre · Chantilly", "cancelled": false,
+    "arrival": [12, 3, 10, 13, 9],
+    "tickets": [{ "source": "L'IA qui parle aux chevaux", "picks": [3, 9, 1, 12, 5], "won_eur": 0 }]
+  }],
   "season": {
     "players": [{ "name": "L'IA qui parle aux chevaux", "bet_eur": 0, "won_eur": 0 }],
     "note": "..."
