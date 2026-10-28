@@ -4,6 +4,7 @@ Railway service: serves the phone app (app/) and runs the daily job at 06:00 Par
 - GET /                 the app (app/index.html, styles.css, app.js)
 - GET /data/today.json  the day's file, kept on the volume so it survives redeploys
 - GET /status           last lines of the job log (plain text)
+- POST /refresh         re-ranks the day's prono with the latest odds (one feed request, ~2 s)
 
 First start on an empty volume: downloads 12 months of Quinté data (~1,460 requests at one per
 second, ~25 min), builds the tables and runs the backtest, then the day's job. Every day at 06:00
@@ -18,16 +19,18 @@ Environment (all optional):
 Usage: python server.py   (Python 3.9+, no extra packages)
 """
 import base64
+import json
 import os
 import subprocess
 import sys
 import threading
 import time
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from clock import paris_now
 from paths import DATA, ROOT
 
 os.environ.setdefault("QUINTE_APP_JSON", str(DATA / "today.json"))  # inherited by the job scripts
@@ -36,22 +39,10 @@ LOG = DATA / "server_log.txt"
 BOOTSTRAPPED = DATA / "bootstrap_done.txt"
 LAST_RUN = DATA / "last_run.txt"
 RUN_AT_HOUR, GIVE_UP_HOUR, RETRY_MIN = 6, 12, 30
+REFRESH_MIN_S = 60  # a refresh within a minute of the last one is not sent to the feed
+JOB = threading.Lock()  # one job at a time: the daily run and refreshes write the same files
+last_refresh = 0.0
 PASSWORD = os.environ.get("APP_PASSWORD", "")
-
-
-# ---------------------------------------------------------------- Paris time without tz database
-
-def last_sunday(year, month):
-    d = date(year, month, 31)  # March and October both have 31 days
-    return d - timedelta(days=(d.weekday() + 1) % 7)
-
-
-def paris_now():
-    """EU summer time: from the last Sunday of March to the last Sunday of October, 01:00 UTC."""
-    utc = datetime.now(timezone.utc)
-    start = datetime.combine(last_sunday(utc.year, 3), datetime.min.time(), timezone.utc) + timedelta(hours=1)
-    end = datetime.combine(last_sunday(utc.year, 10), datetime.min.time(), timezone.utc) + timedelta(hours=1)
-    return (utc + timedelta(hours=2 if start <= utc < end else 1)).replace(tzinfo=None)
 
 
 # ---------------------------------------------------------------- jobs
@@ -117,9 +108,28 @@ def scheduler():
             done = LAST_RUN.read_text(encoding="utf-8").strip() if LAST_RUN.exists() else ""
             due = RUN_AT_HOUR <= now.hour < GIVE_UP_HOUR or not APP_JSON.exists()
             if done != today.isoformat() and due:
-                if not daily(today):
+                with JOB:
+                    ok = daily(today)
+                if not ok:
                     next_try = now + timedelta(minutes=RETRY_MIN)
         time.sleep(30)
+
+
+def refresh():
+    """Latest odds for the last daily record. Returns (HTTP status, message)."""
+    global last_refresh
+    if not LAST_RUN.exists():
+        return 404, "no tips yet"
+    if time.time() - last_refresh < REFRESH_MIN_S:
+        return 200, "recent"
+    if not JOB.acquire(blocking=False):
+        return 409, "busy"
+    try:
+        last_refresh = time.time()
+        ok = run("daily.py", "--refresh", LAST_RUN.read_text(encoding="utf-8").strip(), timeout=120)
+        return (200, "updated") if ok else (502, "failed")
+    finally:
+        JOB.release()
 
 
 # ---------------------------------------------------------------- web
@@ -165,6 +175,19 @@ class Handler(SimpleHTTPRequestHandler):
             lines = LOG.read_text(encoding="utf-8").splitlines()[-80:] if LOG.exists() else ["no run yet"]
             return self.send_bytes("\n".join(lines).encode("utf-8"), "text/plain; charset=utf-8")
         return super().do_GET()
+
+    def do_POST(self):
+        if not self.authorised():
+            return
+        if self.path.split("?", 1)[0] != "/refresh":
+            return self.send_error(404)
+        code, message = refresh()
+        body = json.dumps({"ok": code == 200, "message": message}).encode("utf-8")
+        self.send_response(code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
 
     def do_HEAD(self):
         if self.authorised():

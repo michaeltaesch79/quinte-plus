@@ -36,6 +36,7 @@ ranks, chances, verdicts and factor explanations all come from the pipeline.
   "schema_version": 1,
   "generated_at": "ISO-8601 UTC",
   "generated_by": "free text: model name/version",
+  "odds_updated": "11h42",           // Paris time of the odds behind the prono; null if no odds yet
   "race": {
     "date": "YYYY-MM-DD",            // also used as the key for saved picks on the phone
     "date_label": "Mardi 27 octobre",
@@ -106,6 +107,8 @@ Mode object:
 ## Deploying on Railway
 `server.py` (repo root, standard library only) serves this folder and runs the daily job at
 06:00 Paris time. `/data/today.json` comes from the Railway volume, `/status` shows the job log.
+The "Actualiser les cotes" button posts to `/refresh`: the server re-ranks the prono with the latest
+odds (one feed request, no refit, at most once a minute) until the start; "Le bon rapport" keeps its list.
 
 1. New Railway project → Deploy from GitHub repo `quinte-plus`. Railway builds the `Dockerfile`.
 2. Add a **volume** to the service (mount path e.g. `/data`, 1 GB is plenty). Railway sets

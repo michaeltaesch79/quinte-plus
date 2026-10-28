@@ -43,15 +43,47 @@ function horseRows(list) {
   }).join("");
 }
 
-function modeHTML(m, hint) {
+function modeHTML(m, hint, extra = "") {
   return `<div class="card">
       <div class="eyebrow">${esc(m.title)}</div>
       ${m.intro ? `<div class="small">${esc(m.intro)}</div>` : ""}
       <div class="chips">${m.picks.map(n => cloth(n, "", true)).join("")}</div>
+      ${extra}
       <div class="tap-hint">${hint}</div></div>
     ${(m.notices || []).map(t => `<div class="preview">${esc(t)}</div>`).join("")}
     ${ticketHTML(m.ticket, m.payouts)}
     <div class="card"><h2>Pourquoi ces chevaux</h2><div>${horseRows(m.picks)}</div></div>`;
+}
+
+/* ---------- latest odds ---------- */
+function raceStarted() {
+  const [h, m] = D.race.start_time.split("h");
+  return new Date() >= new Date(`${D.race.date}T${h.padStart(2, "0")}:${m}:00`);  // phone clock, French time
+}
+function oddsLabel() { return D.odds_updated ? `Cotes de ${D.odds_updated}` : "Cotes pas encore publiées"; }
+function refreshHTML() {
+  if (raceStarted()) return D.odds_updated ? `<div class="small muted">${oddsLabel()}</div>` : "";
+  return `<div class="refresh"><button class="btn" data-refresh>↻ Actualiser les cotes</button>
+    <span class="small muted" id="refresh-msg">${oddsLabel()}</span></div>`;
+}
+async function refreshOdds(btn) {
+  const before = D.modes.prono.picks.join("-");
+  btn.disabled = true; btn.textContent = "Actualisation…";
+  try {
+    const r = await fetch("refresh", { method: "POST" });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const res = await fetch(DATA_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    D = await res.json();
+  } catch (e) {
+    btn.disabled = false; btn.textContent = "↻ Actualiser les cotes";
+    el("refresh-msg").textContent = "Actualisation impossible pour le moment, réessayez plus tard.";
+    return;
+  }
+  BY_NUM = {}; D.runners.forEach(r => BY_NUM[r.num] = r);
+  renderRace(); renderCompare();
+  const msg = el("refresh-msg");
+  if (msg) msg.textContent = `${oddsLabel()} · ${D.modes.prono.picks.join("-") === before ? "classement inchangé" : "classement mis à jour"}`;
 }
 
 /* ---------- horse sheet ---------- */
@@ -85,7 +117,7 @@ function renderRace() {
   el("saisie-eyebrow").textContent = `${r.date_label} · ${r.hippodrome}`;
   document.title = `Quinté · ${r.hippodrome}`;
 
-  el("mode-prono").innerHTML = modeHTML(D.modes.prono, "Touchez un numéro pour savoir pourquoi.");
+  el("mode-prono").innerHTML = modeHTML(D.modes.prono, "Touchez un numéro pour savoir pourquoi.", refreshHTML());
   el("mode-value").innerHTML = modeHTML(D.modes.value, "Touchez un numéro pour le détail.");
   el("runners").innerHTML = D.runners.map(h => h.non_runner ? `<span class="cloth np" title="Non-partant">${h.num}</span>` : cloth(h.num, "", true)).join("");
   el("cmp-note").textContent = D.other_tips.note || "";
@@ -161,6 +193,8 @@ function wire() {
   el("scrim").onclick = closeSheet;
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
   document.addEventListener("click", e => {
+    const r = e.target.closest("[data-refresh]");
+    if (r) return refreshOdds(r);
     const b = e.target.closest("[data-h]");
     if (b && BY_NUM[b.dataset.h] && !BY_NUM[b.dataset.h].non_runner) openSheet(+b.dataset.h);
   });

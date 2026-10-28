@@ -240,6 +240,7 @@ def build(iso):
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "generated_by": f"Plackett-Luce {'avec' if has_odds else 'sans'} cotes, "
                         f"{rec['modele']['courses_d_entrainement']} Quintés (daily.py)",
+        "odds_updated": rec.get("cotes_maj"),
         "race": {
             "date": iso, "date_label": date_label(iso),
             "reunion": f"R{c['reunion']}", "course": f"C{c['course']}",

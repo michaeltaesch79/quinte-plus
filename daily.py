@@ -14,6 +14,7 @@ Every percentage in the output is a model estimate and is labelled as such.
 Usage (Python 3.9+, no extra packages):
     python daily.py               # today
     python daily.py 2026-10-28    # another day (for testing)
+    python daily.py --refresh 2026-10-28   # same tips with the latest odds (no refit, one request)
 
 Personal use only: one request per second, no parallel calls.
 """
@@ -29,6 +30,7 @@ import app_export
 import backtest as bt
 import build_dataset as bd
 import features as ft
+from clock import paris_now
 from fetch_programmes import HOSTS, PAUSE_S, fetch
 from paths import DATA
 
@@ -234,6 +236,51 @@ def phrase(name, high, f, r):
     return None
 
 
+def model_cols(name, feats):
+    mkt = feats.index("f_mkt_logp")
+    return [i for i in range(len(feats)) if name == "avec_cote" or i != mkt]
+
+
+def ranking(nums, raw, feats, stats, weights, odds):
+    """Prono, bon rapport and estimated chances of one race from fitted weights and the given odds
+    (None where unknown). The market feature is recomputed from these odds as in features.py."""
+    mkt = feats.index("f_mkt_logp")
+    has_odds = all(odds)
+    inv = sum(1 / o for o in odds if o)
+    raw = [row[:mkt] + [math.log((1 / o) / inv) if o else None] + row[mkt + 1:] for row, o in zip(raw, odds)]
+    s = {}
+    for name, w in weights.items():
+        race = {"raw": raw}
+        bt.design([race], model_cols(name, feats), stats)
+        s[name] = bt.scores(race["X"], w)
+    main = "avec_cote" if has_odds else "sans_cote"
+    rng = random.Random(1)
+    p5 = bt.p_top5(s[main], rng)
+    pwin = [math.exp(x - max(s[main])) for x in s[main]]
+    pwin = [x / sum(pwin) for x in pwin]
+    p5_form = bt.p_top5(s["sans_cote"], rng)
+    p5_mkt = bt.p_top5([-math.log(o) for o in odds], rng) if has_odds else None
+    n = len(nums)
+    order = sorted(range(n), key=lambda i: -p5[i])
+    value = []
+    if p5_mkt:  # same rule as the "Bon rapport" strategy of backtest.py
+        shortlist = sorted(range(n), key=lambda i: -p5_form[i])[:8]
+        picked = sorted(shortlist, key=lambda i: -p5_form[i] / max(p5_mkt[i], 1e-6))[:5]
+        value = [nums[i] for i in sorted(picked, key=lambda i: -p5_form[i])]
+    return {"main": main, "order": order, "prono": [nums[i] for i in order[:5]], "value": value,
+            "p5": p5, "pwin": pwin, "p5_mkt": p5_mkt}
+
+
+def chances(i, rk):
+    return {"chance_top5_estimee": round(rk["p5"][i], 3), "chance_gagner_estimee": round(rk["pwin"][i], 3),
+            "chance_top5_marche_estimee": round(rk["p5_mkt"][i], 3) if rk["p5_mkt"] else None}
+
+
+def model_note(with_odds, at):
+    return (f"Classement établi avec les cotes de {at} (elles bougent jusqu'au départ)." if with_odds else
+            "Cotes pas encore disponibles : classement établi sans les cotes, uniquement sur la forme et le profil.")
+
+
 def tips(race, runners, past):
     hist_runners = [r for r in load_csv("runners.csv") if r["race_id"] != race["race_id"]]
     hist_past = [p for p in load_csv("past_runs.csv") if p["race_id"] != race["race_id"]]
@@ -245,60 +292,86 @@ def tips(race, runners, past):
     rows_by_num = {r["numPmu"]: r for r in runners}
 
     stats = bt.fit_stats(train, len(feats))
-    mkt = feats.index("f_mkt_logp")
-    sets = {"sans_cote": [i for i in range(len(feats)) if i != mkt]}
-    if today["has_odds"]:
-        sets["avec_cote"] = list(range(len(feats)))
-    fitted = {}
-    for name, cols in sets.items():
-        bt.design(train + [today], cols, stats)
-        w = bt.fit(train, len(cols))
-        fitted[name] = (cols, w, [x[:] for x in today["X"]], bt.scores(today["X"], w))
+    weights = {}
+    for name in ("sans_cote", "avec_cote"):  # both, so a later refresh can use the odds without refitting
+        bt.design(train, model_cols(name, feats), stats)
+        weights[name] = bt.fit(train, len(model_cols(name, feats)))
         print(f"model '{name}' fitted on {len(train)} races")
 
-    rng = random.Random(1)
-    main_model = "avec_cote" if "avec_cote" in fitted else "sans_cote"
-    s = fitted[main_model][3]
-    p5 = bt.p_top5(s, rng)
-    pwin = [math.exp(x - max(s)) for x in s]
-    pwin = [x / sum(pwin) for x in pwin]
-    p5_form = bt.p_top5(fitted["sans_cote"][3], rng)
-    p5_mkt = bt.p_top5([-math.log(o) for o in today["odds"]], rng) if today["has_odds"] else None
-    n = len(today["nums"])
-    order = sorted(range(n), key=lambda i: -p5[i])
-    prono = [today["nums"][i] for i in order[:5]]
-    value = []
-    if p5_mkt:  # same rule as the "Bon rapport" strategy of backtest.py
-        shortlist = sorted(range(n), key=lambda i: -p5_form[i])[:8]
-        picked = sorted(shortlist, key=lambda i: -p5_form[i] / max(p5_mkt[i], 1e-6))[:5]
-        value = [today["nums"][i] for i in sorted(picked, key=lambda i: -p5_form[i])]
-
-    cols, w, X, _ = fitted["sans_cote"]
+    nums = today["nums"]
+    odds = [ft.num(rows_by_num[str(n)]["cote_reference"]) or ft.num(rows_by_num[str(n)]["cote_finale"]) for n in nums]
+    rk = ranking(nums, today["raw"], feats, stats, weights, odds)
+    form = {"raw": today["raw"]}
+    cols = model_cols("sans_cote", feats)
+    bt.design([form], cols, stats)
     horses = []
-    for rank, i in enumerate(order, 1):
-        num = today["nums"][i]
+    for rank, i in enumerate(rk["order"], 1):
+        num = nums[i]
         r = rows_by_num[str(num)]
-        plus, minus = explain(i, X, w, cols, feats, frows[str(num)], r)
-        cote = ft.num(r["cote_finale"]) or ft.num(r["cote_reference"])
+        plus, minus = explain(i, form["X"], weights["sans_cote"], cols, feats, frows[str(num)], r)
         horses.append({
-            **runner_info(r), "rang_ia": rank,
-            "cote": cote,
-            "chance_top5_estimee": round(p5[i], 3),
-            "chance_gagner_estimee": round(pwin[i], 3),
-            "chance_top5_marche_estimee": round(p5_mkt[i], 3) if p5_mkt else None,
-            "bon_rapport": num in value,
-            "atouts": plus, "points_faibles": minus,
+            **runner_info(r), "rang_ia": rank, "cote": odds[i], **chances(i, rk),
+            "bon_rapport": num in rk["value"], "atouts": plus, "points_faibles": minus,
         })
+    at = f"{paris_now():%Hh%M}"
     return {
-        "prono": prono, "bon_rapport": value, "chevaux": horses,
+        "prono": rk["prono"], "bon_rapport": rk["value"], "chevaux": horses,
+        "cotes_maj": at if rk["main"] == "avec_cote" else None,
         "modele": {
-            "avec_cotes": main_model == "avec_cote",
+            "avec_cotes": rk["main"] == "avec_cote",
             "courses_d_entrainement": len(train),
-            "note": ("Classement établi avec les cotes disponibles au moment du calcul (elles bougent jusqu'au départ)."
-                     if main_model == "avec_cote" else
-                     "Cotes pas encore disponibles : classement établi sans les cotes, uniquement sur la forme et le profil."),
+            "note": model_note(rk["main"] == "avec_cote", at),
         },
+        "cache": {"feats": feats, "stats": stats, "weights": weights, "nums": nums, "raw": today["raw"]},
     }
+
+
+def refresh(iso):
+    """Re-rank the prono of a daily record with the latest odds: one request, no refit.
+    The bon rapport keeps its first list (it is only filled here if the odds were missing until now)."""
+    f = DAILY / f"{iso}.json"
+    rec = json.loads(f.read_text(encoding="utf-8"))
+    c = rec.get("course")
+    if not c or "cache" not in rec:
+        sys.exit(f"{iso}: nothing to refresh")
+    if f"{paris_now():%Y-%m-%d %H:%M}" >= c["heure_depart"]:
+        print(f"{iso}: race started, odds no longer refreshed")
+        return
+    key = f"{iso[8:10]}{iso[5:7]}{iso[:4]}"
+    part, _ = get(f"{key}/R{c['reunion']}/C{c['course']}/participants")
+    if not part:
+        sys.exit(f"{iso}: runners not available")
+    live = {p["numPmu"]: p for p in part["participants"] if p.get("statut") == "PARTANT"}
+    cache = rec["cache"]
+    keep = [i for i, n in enumerate(cache["nums"]) if n in live]
+    nums = [cache["nums"][i] for i in keep]
+    odds = [(live[n].get("dernierRapportDirect") or live[n].get("dernierRapportReference") or {}).get("rapport")
+            for n in nums]
+    rk = ranking(nums, [cache["raw"][i] for i in keep], cache["feats"], cache["stats"], cache["weights"], odds)
+
+    by_num = {h["num"]: h for h in rec["chevaux"]}
+    for n in set(by_num) - set(nums):  # withdrawn since the morning
+        h = by_num.pop(n)
+        rec["non_partants"].append({k: h[k] for k in ("num", "nom", "jockey", "entraineur", "age", "sexe",
+                                                      "musique", "poids_kg", "corde")})
+    for rank, i in enumerate(rk["order"], 1):
+        by_num[nums[i]].update({"rang_ia": rank, "cote": odds[i], **chances(i, rk)})
+    if not rec["bon_rapport"] and rk["value"]:
+        rec["bon_rapport"] = rk["value"]
+        for n, h in by_num.items():
+            h["bon_rapport"] = n in rk["value"]
+    at = f"{paris_now():%Hh%M}"
+    rec.setdefault("prono_initial", rec["prono"])
+    rec["prono"] = rk["prono"]
+    rec["chevaux"] = sorted(by_num.values(), key=lambda h: h["rang_ia"])
+    rec["course"]["partants"] = len(nums)
+    if rk["main"] == "avec_cote":
+        rec["cotes_maj"] = at
+    rec["modele"].update({"avec_cotes": rk["main"] == "avec_cote", "note": model_note(rk["main"] == "avec_cote", at)})
+    f.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+    app_export.write(iso)
+    print(f"{iso}: odds of {at}, prono {'-'.join(map(str, rec['prono']))} "
+          f"(was {'-'.join(map(str, rec['prono_initial']))})")
 
 
 def runner_info(r):
@@ -311,6 +384,8 @@ def runner_info(r):
 
 
 def main():
+    if sys.argv[1:2] == ["--refresh"]:
+        return refresh(sys.argv[2] if len(sys.argv) > 2 else paris_now().date().isoformat())
     iso = sys.argv[1] if len(sys.argv) > 1 else date.today().isoformat()
     DAILY.mkdir(parents=True, exist_ok=True)
     if settle(min(iso, date.today().isoformat())):
