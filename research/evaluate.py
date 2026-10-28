@@ -100,7 +100,20 @@ def load_versions():
         v1rows = load_csv(DATA / "research" / "features_v1.csv")
     v1, f1 = build_races(v1rows, odds_ref)
     v2, f2 = build_races(ft.compute(runners, past), odds_ref)
-    return {"v1": (v1, f1), "v2": (v2, f2)}
+    return {"v1": (v1, f1), "v2": frozen_v2(v2, f2)}
+
+
+def frozen_v2(races, feats):
+    """The v2 features as frozen for the protocol: the trainer-opinion split and the outsider feature
+    were added to production later (signal_eval.py adds them back), so rebuild the single -1/0/+1
+    f_avis in place of f_avis_neg and drop f_avis_pos and f_outsider."""
+    neg, pos = feats.index("f_avis_neg"), feats.index("f_avis_pos")
+    keep = [i for i, c in enumerate(feats) if c not in ("f_avis_pos", "f_outsider")]
+    for r in races:
+        raw = r["raw"].copy()
+        raw[:, neg] = raw[:, pos] - raw[:, neg]
+        r["raw"] = raw[:, keep]
+    return races, ["f_avis" if c == "f_avis_neg" else c for c in (feats[i] for i in keep)]
 
 
 def design(races, cols, stats, trot=False):

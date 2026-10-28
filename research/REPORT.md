@@ -266,6 +266,65 @@ clear on validation and positive but uncertain on test. That's a plausible effec
 more all-race months exist. Adopting it would also need a daily download of all French races (about 35
 requests a day). Production is unchanged.
 
+## 12. Where the market is wrong: trainer opinion and rank outsiders (adopted)
+
+`factor_scan.py` compares, for groups of runners, the actual top-5 rate with what the reference odds
+imply (market fitted with stage discounts). It is split into two halves: before and after 2025-05-01.
+A pattern counts only if it holds in both.
+
+- **No effect:** weather (rain, sun, cold, heat, wind) matches the odds to the decimal. Ground,
+  course and distance specialists, draw, blinkers and freshness change sign between halves.
+- **Too little data:** odds movement before T-30 (few horses move more than 5%) and last-race comments
+  (written for only a few races).
+- **Holds in both halves:**
+
+| Group | Runners | Actual top 5 | Market implies | Model implies (before the fix) |
+|---|---|---|---|---|
+| Negative trainer opinion | 626 | 4.4% / 2.5% | 13.1% / 10.7% | 9.9% / 9.1% |
+| Odds above 60 | 1,314 | 5.4% / 4.3% | 10.8% / 9.5% | 8.9% / 8.8% |
+
+None of the 626 negative-opinion horses won.
+
+**Fix** (`signal_eval.py`):
+- The trainer opinion becomes two indicators (`f_avis_neg`, `f_avis_pos`) instead of one −1/0/+1 scale.
+- The with-odds model gets `f_outsider = max(0, log(odds / 30))`.
+
+The rule was declared before the run: a positive gain on both the validation and the test months.
+Gain in log-likelihood per race, with 95% intervals:
+
+| | Validation 2026-02..05 | Test 2026-06..10 | Hold-out 2024-11..2025-10 |
+|---|---|---|---|
+| Opinion split, no odds | +0.046 [0.022, 0.071] | +0.038 [0.011, 0.063] | +0.031 [0.019, 0.043] |
+| Opinion split, with odds | +0.029 [0.009, 0.050] | +0.026 [0.004, 0.046] | +0.018 [0.008, 0.027] |
+| Opinion split + outsider, with odds | +0.037 [0.009, 0.064] | +0.038 [−0.004, 0.078] | +0.030 [0.010, 0.049] |
+
+Against the market fitted at T-30, the fixed with-odds model gains:
+- 2026: +0.053 [0.013, 0.093]. This is the first interval above 0.
+- Hold-out year: +0.022 [−0.018, 0.061]. Not demonstrated.
+
+**Caveat:** the scan that found the pattern looked at all three years, so these are not pre-registered
+tests. The evidence is that the gain holds in three separate periods. The clean test is the races to come.
+
+**Betting** (`signal_bets.py`, 633 races, €1,266 staked, official dividends):
+
+| Strategy | Back before the fix | Back after the fix |
+|---|---|---|
+| Top 5 with odds | €675 | €665 |
+| Top 5 without odds | €778 | €723 (one Désordre fewer) |
+| Bon rapport | €289 | €329 |
+
+The fix makes the probabilities more accurate but rarely changes the five horses picked. All the
+differences are within luck. **No change in profitability is demonstrated.**
+
+**Production:**
+- `features.py` writes `f_avis_neg`, `f_avis_pos` and `f_outsider`. `ODDS` lists the odds-based features
+  kept out of the no-odds model.
+- `daily.py` recomputes `f_outsider` from the odds at each Refresh. Records cached before the change
+  still refresh as before (tested: identical result).
+- The explanations still show "Avis positif/négatif de l'entraîneur".
+- The research protocol keeps its frozen v2 features: `evaluate.frozen_v2` rebuilds the old `f_avis`.
+  Tested: identical to the previous code on all 1,096 races.
+
 ## Reproduce
 
 ```

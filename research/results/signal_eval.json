@@ -1,0 +1,78 @@
+{
+ "avis split, no odds": {
+  "validation": {
+   "mean_ll_gain": 0.046,
+   "ci95": [
+    0.0218,
+    0.0713
+   ],
+   "races": 119
+  },
+  "test": {
+   "mean_ll_gain": 0.0381,
+   "ci95": [
+    0.011,
+    0.0626
+   ],
+   "races": 150
+  },
+  "passes_rule": true
+ },
+ "avis split, with odds": {
+  "validation": {
+   "mean_ll_gain": 0.029,
+   "ci95": [
+    0.0085,
+    0.0496
+   ],
+   "races": 119
+  },
+  "test": {
+   "mean_ll_gain": 0.0263,
+   "ci95": [
+    0.0036,
+    0.0463
+   ],
+   "races": 150
+  },
+  "passes_rule": true
+ },
+ "outsider correction, with odds": {
+  "validation": {
+   "mean_ll_gain": 0.0191,
+   "ci95": [
+    -0.0081,
+    0.0424
+   ],
+   "races": 119
+  },
+  "test": {
+   "mean_ll_gain": 0.0224,
+   "ci95": [
+    -0.0197,
+    0.0615
+   ],
+   "races": 150
+  },
+  "passes_rule": true
+ },
+ "both, with odds": {
+  "validation": {
+   "mean_ll_gain": 0.037,
+   "ci95": [
+    0.0093,
+    0.0635
+   ],
+   "races": 119
+  },
+  "test": {
+   "mean_ll_gain": 0.0381,
+   "ci95": [
+    -0.0041,
+    0.0778
+   ],
+   "races": 150
+  },
+  "passes_rule": true
+ }
+}

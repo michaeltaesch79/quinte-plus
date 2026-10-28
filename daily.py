@@ -49,7 +49,7 @@ DROPPED = set()
 
 # Features used in explanations, with the direction that makes sense (+1: more is better).
 # A feature is only explained when the fitted weight has that same sign.
-EXPECTED = {"f_class": 1, "f_jockey_rides": 1, "f_jockey_top3": 1, "f_draw_rel": -1, "f_avis": 1,
+EXPECTED = {"f_class": 1, "f_jockey_rides": 1, "f_jockey_top3": 1, "f_draw_rel": -1, "f_avis_pos": 1, "f_avis_neg": -1,
             "f_weight_rel": 1, "f_career_win": 1, "f_last_place": -1, "f_form_place": -1, "f_form_top3": 1,
             "f_form_win": 1, "f_going_top3": 1, "f_dist_top3": 1, "f_track_top3": 1, "f_trainer_top5": 1,
             "f_log_gains_year": 1, "f_days_since": -1, "f_unshod4": 1, "f_dist_handicap": -1}
@@ -210,8 +210,10 @@ def phrase(name, high, f, r):
         return f"{rider} en réussite ces 3 derniers mois" if high else f"{rider} en manque de réussite ces 3 derniers mois"
     if name == "f_draw_rel" and r["placeCorde"]:
         return f"Numéro de corde élevé ({r['placeCorde']})" if high else f"Bon numéro de corde ({r['placeCorde']})"
-    if name == "f_avis" and r["avisEntraineur"] in ("POSITIF", "NEGATIF"):
-        return "Avis positif de l'entraîneur" if r["avisEntraineur"] == "POSITIF" else "Avis négatif de l'entraîneur"
+    if name == "f_avis_pos" and high:
+        return "Avis positif de l'entraîneur"
+    if name == "f_avis_neg" and high:
+        return "Avis négatif de l'entraîneur"
     if name == "f_weight_rel" and r["handicapPoids"]:
         kg = f"{num(r['handicapPoids']) / 10:g} kg".replace(".", ",")
         return (f"Parmi les plus chargés ({kg}) : le handicapeur le juge parmi les meilleurs" if high
@@ -252,7 +254,7 @@ def phrase(name, high, f, r):
 
 
 def model_cols(name, feats):
-    return [i for i, f in enumerate(feats) if f not in DROPPED and (name == "avec_cote" or f != "f_mkt_logp")]
+    return [i for i, f in enumerate(feats) if f not in DROPPED and (name == "avec_cote" or f not in ft.ODDS)]
 
 
 def unpack(fitted):
@@ -262,11 +264,14 @@ def unpack(fitted):
 
 def ranking(nums, raw, feats, stats, weights, odds):
     """Prono, bon rapport and estimated chances of one race from fitted weights and the given odds
-    (None where unknown). The market feature is recomputed from these odds as in features.py."""
+    (None where unknown). The market features are recomputed from these odds as in features.py."""
     mkt = feats.index("f_mkt_logp")
     has_odds = all(odds)
     inv = sum(1 / o for o in odds if o)
     raw = [row[:mkt] + [math.log((1 / o) / inv) if o else None] + row[mkt + 1:] for row, o in zip(raw, odds)]
+    if "f_outsider" in feats:  # absent from records cached before it was added
+        out = feats.index("f_outsider")
+        raw = [row[:out] + [ft.outsider(o)] + row[out + 1:] for row, o in zip(raw, odds)]
     s, lam = {}, {}
     for name, fitted in weights.items():
         w, lam[name] = unpack(fitted)

@@ -1,0 +1,18 @@
+2026              bon rapport, fix           bets  269 back      148 ROI -0.72 CI [-0.9061, -0.4963] w/o top1 -0.81  {'BONUS_3': 9, 'BONUS_4SUR5': 5}
+2026              bon rapport, prod          bets  269 back      120 ROI -0.78 CI [-0.9054, -0.6179] w/o top1 -0.81  {'BONUS_4SUR5': 7, 'BONUS_3': 9}
+2026              top 5 no odds, fix         bets  269 back      192 ROI -0.64 CI [-0.7651, -0.497] w/o top1 -0.69  {'BONUS_4SUR5': 28, 'BONUS_3': 12, 'DESORDRE': 1}
+2026              top 5 no odds, prod        bets  269 back      215 ROI -0.60 CI [-0.7193, -0.4662] w/o top1 -0.65  {'BONUS_3': 12, 'BONUS_4SUR5': 30, 'DESORDRE': 2}
+2026              top 5 with odds, fix       bets  269 back      338 ROI -0.37 CI [-0.5421, -0.1663] w/o top1 -0.44  {'BONUS_4SUR5': 40, 'DESORDRE': 4, 'BONUS_3': 25}
+2026              top 5 with odds, prod      bets  269 back      364 ROI -0.32 CI [-0.4964, -0.118] w/o top1 -0.39  {'BONUS_4SUR5': 41, 'DESORDRE': 5, 'BONUS_3': 27}
+both periods      bon rapport, fix           bets  633 back      329 ROI -0.74 CI [-0.8455, -0.6175] w/o top1 -0.77  {'BONUS_4SUR5': 17, 'BONUS_3': 15}
+both periods      bon rapport, prod          bets  633 back      289 ROI -0.77 CI [-0.8564, -0.6709] w/o top1 -0.79  {'BONUS_4SUR5': 18, 'BONUS_3': 16}
+both periods      top 5 no odds, fix         bets  633 back      723 ROI -0.43 CI [-0.6831, -0.0853] w/o top1 -0.53  {'BONUS_3': 31, 'BONUS_4SUR5': 72, 'DESORDRE': 3}
+both periods      top 5 no odds, prod        bets  633 back      778 ROI -0.39 CI [-0.6445, -0.0375] w/o top1 -0.49  {'BONUS_3': 34, 'BONUS_4SUR5': 75, 'DESORDRE': 4}
+both periods      top 5 with odds, fix       bets  633 back      665 ROI -0.47 CI [-0.5724, -0.3676] w/o top1 -0.50  {'BONUS_4SUR5': 85, 'BONUS_3': 54, 'DESORDRE': 9}
+both periods      top 5 with odds, prod      bets  633 back      675 ROI -0.47 CI [-0.5674, -0.3565] w/o top1 -0.50  {'BONUS_4SUR5': 88, 'BONUS_3': 53, 'DESORDRE': 9}
+hold-out 2024-25  bon rapport, fix           bets  364 back      181 ROI -0.75 CI [-0.8658, -0.6218] w/o top1 -0.78  {'BONUS_4SUR5': 12, 'BONUS_3': 6}
+hold-out 2024-25  bon rapport, prod          bets  364 back      169 ROI -0.77 CI [-0.882, -0.6403] w/o top1 -0.80  {'BONUS_4SUR5': 11, 'BONUS_3': 7}
+hold-out 2024-25  top 5 no odds, fix         bets  364 back      531 ROI -0.27 CI [-0.6969, 0.3001] w/o top1 -0.45  {'BONUS_3': 19, 'BONUS_4SUR5': 44, 'DESORDRE': 2}
+hold-out 2024-25  top 5 no odds, prod        bets  364 back      563 ROI -0.23 CI [-0.6654, 0.356] w/o top1 -0.41  {'BONUS_3': 22, 'BONUS_4SUR5': 45, 'DESORDRE': 2}
+hold-out 2024-25  top 5 with odds, fix       bets  364 back      327 ROI -0.55 CI [-0.663, -0.4356] w/o top1 -0.57  {'BONUS_4SUR5': 45, 'BONUS_3': 29, 'DESORDRE': 5}
+hold-out 2024-25  top 5 with odds, prod      bets  364 back      311 ROI -0.57 CI [-0.6835, -0.4545] w/o top1 -0.59  {'BONUS_4SUR5': 47, 'BONUS_3': 26, 'DESORDRE': 4}

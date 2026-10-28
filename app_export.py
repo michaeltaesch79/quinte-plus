@@ -30,7 +30,7 @@ SMALL_WORDS = {"de", "du", "des", "la", "le", "les", "et", "en", "sur", "à", "a
 SEX = {"MALES": "Mâle", "FEMELLES": "Femelle", "HONGRES": "Hongre"}
 FACTOR_TITLE = {
     "f_class": "Niveau", "f_jockey_rides": "{rider}", "f_jockey_top3": "{rider}", "f_draw_rel": "Corde",
-    "f_avis": "Entraîneur", "f_trainer_top5": "Entraîneur", "f_weight_rel": "Poids", "f_career_win": "Palmarès",
+    "f_avis": "Entraîneur", "f_avis_pos": "Entraîneur", "f_avis_neg": "Entraîneur", "f_trainer_top5": "Entraîneur", "f_weight_rel": "Poids", "f_career_win": "Palmarès",
     "f_log_gains_year": "Gains", "f_last_place": "Forme", "f_form_place": "Forme", "f_form_top3": "Forme",
     "f_form_win": "Forme", "f_going_top3": "Terrain", "f_dist_top3": "Distance", "f_track_top3": "Hippodrome",
     "f_days_since": "Fraîcheur", "f_unshod4": "Ferrure", "f_dist_handicap": "Recul",

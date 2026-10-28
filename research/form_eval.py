@@ -29,8 +29,8 @@ def main():
     races, feats = ev.build_races(ft.compute(runners, past, all_runs), odds_ref)
     mv = ev.months_between(races, *ev.VALID)
     mt = ev.months_between(races, *ev.TEST)
-    base_no = [c for c in feats if c != "f_mkt_logp" and c not in FORM]
-    base_with = base_no + ["f_mkt_logp"]
+    base_no = [c for c in feats if c not in ft.ODDS and c not in FORM]
+    base_with = base_no + list(ft.ODDS)
     cfgs = {
         "no odds": ({"cols": base_no, "l2": 20.0, "discount": True}, {"cols": base_no + FORM, "l2": 20.0, "discount": True}),
         "with odds": ({"cols": base_with, "l2": 10.0, "discount": True}, {"cols": base_with + FORM, "l2": 10.0, "discount": True}),

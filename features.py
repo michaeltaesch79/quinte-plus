@@ -11,8 +11,8 @@ Only information available before the race is used (research/checks.py tests thi
 - trainer rates use earlier Quinté results only;
 - optional jockey/trainer form from all French races (data/all_runs.csv, when downloaded): races
   strictly before the race day, same discipline group, actual vs expected top-3 finishes;
-- the market feature uses the reference odds (30 min before the start), never the odds taken
-  after the start (cote_finale).
+- the market features (ODDS) use the reference odds (30 min before the start), never the odds
+  taken after the start (cote_finale).
 Missing values are left empty; the model fills them with the race average.
 
 Usage (Python 3.9+, no extra packages):
@@ -37,6 +37,13 @@ GOING = {"tres leger": 0, "leger": 0, "bon leger": 1, "sec": 0, "bon": 1, "bon s
 FAILED = {"DISQUALIFIE", "DISQUALIFIE_POUR_ALLURE_IRREGULIERE", "DISQUALIFIE_POTEAU_GALOP",
           "ARRETE", "TOMBE", "DISTANCE"}
 DISQUALIFIED = {"DISQUALIFIE", "DISQUALIFIE_POUR_ALLURE_IRREGULIERE", "DISQUALIFIE_POTEAU_GALOP"}
+# Features computed from the odds: left out of the model without odds.
+ODDS = ("f_mkt_logp", "f_outsider")
+
+
+def outsider(o):
+    """Rank outsiders (odds above 30) get far fewer places than their odds suggest: log(odds / 30), else 0."""
+    return max(0.0, math.log(o / 30)) if o else None
 
 
 def plain(s):
@@ -266,7 +273,10 @@ def compute(runners, past, all_runs=None):
             f["f_entire"] = int(r["sexe"] == "MALES")
             f["f_blinkers"] = int(r["oeilleres"] != "SANS_OEILLERES")
             f["f_unshod4"] = int(r["deferre"] == "DEFERRE_ANTERIEURS_POSTERIEURS") if fam in ("ATTELE", "MONTE") else None
-            f["f_avis"] = {"POSITIF": 1, "NEGATIF": -1, "NEUTRE": 0}.get(r["avisEntraineur"])
+            # two signals, not one -1/0/+1 scale: a negative opinion matters far more (research/signal_eval.py)
+            avis = r["avisEntraineur"] if r["avisEntraineur"] in ("POSITIF", "NEGATIF", "NEUTRE") else None
+            f["f_avis_neg"] = int(avis == "NEGATIF") if avis else None
+            f["f_avis_pos"] = int(avis == "POSITIF") if avis else None
             f["f_driver_change"] = int(r["driverChange"] == "True")
 
             nc, nv, npl = num(r["nombreCourses"]) or 0, num(r["nombreVictoires"]) or 0, num(r["nombrePlaces"]) or 0
@@ -293,6 +303,7 @@ def compute(runners, past, all_runs=None):
 
             o = odds[r["numPmu"]]
             f["f_mkt_logp"] = math.log((1 / o) / inv) if o and inv else None
+            f["f_outsider"] = outsider(o)
 
             rows.append({"race_id": race_id, "date": r["date"], "numPmu": r["numPmu"], "nom": r["nom"],
                          "specialite": r["specialite"], "partants": n, "res_place": r["res_place"],
