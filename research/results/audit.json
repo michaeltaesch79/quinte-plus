@@ -1,65 +1,105 @@
 {
  "identifiers": {
-  "runner_rows": 5739,
-  "races": 367,
+  "runner_rows": 17169,
+  "races": 1097,
   "duplicate_race_numPmu": 0,
-  "duplicate_race_idCheval": 0,
-  "idCheval_with_several_names": 0,
-  "names_with_several_idCheval": 0,
-  "distinct_horses": 2709
+  "duplicate_race_idCheval": 613,
+  "idCheval_with_several_names": 1,
+  "names_with_several_idCheval": 1262,
+  "distinct_horses": 3284
  },
  "races": {
   "by_specialite": {
-   "PLAT": 143,
-   "OBSTACLE": 40,
-   "TROT_ATTELE": 182,
-   "TROT_MONTE": 2
+   "TROT_ATTELE": 544,
+   "OBSTACLE": 122,
+   "PLAT": 427,
+   "TROT_MONTE": 4
   },
   "by_country": {
-   "FRA": 367
+   "FRA": 1097
   },
   "statut_course": {
-   "FIN_COURSE": 131,
-   "ARRIVEE_DEFINITIVE_COMPLETE": 235,
+   "ARRIVEE_DEFINITIVE_COMPLETE": 556,
+   "FIN_COURSE": 540,
    "COURSE_ANNULEE": 1
   },
   "starters": {
-   "n": 367,
-   "min": 12,
+   "n": 1097,
+   "min": 11,
    "p05": 13,
    "median": 15,
-   "p95": 18,
+   "p95": 17,
    "max": 20
   },
-  "first_date": "2025-10-27",
+  "first_date": "2023-10-27",
   "last_date": "2026-10-28"
  },
  "outcomes": {
-  "starters": 5601,
-  "non_runners": 138,
-  "non_runners_with_reference_odds (late scratches)": 57,
-  "starters_without_place (non-finishers, DQ, falls)": 650,
-  "starters_without_place_pct": 11.6,
+  "starters": 16742,
+  "non_runners": 427,
+  "non_runners_with_reference_odds (late scratches)": 161,
+  "starters_without_place (non-finishers, DQ, falls)": 1795,
+  "starters_without_place_pct": 10.7,
   "unplaced_by_specialite_pct": {
-   "PLAT": 0.3,
-   "OBSTACLE": 25.6,
-   "TROT_ATTELE": 17.5,
-   "TROT_MONTE": 33.3
+   "TROT_ATTELE": 16.0,
+   "OBSTACLE": 22.9,
+   "PLAT": 0.6,
+   "TROT_MONTE": 26.1
   },
   "incident_codes": {
-   "DISQUALIFIE_POUR_ALLURE_IRREGULIERE": 443,
-   "ARRETE": 141,
-   "(none)": 33,
-   "TOMBE": 27,
-   "DISTANCE": 4,
-   "DISQUALIFIE_POTEAU_GALOP": 2
+   "DISQUALIFIE_POUR_ALLURE_IRREGULIERE": 1230,
+   "ARRETE": 349,
+   "TOMBE": 104,
+   "(none)": 82,
+   "DISTANCE": 23,
+   "RESTE_AU_POTEAU": 4,
+   "DISQUALIFIE_POTEAU_GALOP": 3
   },
   "races_by_number_of_top5_runners": {
-   "5": 362,
-   "6": 4,
+   "5": 1083,
+   "6": 13,
    "0": 1
   },
   "dead_heat_races": [
+   "2024-01-14_R1C4",
+   "2024-02-03_R1C3",
+   "2024-02-05_R1C2",
+   "2024-03-11_R1C4",
+   "2024-03-13_R1C1",
+   "2024-03-15_R1C8",
+   "2024-04-18_R1C1",
+   "2024-06-12_R1C1",
+   "2024-06-20_R1C7",
+   "2024-07-03_R1C7",
+   "2024-07-30_R1C7",
+   "2024-08-10_R1C4",
+   "2024-08-15_R1C3",
+   "2024-09-28_R1C3",
+   "2024-10-21_R1C1",
+   "2024-10-30_R1C3",
+   "2024-11-05_R1C1",
+   "2024-11-19_R1C5",
+   "2025-01-27_R1C3",
+   "2025-02-04_R1C1",
+   "2025-02-14_R1C8",
+   "2025-02-21_R1C8",
+   "2025-02-22_R1C4",
+   "2025-03-28_R1C8",
+   "2025-04-01_R1C1",
+   "2025-04-05_R1C5",
+   "2025-04-24_R1C9",
+   "2025-04-28_R1C1",
+   "2025-05-15_R1C7",
+   "2025-05-17_R1C5",
+   "2025-06-05_R1C6",
+   "2025-06-21_R1C4",
+   "2025-06-24_R1C7",
+   "2025-06-26_R1C8",
+   "2025-06-27_R1C4",
+   "2025-07-08_R1C7",
+   "2025-08-12_R1C7",
+   "2025-09-20_R1C4",
+   "2025-10-16_R1C1",
    "2025-10-28_R1C3",
    "2025-11-18_R1C5",
    "2025-11-21_R1C4",
@@ -79,9 +119,41 @@
   ]
  },
  "missing_pct_among_starters": {
+  "TROT_ATTELE": {
+   "cote_reference": 0.0,
+   "cote_finale": 0.0,
+   "musique": 0.0,
+   "driver": 0.0,
+   "entraineur": 0.0,
+   "handicapPoids": 100.0,
+   "handicapValeur": 100.0,
+   "handicapDistance": 0.0,
+   "placeCorde": 75.7,
+   "deferre": 13.2,
+   "avisEntraineur": 0.0,
+   "terrain": 99.5,
+   "nombreCourses": 0.0,
+   "gainsAnneeEnCours": 0.0
+  },
+  "OBSTACLE": {
+   "cote_reference": 0.0,
+   "cote_finale": 0.0,
+   "musique": 0.1,
+   "driver": 0.0,
+   "entraineur": 0.0,
+   "handicapPoids": 0.0,
+   "handicapValeur": 0.9,
+   "handicapDistance": 100.0,
+   "placeCorde": 100.0,
+   "deferre": 100.0,
+   "avisEntraineur": 100.0,
+   "terrain": 0.0,
+   "nombreCourses": 0.0,
+   "gainsAnneeEnCours": 0.0
+  },
   "PLAT": {
    "cote_reference": 0.0,
-   "cote_finale": 0.7,
+   "cote_finale": 0.2,
    "musique": 0.0,
    "driver": 0.0,
    "entraineur": 0.0,
@@ -92,38 +164,6 @@
    "deferre": 100.0,
    "avisEntraineur": 100.0,
    "terrain": 0.0,
-   "nombreCourses": 0.0,
-   "gainsAnneeEnCours": 0.0
-  },
-  "OBSTACLE": {
-   "cote_reference": 0.0,
-   "cote_finale": 0.0,
-   "musique": 0.0,
-   "driver": 0.0,
-   "entraineur": 0.0,
-   "handicapPoids": 0.0,
-   "handicapValeur": 0.2,
-   "handicapDistance": 100.0,
-   "placeCorde": 100.0,
-   "deferre": 100.0,
-   "avisEntraineur": 100.0,
-   "terrain": 0.0,
-   "nombreCourses": 0.0,
-   "gainsAnneeEnCours": 0.0
-  },
-  "TROT_ATTELE": {
-   "cote_reference": 0.0,
-   "cote_finale": 0.0,
-   "musique": 0.0,
-   "driver": 0.0,
-   "entraineur": 0.0,
-   "handicapPoids": 100.0,
-   "handicapValeur": 100.0,
-   "handicapDistance": 0.0,
-   "placeCorde": 75.4,
-   "deferre": 11.8,
-   "avisEntraineur": 0.0,
-   "terrain": 99.4,
    "nombreCourses": 0.0,
    "gainsAnneeEnCours": 0.0
   },
@@ -147,59 +187,229 @@
  "races_with_reference_odds_for_every_starter_pct": 100.0,
  "odds_timing": {
   "reference_minutes_vs_start": {
-   "n": 5660,
+   "n": 16905,
    "min": -674.9,
    "p05": -31.9,
    "median": -29.9,
    "p95": -29.9,
-   "max": -29.3
+   "max": -26.9
   },
   "direct_minutes_vs_start": {
-   "n": 5677,
+   "n": 16960,
    "min": -840.0,
-   "p05": 0.5,
-   "median": 1.5,
-   "p95": 4.5,
+   "p05": 0.6,
+   "median": 1.7,
+   "p95": 4.9,
    "max": 21.3
   },
   "share_reference_after_start_pct": 0.0,
   "kinds": {
-   "dernierRapportReference / SIMPLE_GAGNANT / REFERENCE": 5660,
-   "dernierRapportDirect / SIMPLE_GAGNANT / DIRECT": 5677
+   "dernierRapportReference / SIMPLE_GAGNANT / REFERENCE": 16905,
+   "dernierRapportDirect / SIMPLE_GAGNANT / DIRECT": 16960
   }
  },
  "past_runs": {
-  "rows": 35366,
+  "rows": 114686,
   "on_or_after_race_date": 0,
   "min_days_before": 3,
   "duplicate_rows": 7,
   "status_counts": {
-   "PLACE": 28465,
-   "NON_PLACE": 4322,
-   "DISQUALIFIE": 1471,
+   "PLACE": 98862,
+   "NON_PLACE": 8103,
+   "DISQUALIFIE": 5161,
+   "ARRETE": 1205,
+   "TOMBE": 751,
    "DISQUALIFIE_POUR_ALLURE_IRREGULIERE": 506,
-   "ARRETE": 377,
-   "TOMBE": 199,
-   "DISTANCE": 15,
-   "INCONNU": 6,
-   "DISQUALIFIE_POTEAU_GALOP": 3,
-   "DEROBE": 1,
-   "RESTE_AU_POTEAU": 1
+   "DISTANCE": 58,
+   "INCONNU": 21,
+   "DEROBE": 10,
+   "RESTE_AU_POTEAU": 6,
+   "DISQUALIFIE_POTEAU_GALOP": 3
   },
-  "starters_without_history": 16
+  "starters_without_history": 86
  },
  "payouts": {
   "base_stake_cents": {
-   "200": 367
+   "200": 1097
   },
   "unit_mismatches": 0,
   "races_flagged_rembourse": 1,
   "categories_by_month": {
+   "2023-10": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2023-11": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2023-12": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-01": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-02": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-03": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-04": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-05": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-06": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-07": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-08": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-09": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-10": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-11": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2024-12": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2025-01": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2025-02": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2025-03": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2025-04": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2025-05": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2025-06": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2025-07": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2025-08": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
+   "2025-09": [
+    "QUINTE_PLUS:BONUS_3",
+    "QUINTE_PLUS:BONUS_4SUR5",
+    "QUINTE_PLUS:DESORDRE",
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
+   ],
    "2025-10": [
     "QUINTE_PLUS:BONUS_3",
     "QUINTE_PLUS:BONUS_4SUR5",
     "QUINTE_PLUS:DESORDRE",
-    "QUINTE_PLUS:ORDRE"
+    "QUINTE_PLUS:ORDRE",
+    "QUINTE_PLUS:ORDRE_TIRELIRE"
    ],
    "2025-11": [
     "QUINTE_PLUS:BONUS_3",
@@ -288,16 +498,48 @@
    ]
   },
   "rows_by_category": {
-   "QUINTE_PLUS:ORDRE": 376,
-   "QUINTE_PLUS:DESORDRE": 370,
-   "QUINTE_PLUS:BONUS_4SUR5": 1846,
-   "QUINTE_PLUS:BONUS_3": 367,
-   "QUINTE_PLUS:ORDRE_TIRELIRE": 29
+   "QUINTE_PLUS:ORDRE": 1120,
+   "QUINTE_PLUS:DESORDRE": 1109,
+   "QUINTE_PLUS:BONUS_4": 8,
+   "QUINTE_PLUS:BONUS_3": 1098,
+   "QUINTE_PLUS:ORDRE_TIRELIRE": 102,
+   "QUINTE_PLUS:BONUS_4SUR5": 5492
   },
   "races_without_desordre_row": [
    "2026-03-13_R1C8"
   ],
   "races_with_zero_ordre_dividend (no winner, carried over)": [
+   "2023-11-07_R1C3",
+   "2024-01-02_R1C3",
+   "2024-01-05_R1C7",
+   "2024-03-06_R1C1",
+   "2024-04-20_R1C4",
+   "2024-06-11_R1C1",
+   "2024-08-05_R1C4",
+   "2024-09-16_R1C1",
+   "2024-10-05_R1C4",
+   "2024-10-22_R1C1",
+   "2024-10-26_R1C4",
+   "2024-11-11_R1C3",
+   "2024-12-03_R1C1",
+   "2025-01-09_R1C1",
+   "2025-01-15_R1C2",
+   "2025-02-12_R1C1",
+   "2025-03-09_R1C4",
+   "2025-03-20_R1C1",
+   "2025-04-26_R1C3",
+   "2025-05-04_R1C4",
+   "2025-05-08_R1C3",
+   "2025-05-11_R1C3",
+   "2025-07-03_R1C6",
+   "2025-07-08_R1C7",
+   "2025-07-21_R1C7",
+   "2025-07-28_R1C4",
+   "2025-08-10_R1C3",
+   "2025-08-16_R1C4",
+   "2025-09-04_R1C5",
+   "2025-09-16_R1C1",
+   "2025-10-04_R1C4",
    "2025-10-27_R1C4",
    "2025-12-10_R1C1",
    "2025-12-17_R1C1",
@@ -319,20 +561,20 @@
   "desordre_combination_differs_from_runner_places": [],
   "races_where_desordre>=bonus4sur5>=bonus3_fails": 0,
   "desordre_eur_per_1eur": {
-   "n": 370,
+   "n": 1109,
    "min": 1.4,
    "p05": 9.7,
-   "median": 195.5,
-   "p95": 2354.7,
-   "max": 23488.1
+   "median": 204.8,
+   "p95": 2896.8,
+   "max": 28420.0
   },
   "bonus3_eur_per_1eur": {
-   "n": 367,
+   "n": 1098,
    "min": 1.1,
    "p05": 1.1,
-   "median": 3.4,
-   "p95": 19.4,
-   "max": 63.4
+   "median": 3.6,
+   "p95": 19.8,
+   "max": 85.9
   }
  }
 }

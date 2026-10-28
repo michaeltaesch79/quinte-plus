@@ -15,6 +15,7 @@ Needs numpy + scipy (+ lightgbm for the boosting comparison), e.g. in a separate
 Writes research/results/evaluation.json and prints the tables. Paper betting only.
 """
 import csv
+import importlib.util
 import itertools
 import json
 import math
@@ -88,8 +89,17 @@ def build_races(rows, odds_ref):
 def load_versions():
     odds_ref = {(r["race_id"], r["numPmu"]): float(r["cote_reference"])
                 for r in load_csv(DATA / "runners.csv") if r["cote_reference"]}
-    v1, f1 = build_races(load_csv(DATA / "research" / "features_v1.csv"), odds_ref)
-    v2, f2 = build_races(ft.compute(load_csv(DATA / "runners.csv"), load_csv(DATA / "past_runs.csv")), odds_ref)
+    runners, past = load_csv(DATA / "runners.csv"), load_csv(DATA / "past_runs.csv")
+    code = DATA / "research" / "features_v1.py"  # the pre-fix feature code, kept to rebuild the "before" rows
+    if code.exists():
+        spec = importlib.util.spec_from_file_location("features_v1", code)
+        v1code = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(v1code)
+        v1rows = v1code.compute(runners, past)
+    else:
+        v1rows = load_csv(DATA / "research" / "features_v1.csv")
+    v1, f1 = build_races(v1rows, odds_ref)
+    v2, f2 = build_races(ft.compute(runners, past), odds_ref)
     return {"v1": (v1, f1), "v2": (v2, f2)}
 
 
@@ -294,7 +304,7 @@ class PayoutModel:
     """log(dividend) ~ market popularity of the winning combination (sum of log implied win
     probabilities of its horses) + field size + discipline. Fitted on earlier races only;
     lognormal mean exp(mu + sigma^2/2). Its uncertainty is reported, not hidden."""
-    CATS = {"ORDRE": 5, "DESORDRE": 5, "BONUS_4SUR5": 5, "BONUS_3": 3}
+    CATS = {"ORDRE": 5, "DESORDRE": 5, "BONUS_4SUR5": 5, "BONUS_4": 4, "BONUS_3": 3}  # BONUS_4: older rule
 
     def __init__(self, races, payouts):
         self.coef, self.sigma, self.r2 = {}, {}, {}
@@ -306,6 +316,8 @@ class PayoutModel:
                     continue
                 X.append(self.x(r, logq(r)[r["order"][:depth]].sum()))
                 y.append(math.log(np.mean(vals)))
+            if len(y) < 20:  # category not in force (or too rare) in the training period
+                continue
             X, y = np.array(X), np.array(y)
             beta = np.linalg.solve(X.T @ X + 1e-3 * np.eye(X.shape[1]), X.T @ y)
             res = y - X @ beta
@@ -323,26 +335,36 @@ class PayoutModel:
         return np.exp(base + b[1] * np.asarray(pop) + self.sigma[cat] ** 2 / 2)
 
 
-def ticket_evs(r, s, lam, orders, pm, candidates):
-    """Expected net euros of each candidate ticket (ordered tuple of runner indices) for 2 €."""
+def race_rule(r, payouts):
+    """Bonus rule in force for a race: the older "first four" Bonus 4 or the current Bonus 4sur5."""
+    return "BONUS_4" if any(p == "QUINTE_PLUS:BONUS_4" for p, _, _ in payouts.get(r["id"], [])) else "BONUS_4SUR5"
+
+
+def ticket_evs(r, s, lam, orders, pm, candidates, rule="BONUS_4SUR5"):
+    """Expected net euros of each candidate ticket (ordered tuple of runner indices) for 2 €.
+    Best category only: Ordre > Désordre > Bonus 4 or 4sur5 > Bonus 3."""
     lq = logq(r)
     n = len(s)
-    member5 = np.zeros((len(orders), n), bool)
-    member5[np.arange(len(orders))[:, None], orders] = True
-    member3 = np.zeros((len(orders), n), bool)
-    member3[np.arange(len(orders))[:, None], orders[:, :3]] = True
-    pop5 = lq[orders].sum(axis=1)
-    pop3 = lq[orders[:, :3]].sum(axis=1)
-    T = np.zeros((len(candidates), n), bool)
+    rows = np.arange(len(orders))[:, None]
+    T = np.zeros((len(candidates), n), int)
     for j, t in enumerate(candidates):
-        T[j, list(t)] = True
-    k5 = member5.astype(int) @ T.T.astype(int)
-    k3 = member3.astype(int) @ T.T.astype(int)
-    e_b45 = pm.mean("BONUS_4SUR5", r, pop5)[:, None]
-    e_b3 = pm.mean("BONUS_3", r, pop3)[:, None]
-    ev_b45 = ((k5 == 4) * e_b45).mean(axis=0)
-    ev_b3 = ((k5 == 3) & (k3 == 3)) * e_b3
-    ev_b3 = ev_b3.mean(axis=0)
+        T[j, list(t)] = 1
+
+    def hits(depth):
+        m = np.zeros((len(orders), n), int)
+        m[rows, orders[:, :depth]] = 1
+        return m @ T.T
+
+    k5, k4, k3 = hits(5), hits(4), hits(3)
+    if rule == "BONUS_4":  # the first four, any order
+        b4 = (k4 == 4) & (k5 < 5)
+        e_b4 = pm.mean("BONUS_4", r, lq[orders[:, :4]].sum(axis=1))[:, None]
+    else:  # any 4 of the first five
+        b4 = k5 == 4
+        e_b4 = pm.mean("BONUS_4SUR5", r, lq[orders].sum(axis=1))[:, None]
+    b3 = (k3 == 3) & ~b4 & (k5 < 5)
+    ev_b45 = (b4 * e_b4).mean(axis=0)
+    ev_b3 = (b3 * pm.mean("BONUS_3", r, lq[orders[:, :3]].sum(axis=1))[:, None]).mean(axis=0)
     perms = np.array([list(p) for t in candidates for p in itertools.permutations(t)])
     pp = plm.perm_probs(s, lam, perms).reshape(len(candidates), 120)
     out = []
@@ -350,7 +372,7 @@ def ticket_evs(r, s, lam, orders, pm, candidates):
         p_ord, p_set = pp[j, 0], pp[j].sum()  # the first permutation is the ticket's own order
         pop = lq[list(t)].sum()
         per_euro = p_ord * pm.mean("ORDRE", r, pop) + (p_set - p_ord) * pm.mean("DESORDRE", r, pop) + ev_b45[j] + ev_b3[j]
-        out.append({"ticket": t, "ev_net": STAKE * (float(per_euro) - 1), "p_set": p_set, "p_b45": float((k5[:, j] == 4).mean())})
+        out.append({"ticket": t, "ev_net": STAKE * (float(per_euro) - 1), "p_set": p_set, "p_b4": float(b4[:, j].mean())})
     return out
 
 

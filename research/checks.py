@@ -42,17 +42,21 @@ def feats_of(rows, race_id):
 
 # ---------------------------------------------------------------- leakage
 
-def leakage(compute, label, strict=True):
+def leakage(compute, label, strict=True, all_runs=None):
     """Features of a race must not change when everything after it is removed, when its own
     result is blanked, or when the post-start odds change."""
     runners, past = load("runners.csv"), load("past_runs.csv")
-    days = sorted({r["date"] for r in runners})
+    days = sorted({r["date"] for r in runners if not all_runs or r["date"] >= min(x["date"] for x in all_runs)})
     probe = [days[len(days) // 5], days[len(days) // 2], days[4 * len(days) // 5]]
+    if all_runs is not None:
+        base = compute
+        compute = lambda rs, ps, cut=None: base(rs, ps, [x for x in all_runs if not cut or x["date"] <= cut])
     full = compute(runners, past)
     bad = 0
     for d in probe:
         rid = next(r["race_id"] for r in runners if r["date"] == d)
-        cut = compute([r for r in runners if r["date"] <= d], [p for p in past if p["race_id"][:10] <= d])
+        cut = compute([r for r in runners if r["date"] <= d], [p for p in past if p["race_id"][:10] <= d],
+                      *([d] if all_runs is not None else []))
         a, b = feats_of(full, rid), feats_of(cut, rid)
         diff = [(n, k) for n in a for k in a[n] if a[n][k] != b[n][k]]
         bad += len(diff)
@@ -185,6 +189,8 @@ def probabilities():
 def main():
     random.seed(0)
     leakage(ft.compute, "features v2")
+    if (DATA / "all_runs.csv").exists():
+        leakage(ft.compute, "features v2 + all-race jockey/trainer form", all_runs=load("all_runs.csv"))
     spec = importlib.util.spec_from_file_location("features_v1", DATA / "research" / "features_v1.py")
     if spec and (DATA / "research" / "features_v1.py").exists():
         v1 = importlib.util.module_from_spec(spec)

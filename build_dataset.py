@@ -4,6 +4,8 @@ Phase 5: flatten the raw Quinté files into three CSV tables (no downloads).
     data/runners.csv    one row per runner per Quinté race
     data/past_runs.csv  one row per runner per past race (from performances-detaillees)
     data/payouts.csv    one row per payout line of each Quinté race
+    data/all_runs.csv   one row per runner of every French race whose runners file was downloaded
+                        (fetch_participants.py --france): jockey and trainer form across all races
 
 Columns starting with res_ are only known after the race: never use them as model inputs.
 Runner fields are a pre-race snapshot (checked: musique and career counts do not include
@@ -84,7 +86,7 @@ def runner_row(p, partants):
     return {
         "numPmu": p["numPmu"],
         "nom": p["nom"],
-        "idCheval": p["idCheval"],
+        "idCheval": p.get("idCheval"),  # missing in some older files
         "statut": p["statut"],
         "partants": partants,
         "age": p.get("age"),
@@ -189,6 +191,27 @@ def payout_rows(race_id, rapports):
             }
 
 
+def all_runs():
+    """Runners of every French race with a saved runners file (Quinté races included)."""
+    for f in sorted((RAW / "programme").glob("*.json")):
+        prog = json.loads(f.read_bytes())["programme"]
+        for reunion in prog["reunions"]:
+            if reunion["pays"]["code"] != "FRA":
+                continue
+            for course in reunion["courses"]:
+                path = RAW / "participants" / f.stem / f"R{reunion['numOfficiel']}C{course['numOrdre']}.json"
+                if not path.exists():
+                    continue
+                ps = json.loads(path.read_bytes()).get("participants") or []
+                partants = sum(p.get("statut") == "PARTANT" for p in ps)
+                for p in ps:
+                    if p.get("statut") != "PARTANT":
+                        continue
+                    yield {"date": f.stem, "race_id": f"{f.stem}_R{reunion['numOfficiel']}C{course['numOrdre']}",
+                           "specialite": course.get("specialite"), "partants": partants, "numPmu": p["numPmu"],
+                           "driver": p.get("driver"), "entraineur": p.get("entraineur"), "place": p.get("ordreArrivee")}
+
+
 def write_csv(path, rows):
     rows = list(rows)
     with path.open("w", newline="", encoding="utf-8") as f:
@@ -216,6 +239,7 @@ def main():
     write_csv(ROOT / "runners.csv", runners)
     write_csv(ROOT / "past_runs.csv", past)
     write_csv(ROOT / "payouts.csv", payouts)
+    write_csv(ROOT / "all_runs.csv", all_runs())
     if missing:
         print(f"{len(missing)} raw files missing, e.g. {missing[:3]}")
 

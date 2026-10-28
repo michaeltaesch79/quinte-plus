@@ -9,6 +9,8 @@ Only information available before the race is used (research/checks.py tests thi
 - jockey rides come only from past-performance files of races up to the race date, so a ride
   is only known once a file that lists it was available (no look-ahead through later files);
 - trainer rates use earlier Quinté results only;
+- optional jockey/trainer form from all French races (data/all_runs.csv, when downloaded): races
+  strictly before the race day, same discipline group, actual vs expected top-3 finishes;
 - the market feature uses the reference odds (30 min before the start), never the odds taken
   after the start (cote_finale).
 Missing values are left empty; the model fills them with the race average.
@@ -22,6 +24,7 @@ import csv
 import math
 import re
 import unicodedata
+from bisect import bisect_left
 from collections import defaultdict
 from datetime import date, timedelta
 
@@ -146,9 +149,47 @@ def prior_as_of(rides):
     return days, out
 
 
-def compute(runners, past):
-    """Feature rows for every starter, from runner and past-run rows shaped like the CSVs (all strings)."""
+def form_index(all_runs):
+    """(kind, name, group) -> (dates, cumulative top-3 finishes, cumulative expected top-3) over all
+    French races; expected = 3 / starters, so big and small fields count fairly."""
+    rides, first = defaultdict(list), None
+    for r in all_runs:
+        n = int(num(r["partants"]) or 0)
+        if n < 4:
+            continue
+        d = date.fromisoformat(r["date"])
+        first = d if first is None or d < first else first
+        place = num(r["place"])
+        group = "TROT" if (r["specialite"] or "").startswith("TROT") else "GALOP"
+        for kind, name in (("jockey", r["driver"]), ("trainer", r["entraineur"])):
+            if name:
+                rides[(kind, name, group)].append((d, place is not None and place <= 3, 3 / n))
+    index = {}
+    for key, v in rides.items():
+        v.sort()
+        cum_a, cum_e = [0.0], [0.0]
+        for _, a, e in v:
+            cum_a.append(cum_a[-1] + a)
+            cum_e.append(cum_e[-1] + e)
+        index[key] = ([d for d, _, _ in v], cum_a, cum_e)
+    return index, first
+
+
+def form_ratio(index, key, day, days, k=3.0):
+    """Smoothed log(actual / expected top-3 finishes) and log(1 + runs) in [day - days, day)."""
+    if key not in index:
+        return 0.0, 0.0
+    dates, cum_a, cum_e = index[key]
+    lo, hi = bisect_left(dates, day - timedelta(days=days)), bisect_left(dates, day)
+    a, e = cum_a[hi] - cum_a[lo], cum_e[hi] - cum_e[lo]
+    return math.log((a + k) / (e + k)), math.log1p(hi - lo)
+
+
+def compute(runners, past, all_runs=None):
+    """Feature rows for every starter, from runner and past-run rows shaped like the CSVs (all strings).
+    all_runs (rows of data/all_runs.csv) adds jockey/trainer form across all French races."""
     runners = [r for r in runners if r["statut"] == "PARTANT"]
+    forms, form_start = form_index(all_runs) if all_runs else ({}, None)
     runs_of = past_by_runner(past)
     rides = jockey_index(past)
     prior_days, prior_at = prior_as_of(rides)
@@ -240,6 +281,16 @@ def compute(runners, past):
             th = [t5 for dt, t5 in trainer_hist.get(r["entraineur"], []) if dt < day]
             f["f_trainer_top5"] = rate(sum(th), len(th), 5 / 15, k=5)
 
+            if all_runs is not None:  # valid once 30 days of all-race history exist before the race
+                ok = form_start is not None and day >= form_start + timedelta(days=30)
+                group = "TROT" if fam in ("ATTELE", "MONTE") else "GALOP"
+                for kind, name, spans in (("jockey", r["driver"], (90,)), ("trainer", r["entraineur"], (90, 30))):
+                    for span in spans:
+                        ratio, runs = form_ratio(forms, (kind, name, group), day, span) if ok else (None, None)
+                        f[f"f_{kind}_form{span}"] = ratio
+                        if span == 90:
+                            f[f"f_{kind}_runs{span}"] = runs
+
             o = odds[r["numPmu"]]
             f["f_mkt_logp"] = math.log((1 / o) / inv) if o and inv else None
 
@@ -250,7 +301,8 @@ def compute(runners, past):
 
 
 def main():
-    rows = compute(load("runners.csv"), load("past_runs.csv"))
+    all_runs = load("all_runs.csv") if (DATA / "all_runs.csv").exists() else None
+    rows = compute(load("runners.csv"), load("past_runs.csv"), all_runs)
     with (DATA / "features.csv").open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         w.writeheader()
