@@ -41,6 +41,12 @@ DAILY = DATA / "daily"
 WARNING = ("Les pourcentages sont des estimations du modèle, pas des certitudes. Sur les Quintés de test, "
            "aucune stratégie (ni l'IA, ni les favoris) n'a été rentable : à jouer pour le plaisir.")
 
+# Model settings (research/REPORT.md): L2 penalty per model and stage discounts (2nd-5th places less
+# predictable than the win), chosen on the validation months. No feature group is dropped: the groups
+# dropped on validation made the test months worse.
+MODELS = {"sans_cote": {"l2": 20.0}, "avec_cote": {"l2": 10.0}}
+DROPPED = set()
+
 # Features used in explanations, with the direction that makes sense (+1: more is better).
 # A feature is only explained when the fitted weight has that same sign.
 EXPECTED = {"f_class": 1, "f_jockey_rides": 1, "f_jockey_top3": 1, "f_draw_rel": -1, "f_avis": 1,
@@ -246,8 +252,12 @@ def phrase(name, high, f, r):
 
 
 def model_cols(name, feats):
-    mkt = feats.index("f_mkt_logp")
-    return [i for i in range(len(feats)) if name == "avec_cote" or i != mkt]
+    return [i for i, f in enumerate(feats) if f not in DROPPED and (name == "avec_cote" or f != "f_mkt_logp")]
+
+
+def unpack(fitted):
+    """(weights, stage factors); records written before the stage discounts hold weights only."""
+    return (fitted[0], fitted[1]) if fitted and isinstance(fitted[0], list) else (fitted, [1.0] * 5)
 
 
 def ranking(nums, raw, feats, stats, weights, odds):
@@ -257,17 +267,18 @@ def ranking(nums, raw, feats, stats, weights, odds):
     has_odds = all(odds)
     inv = sum(1 / o for o in odds if o)
     raw = [row[:mkt] + [math.log((1 / o) / inv) if o else None] + row[mkt + 1:] for row, o in zip(raw, odds)]
-    s = {}
-    for name, w in weights.items():
+    s, lam = {}, {}
+    for name, fitted in weights.items():
+        w, lam[name] = unpack(fitted)
         race = {"raw": raw}
         bt.design([race], model_cols(name, feats), stats)
         s[name] = bt.scores(race["X"], w)
     main = "avec_cote" if has_odds else "sans_cote"
     rng = random.Random(1)
-    p5 = bt.p_top5(s[main], rng)
-    pwin = [math.exp(x - max(s[main])) for x in s[main]]
+    p5 = bt.p_top5(s[main], rng, lam[main])
+    pwin = [math.exp(x - max(s[main])) for x in s[main]]  # the win stage has factor 1
     pwin = [x / sum(pwin) for x in pwin]
-    p5_form = bt.p_top5(s["sans_cote"], rng)
+    p5_form = bt.p_top5(s["sans_cote"], rng, lam["sans_cote"])
     p5_mkt = bt.p_top5([-math.log(o) for o in odds], rng) if has_odds else None
     n = len(nums)
     order = sorted(range(n), key=lambda i: -p5[i])
@@ -304,7 +315,8 @@ def tips(race, runners, past):
     weights = {}
     for name in ("sans_cote", "avec_cote"):  # both, so a later refresh can use the odds without refitting
         bt.design(train, model_cols(name, feats), stats)
-        weights[name] = bt.fit(train, len(model_cols(name, feats)))
+        w, lam = bt.fit_pl(train, len(model_cols(name, feats)), l2=MODELS[name]["l2"], discount=True)
+        weights[name] = [w, lam]
         print(f"model '{name}' fitted on {len(train)} races")
 
     nums = today["nums"]
@@ -317,7 +329,7 @@ def tips(race, runners, past):
     for rank, i in enumerate(rk["order"], 1):
         num = nums[i]
         r = rows_by_num[str(num)]
-        plus, minus = explain(i, form["X"], weights["sans_cote"], cols, feats, frows[str(num)], r)
+        plus, minus = explain(i, form["X"], weights["sans_cote"][0], cols, feats, frows[str(num)], r)
         horses.append({
             **runner_info(r), "rang_ia": rank, "cote": odds[i], **chances(i, rk),
             "bon_rapport": num in rk["value"], "atouts": plus, "points_faibles": minus,
@@ -346,10 +358,13 @@ def refresh(iso):
         print(f"{iso}: race started, odds no longer refreshed")
         return
     key = f"{iso[8:10]}{iso[5:7]}{iso[:4]}"
-    part, _ = get(f"{key}/R{c['reunion']}/C{c['course']}/participants")
+    part, body = get(f"{key}/R{c['reunion']}/C{c['course']}/participants")
     if not part:
         sys.exit(f"{iso}: runners not available")
-    live = {p["numPmu"]: p for p in part["participants"] if p.get("statut") == "PARTANT"}
+    snap = DAILY / "raw" / iso  # timestamped odds snapshots, to study odds movement later
+    snap.mkdir(parents=True, exist_ok=True)
+    (snap / f"participants_{paris_now():%H%M}.json").write_bytes(body)
+    live ={p["numPmu"]: p for p in part["participants"] if p.get("statut") == "PARTANT"}
     cache = rec["cache"]
     keep = [i for i, n in enumerate(cache["nums"]) if n in live]
     nums = [cache["nums"][i] for i in keep]

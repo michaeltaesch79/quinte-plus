@@ -1,0 +1,4 @@
+# Research only (the app and the daily job need no packages)
+numpy
+scipy
+lightgbm

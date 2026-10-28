@@ -4,9 +4,14 @@ Phase 6a: compute pre-race features for each runner of each Quinté race.
 Reads data/runners.csv and data/past_runs.csv (built by build_dataset.py) and writes
 data/features.csv: one row per runner that started (statut PARTANT), with
     race_id, date, numPmu, nom, specialite, res_place, res_top5, cote_reference, f_* features.
-Only information available before the race is used: past runs are dated before the race
-(checked), jockey and trainer rates use earlier dates only. Missing values are left empty;
-the model fills them with the race average.
+Only information available before the race is used (research/checks.py tests this):
+- past runs are dated before the race;
+- jockey rides come only from past-performance files of races up to the race date, so a ride
+  is only known once a file that lists it was available (no look-ahead through later files);
+- trainer rates use earlier Quinté results only;
+- the market feature uses the reference odds (30 min before the start), never the odds taken
+  after the start (cote_finale).
+Missing values are left empty; the model fills them with the race average.
 
 Usage (Python 3.9+, no extra packages):
     python features.py
@@ -28,6 +33,7 @@ GOING = {"tres leger": 0, "leger": 0, "bon leger": 1, "sec": 0, "bon": 1, "bon s
          "souple": 3, "tres souple": 4, "collant": 5, "lourd": 5, "tres lourd": 6}
 FAILED = {"DISQUALIFIE", "DISQUALIFIE_POUR_ALLURE_IRREGULIERE", "DISQUALIFIE_POTEAU_GALOP",
           "ARRETE", "TOMBE", "DISTANCE"}
+DISQUALIFIED = {"DISQUALIFIE", "DISQUALIFIE_POUR_ALLURE_IRREGULIERE", "DISQUALIFIE_POTEAU_GALOP"}
 
 
 def plain(s):
@@ -92,6 +98,7 @@ def past_by_runner(past):
             "days": int(p["jours_avant"]),
             "place": place,
             "failed": status in FAILED,
+            "dq": status in DISQUALIFIED,
             "top3": place is not None and place <= 3,
             "win": place == 1,
             "family": family(p["discipline"]),
@@ -107,16 +114,36 @@ def past_by_runner(past):
 
 
 def jockey_index(past):
-    """Unique past rides (same horse, date and prize can appear in several files) per jockey."""
-    seen, rides = set(), defaultdict(list)
+    """Unique past rides per jockey: (date of the ride, date it became known, top 3).
+    The same ride can be listed in several files (one per later Quinté of the horse); it is known
+    from the first race date whose file lists it."""
+    first = {}
     for p in past:
-        key = (p["nom"], p["past_date"], p["prix"])
-        if key in seen or not p["jockey"]:
+        if not p["jockey"]:
             continue
-        seen.add(key)
-        ok = p["statusArrivee"] in ("PLACE", "NON_PLACE") and num(p["place"]) is not None
-        rides[p["jockey"]].append((date.fromisoformat(p["past_date"]), ok and num(p["place"]) <= 3))
+        key = (p["nom"], p["past_date"], p["prix"])
+        known = date.fromisoformat(p["race_id"][:10])
+        if key not in first or known < first[key][1]:
+            ok = p["statusArrivee"] in ("PLACE", "NON_PLACE") and num(p["place"]) is not None
+            first[key] = (p["jockey"], known, date.fromisoformat(p["past_date"]), ok and num(p["place"]) <= 3)
+    rides = defaultdict(list)
+    for jockey, known, ride_day, top3 in first.values():
+        rides[jockey].append((ride_day, known, top3))
     return rides
+
+
+def prior_as_of(rides):
+    """day -> average top-3 rate of the rides known by that day (the shrinkage target)."""
+    by_known = defaultdict(lambda: [0, 0])
+    for v in rides.values():
+        for _, known, top3 in v:
+            by_known[known][0] += top3
+            by_known[known][1] += 1
+    days, hits, n, out = sorted(by_known), 0, 0, {}
+    for d in days:
+        hits, n = hits + by_known[d][0], n + by_known[d][1]
+        out[d] = hits / n
+    return days, out
 
 
 def compute(runners, past):
@@ -124,7 +151,7 @@ def compute(runners, past):
     runners = [r for r in runners if r["statut"] == "PARTANT"]
     runs_of = past_by_runner(past)
     rides = jockey_index(past)
-    jockey_prior = sum(t for v in rides.values() for _, t in v) / max(1, sum(len(v) for v in rides.values()))
+    prior_days, prior_at = prior_as_of(rides)
 
     by_race = defaultdict(list)
     for r in runners:
@@ -146,7 +173,9 @@ def compute(runners, past):
         n = len(field)
         means = {k: _mean(num(x[k]) for x in field) for k in ("handicapPoids", "handicapValeur", "handicapDistance", "age")}
         min_hd = min((num(x["handicapDistance"]) for x in field if num(x["handicapDistance"]) is not None), default=None)
-        odds = {x["numPmu"]: num(x["cote_reference"]) or num(x["cote_finale"]) for x in field}
+        odds = {x["numPmu"]: num(x["cote_reference"]) for x in field}
+        known_days = [d for d in prior_days if d <= day]
+        jockey_prior = prior_at[known_days[-1]] if known_days else 0.3
         inv = sum(1 / o for o in odds.values() if o)
 
         for r in field:
@@ -162,6 +191,9 @@ def compute(runners, past):
             f["f_form_win"] = rate(sum(x["win"] for x in last5), len(last5), 0.1) if last5 else None
             f["f_form_failed"] = (sum(x["failed"] for x in last5) / len(last5)) if last5 else None
             f["f_last_place"] = (min(runs[0]["place"], 10) if runs[0]["place"] is not None else 10) if runs else None
+            f["f_dq_rate"] = rate(sum(x["dq"] for x in last5), len(last5), 0.1) if last5 else None
+            f["f_last_failed"] = int(runs[0]["failed"]) if runs else None
+            f["f_long_break"] = int(runs[0]["days"] >= 90) if runs else None
             f["f_same_family_share"] = len(same_fam) / len(runs) if runs else None
 
             if today_going[0] == "PSF":
@@ -202,7 +234,7 @@ def compute(runners, past):
             f["f_log_gains_per_run"] = math.log1p((num(r["gainsCarriere"]) or 0) / 100 / max(nc, 1))
             f["f_log_gains_year"] = math.log1p((num(r["gainsAnneeEnCours"]) or 0) / 100)
 
-            jr = [t3 for dt, t3 in rides.get(r["driver"], []) if day - timedelta(days=90) <= dt < day]
+            jr = [t3 for dt, known, t3 in rides.get(r["driver"], []) if known <= day and day - timedelta(days=90) <= dt < day]
             f["f_jockey_top3"] = rate(sum(jr), len(jr), jockey_prior, k=10)
             f["f_jockey_rides"] = math.log1p(len(jr))
             th = [t5 for dt, t5 in trainer_hist.get(r["entraineur"], []) if dt < day]

@@ -86,52 +86,76 @@ def scores(X, w):
     return [sum(a * b for a, b in zip(x, w)) for x in X]
 
 
-def pl_loglik(s, order):
-    """Log-probability of the observed top-5 order under Plackett-Luce with strengths s."""
+def pl_loglik(s, order, lam=None):
+    """Log-probability of the observed top-5 order under Plackett-Luce with strengths s
+    (stage j uses lam[j] * s when stage discounts are given)."""
     left, ll = set(range(len(s))), 0.0
-    for i in order:
-        mx = max(s[j] for j in left)
-        ll += s[i] - mx - math.log(sum(math.exp(s[j] - mx) for j in left))
+    for st, i in enumerate(order):
+        lj = lam[st] if lam else 1.0
+        mx = max(lj * s[j] for j in left)
+        ll += lj * s[i] - mx - math.log(sum(math.exp(lj * s[j] - mx) for j in left))
         left.discard(i)
     return ll
 
 
 def fit(races, k):
     """Adam on the penalised Plackett-Luce log-likelihood of the top-5 order."""
-    w, m, v = [0.0] * k, [0.0] * k, [0.0] * k
+    return fit_pl(races, k)[0]
+
+
+def fit_pl(races, k, l2=L2, discount=False, iters=ITERS):
+    """Adam on the penalised Plackett-Luce log-likelihood of the top-5 order -> (w, lam).
+    With discount, stages 2-5 get their own factor lam_j (strengths lam_j * s, lam_1 = 1): later
+    places are less predictable than the win. log lam_j has a weak pull towards 0."""
+    n_par = k + (4 if discount else 0)
+    theta, m, v = [0.0] * n_par, [0.0] * n_par, [0.0] * n_par
     lr, b1, b2 = 0.05, 0.9, 0.999
-    for t in range(1, ITERS + 1):
-        g = [-L2 * wi for wi in w]
+    for t in range(1, iters + 1):
+        w = theta[:k]
+        lam = [1.0] + ([math.exp(x) for x in theta[k:]] if discount else [1.0] * 4)
+        g = [-l2 * wi for wi in w] + [-x for x in theta[k:]]
         for race in races:
             X, s = race["X"], scores(race["X"], w)
             coef = [0.0] * len(s)
             left = set(range(len(s)))
-            for i in race["order"]:
-                mx = max(s[j] for j in left)
-                e = {j: math.exp(s[j] - mx) for j in left}
+            for st, i in enumerate(race["order"]):
+                lj = lam[st]
+                mx = max(lj * s[j] for j in left)
+                e = {j: math.exp(lj * s[j] - mx) for j in left}
                 z = sum(e.values())
+                if discount and st:
+                    g[k + st - 1] += lj * (s[i] - sum(ej * s[j] for j, ej in e.items()) / z)
                 for j, ej in e.items():
-                    coef[j] -= ej / z
-                coef[i] += 1.0
+                    coef[j] -= lj * ej / z
+                coef[i] += lj
                 left.discard(i)
             for j, c in enumerate(coef):
                 if c:
                     xj = X[j]
                     for f in range(k):
                         g[f] += c * xj[f]
-        for f in range(k):  # gradient ascent with Adam
+        for f in range(n_par):  # gradient ascent with Adam
             m[f] = b1 * m[f] + (1 - b1) * g[f]
             v[f] = b2 * v[f] + (1 - b2) * g[f] ** 2
-            w[f] += lr * (m[f] / (1 - b1 ** t)) / (math.sqrt(v[f] / (1 - b2 ** t)) + 1e-8)
-    return w
+            theta[f] += lr * (m[f] / (1 - b1 ** t)) / (math.sqrt(v[f] / (1 - b2 ** t)) + 1e-8)
+    return theta[:k], [1.0] + ([math.exp(x) for x in theta[k:]] if discount else [1.0] * 4)
 
 
-def p_top5(s, rng):
-    """P(finish in the first 5) for each runner, by sampling Plackett-Luce with the Gumbel trick."""
+def p_top5(s, rng, lam=None):
+    """P(finish in the first 5) for each runner, by sampling Plackett-Luce with the Gumbel trick
+    (one draw per stage when stage discounts are given)."""
     hits = [0] * len(s)
     for _ in range(SIMS):
-        noisy = [x - math.log(-math.log(rng.random() or 1e-12)) for x in s]
-        for i in sorted(range(len(s)), key=noisy.__getitem__, reverse=True)[:5]:
+        if lam is None:
+            noisy = [x - math.log(-math.log(rng.random() or 1e-12)) for x in s]
+            picked = sorted(range(len(s)), key=noisy.__getitem__, reverse=True)[:5]
+        else:
+            picked, left = [], set(range(len(s)))
+            for lj in lam[:min(5, len(s))]:
+                i = max(left, key=lambda j: lj * s[j] - math.log(-math.log(rng.random() or 1e-12)))
+                picked.append(i)
+                left.discard(i)
+        for i in picked:
             hits[i] += 1
     return [h / SIMS for h in hits]
 
