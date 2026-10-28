@@ -1,0 +1,43 @@
+{
+ "races_with_form_features": {
+  "validation": 119,
+  "test": 150
+ },
+ "no odds": {
+  "validation": {
+   "mean_ll_gain": 0.0736,
+   "ci95": [
+    0.0358,
+    0.1086
+   ],
+   "races": 119
+  },
+  "test": {
+   "mean_ll_gain": 0.029,
+   "ci95": [
+    -0.0133,
+    0.0704
+   ],
+   "races": 150
+  }
+ },
+ "with odds": {
+  "validation": {
+   "mean_ll_gain": 0.0173,
+   "ci95": [
+    -0.0066,
+    0.0401
+   ],
+   "races": 119
+  },
+  "test": {
+   "mean_ll_gain": -0.0017,
+   "ci95": [
+    -0.0187,
+    0.0153
+   ],
+   "races": 150
+  }
+ },
+ "adopt_in_production": false
+}

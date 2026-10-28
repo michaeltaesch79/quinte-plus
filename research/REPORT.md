@@ -212,12 +212,59 @@ That's a small but consistent gain.
      scratches show the risk exists.
    - Flexi stakes: not modelled; every ticket is a €2 unit.
    - Paying the best category only: assumed, consistent with the data.
-5. **Training data limited to Quinté horses.** Jockey and trainer statistics would be stronger with all French
-   races. That's a larger download (about 6,500 races, 2.5–3 h at one request per second), not done because
-   the scope is Quinté only.
+5. **Jockey/trainer form from all French races** was tested (section 11) and not adopted. Only one year of
+   all-race data exists, so the test has 269 races with the features.
 6. **Shoeing change** isn't derivable (no previous shoeing in the feed).
 7. **Selection after test:** the production settings differ from the frozen protocol by one step, the
    feature-group drop. Their test rows are labelled.
+
+## 10. Pre-registered hold-out year (2024-11 → 2025-10)
+
+The data now covers 3 years (2023-10-27 → 2026-10-27, 1,097 Quintés). The 2024-11 → 2025-10 year was
+downloaded only after `PREREGISTRATION.md` was committed (558b1f2). Models, settings and strategies are
+frozen, with no tuning. There are 364 races, all under the Bonus 4sur5 rule (141 flat, 181 trot,
+42 jumps), and none has incomplete reference odds. The programme of 2024-11-07 is missing (two
+attempts), so that race is absent.
+
+| Model | Log-lik. top-5 order | Win log-loss | Horses found in top 5 |
+|---|---|---|---|
+| uniform | −12.863 | 2.720 | 1.64 |
+| market raw (T-30) | −11.837 | 2.327 | 2.54 |
+| market fitted (T-30) | −11.783 | 2.310 | 2.55 |
+| before, no odds | −12.141 | 2.463 | 2.38 |
+| before, with odds | −11.830 | 2.349 | 2.55 |
+| after, no odds | −12.134 | 2.450 | 2.40 |
+| after, with odds | −11.790 | 2.324 | 2.57 |
+
+Pre-declared verdicts:
+- **After vs before, with odds:** +0.041 per race, CI [+0.009, +0.073]. This is an **improvement**, confirmed
+  out of sample.
+- **After vs before, no odds:** +0.007, CI [−0.019, +0.034]. Not demonstrated.
+- **Model vs market:** −0.007, CI [−0.042, +0.027]. **No information beyond the odds.**
+- **Betting:** no strategy has a demonstrated edge. Favourites −57%, random −84%, top 5 after with odds −57%,
+  bon rapport −78%, EV > €2 −52% (14 bets). "Top 5 before, no odds" shows +21%, CI [−60%, +140%], but it
+  becomes −25% without its largest payout. That comes from a few large Désordre payouts, not an edge.
+
+Details are in `results/holdout_2024-11_2025-10.json`.
+
+## 11. Jockey/trainer form from all French races (not adopted)
+
+All French races from 2025-10-27 to 2026-10-27 were downloaded (12,451 races, 162,640 runners;
+`data/all_runs.csv`). From them we build 90-day jockey and trainer form, run counts, and 30-day trainer form,
+dated strictly before the race. The leakage checks pass.
+
+Pre-declared rule (`form_eval.py`): adopt only if the mean log-likelihood gain is positive on both the
+validation and the test months, for both models.
+
+| Model | Validation (119 races) | Test (150 races) |
+|---|---|---|
+| no odds | **+0.074** [+0.036, +0.109] | +0.029 [−0.013, +0.070] |
+| with odds | +0.017 [−0.007, +0.040] | −0.002 [−0.019, +0.015] |
+
+**Not adopted.** With odds, the form adds nothing: the market already prices it. Without odds, the gain is
+clear on validation and positive but uncertain on test. That's a plausible effect worth re-testing once
+more all-race months exist. Adopting it would also need a daily download of all French races (about 35
+requests a day). Production is unchanged.
 
 ## Reproduce
 
