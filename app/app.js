@@ -58,7 +58,8 @@ function modeHTML(m, hint, extra = "") {
 /* ---------- latest odds ---------- */
 function raceStarted() {
   const [h, m] = D.race.start_time.split("h");
-  return new Date() >= new Date(`${D.race.date}T${h.padStart(2, "0")}:${m}:00`);  // phone clock, French time
+  const paris = new Date().toLocaleString("sv-SE", { timeZone: "Europe/Paris" });  // "YYYY-MM-DD HH:MM:SS" on any device
+  return paris.slice(0, 16) >= `${D.race.date} ${h.padStart(2, "0")}:${m}`;
 }
 function oddsLabel() { return D.odds_updated ? `Cotes de ${D.odds_updated}` : "Cotes pas encore publiées"; }
 function refreshHTML() {
