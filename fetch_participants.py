@@ -8,6 +8,7 @@ Usage (Python 3.9+, no extra packages):
     python fetch_participants.py --quinte     # only the Quinté+ race of each day
     python fetch_participants.py --france     # all races at French meetings
     python fetch_participants.py --all        # every race, including foreign meetings
+    python fetch_participants.py --france 2025-10-27 2026-10-27   # optional date range (included)
 
 Re-running skips races already downloaded, so it is safe to stop and restart.
 Personal use only: one request per second, no parallel calls.
@@ -25,9 +26,11 @@ PROG = ROOT / "programme"
 OUT = ROOT / "participants"
 
 
-def races(scope: str):
-    """Yield (iso_date, R, C) for each race in scope, from the saved programmes."""
+def races(scope: str, start: str = "", end: str = "9999"):
+    """Yield (iso_date, R, C) for each race in scope, from the saved programmes dated start..end."""
     for f in sorted(PROG.glob("*.json")):
+        if not start <= f.stem <= end:
+            continue
         prog = json.loads(f.read_bytes())["programme"]
         for reunion in prog["reunions"]:
             if scope != "all" and reunion["pays"]["code"] != "FRA":
@@ -41,14 +44,19 @@ def races(scope: str):
 
 def parse_scope(usage: str) -> str:
     flags = {"--quinte": "quinte", "--france": "france", "--all": "all"}
-    if len(sys.argv) != 2 or sys.argv[1] not in flags:
+    if len(sys.argv) not in (2, 4) or sys.argv[1] not in flags:
         sys.exit(usage)
     return flags[sys.argv[1]]
 
 
-def download(scope: str, endpoint: str, out: Path):
+def date_range():
+    """Optional 'YYYY-MM-DD YYYY-MM-DD' after the scope flag."""
+    return (sys.argv[2], sys.argv[3]) if len(sys.argv) == 4 else ("", "9999")
+
+
+def download(scope: str, endpoint: str, out: Path, start: str = "", end: str = "9999"):
     """Fetch {host}DDMMYYYY/R{n}/C{n}/{endpoint} for each race in scope, saving raw replies under out."""
-    todo = list(races(scope))
+    todo = list(races(scope, start, end))
     print(f"{len(todo)} races in scope '{scope}'")
     log, streak = [], 0
     for iso, r, c in todo:
@@ -86,7 +94,7 @@ def download(scope: str, endpoint: str, out: Path):
 
 
 def main():
-    download(parse_scope(__doc__), "participants", OUT)
+    download(parse_scope(__doc__), "participants", OUT, *date_range())
 
 
 if __name__ == "__main__":

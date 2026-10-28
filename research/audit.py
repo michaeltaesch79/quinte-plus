@@ -20,7 +20,7 @@ from paths import DATA  # noqa: E402
 
 OUT = Path(__file__).resolve().parent / "results"
 QUINTE_CATS = ("QUINTE_PLUS:ORDRE", "QUINTE_PLUS:ORDRE_TIRELIRE", "QUINTE_PLUS:DESORDRE",
-               "QUINTE_PLUS:BONUS_4SUR5", "QUINTE_PLUS:BONUS_3")
+               "QUINTE_PLUS:BONUS_4SUR5", "QUINTE_PLUS:BONUS_4", "QUINTE_PLUS:BONUS_3")
 
 
 def load(name):

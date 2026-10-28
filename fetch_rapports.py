@@ -13,11 +13,11 @@ Re-running skips races already downloaded, so it is safe to stop and restart.
 Personal use only: one request per second, no parallel calls.
 """
 
-from fetch_participants import download, parse_scope
+from fetch_participants import date_range, download, parse_scope
 from paths import DATA
 
 ENDPOINT = "rapports-definitifs"
 OUT = DATA / "raw" / "rapports"
 
 if __name__ == "__main__":
-    download(parse_scope(__doc__), ENDPOINT, OUT)
+    download(parse_scope(__doc__), ENDPOINT, OUT, *date_range())

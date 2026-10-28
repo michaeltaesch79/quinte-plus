@@ -24,7 +24,10 @@ L2 = 5.0                # penalty on the weights, fixed in advance (not tuned on
 ITERS = 300
 SIMS = 4000             # Monte Carlo draws to turn strengths into P(top 5)
 STAKE = 2.0
-BET_RANKS = ("QUINTE_PLUS:ORDRE", "QUINTE_PLUS:DESORDRE", "QUINTE_PLUS:BONUS_4SUR5", "QUINTE_PLUS:BONUS_3")
+# Quinté+ categories paid on a 5-horse ticket. BONUS_4 (the first four, any order) is the older rule that
+# Bonus 4sur5 (any 4 of the first five) replaced; a race has one or the other.
+BET_RANKS = ("QUINTE_PLUS:ORDRE", "QUINTE_PLUS:DESORDRE", "QUINTE_PLUS:BONUS_4SUR5", "QUINTE_PLUS:BONUS_4",
+             "QUINTE_PLUS:BONUS_3")
 
 
 def load_races(rows=None):
@@ -177,6 +180,7 @@ def ticket_return(ticket, rows):
         ok = {"QUINTE_PLUS:ORDRE": ticket == comb,
               "QUINTE_PLUS:DESORDRE": set(ticket) == set(comb),
               "QUINTE_PLUS:BONUS_4SUR5": set(comb) <= set(ticket),
+              "QUINTE_PLUS:BONUS_4": set(comb) <= set(ticket),
               "QUINTE_PLUS:BONUS_3": set(comb) <= set(ticket)}[pari]
         if ok and eur > best[1]:
             best = (pari.split(":")[1], eur)

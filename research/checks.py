@@ -111,6 +111,11 @@ def settlement():
     }
     for name, (ticket, want) in cases.items():
         check(f"settlement: {name}", bt.ticket_return(ticket, rows) == want, str(bt.ticket_return(ticket, rows)))
+    old_rule = [("QUINTE_PLUS:DESORDRE", [1, 2, 3, 4, 5], 50.0), ("QUINTE_PLUS:BONUS_4", [1, 2, 3, 4], 8.0),
+                ("QUINTE_PLUS:BONUS_3", [1, 2, 3], 2.0)]
+    check("settlement (old Bonus 4 rule): the first four -> Bonus 4", bt.ticket_return([4, 3, 2, 1, 9], old_rule) == ("BONUS_4", 8.0))
+    check("settlement (old Bonus 4 rule): 4 of the first 5 without the 4th -> only Bonus 3",
+          bt.ticket_return([1, 2, 3, 5, 9], old_rule) == ("BONUS_3", 2.0))
     dead = [("QUINTE_PLUS:DESORDRE", [1, 2, 3, 4, 5], 40.0), ("QUINTE_PLUS:DESORDRE", [1, 2, 3, 4, 6], 45.0)]
     check("settlement: dead heat pays whichever Désordre row matches",
           bt.ticket_return([1, 2, 3, 4, 6], dead) == ("DESORDRE", 45.0) and bt.ticket_return([1, 2, 3, 4, 5], dead) == ("DESORDRE", 40.0))

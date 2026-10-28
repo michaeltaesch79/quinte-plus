@@ -167,7 +167,7 @@ def bet_kind(type_pari, libelle):
     if "NP" in libelle.split():
         return f"{type_pari}:NP"
     for word, code in (("Tirelire", "ORDRE_TIRELIRE"), ("Désordre", "DESORDRE"), ("Ordre", "ORDRE"),
-                       ("4sur5", "BONUS_4SUR5"), ("Bonus 3", "BONUS_3"), ("Bonus", "BONUS")):
+                       ("4sur5", "BONUS_4SUR5"), ("Bonus 4", "BONUS_4"), ("Bonus 3", "BONUS_3"), ("Bonus", "BONUS")):
         if word in libelle:
             return f"{type_pari}:{code}"
     return type_pari
