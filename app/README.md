@@ -107,8 +107,8 @@ Mode object:
 ## Deploying on Railway
 `server.py` (repo root, standard library only) serves this folder and runs the daily job at
 06:00 Paris time. `/data/today.json` comes from the Railway volume, `/status` shows the job log.
-The "Actualiser les cotes" button posts to `/refresh`: the server re-ranks the prono with the latest
-odds (one feed request, no refit, at most once a minute) until the start; "Le bon rapport" keeps its list.
+The "Actualiser les cotes" button posts to `/refresh`: the server re-ranks the prono and "Le bon rapport"
+with the latest odds (one feed request, no refit, at most once a minute) until the start.
 
 1. New Railway project → Deploy from GitHub repo `quinte-plus`. Railway builds the `Dockerfile`.
 2. Add a **volume** to the service (mount path e.g. `/data`, 1 GB is plenty). Railway sets

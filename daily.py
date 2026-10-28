@@ -327,8 +327,7 @@ def tips(race, runners, past):
 
 
 def refresh(iso):
-    """Re-rank the prono of a daily record with the latest odds: one request, no refit.
-    The bon rapport keeps its first list (it is only filled here if the odds were missing until now)."""
+    """Re-rank the prono and the bon rapport of a daily record with the latest odds: one request, no refit."""
     f = DAILY / f"{iso}.json"
     rec = json.loads(f.read_text(encoding="utf-8"))
     c = rec.get("course")
@@ -356,7 +355,8 @@ def refresh(iso):
                                                       "musique", "poids_kg", "corde")})
     for rank, i in enumerate(rk["order"], 1):
         by_num[nums[i]].update({"rang_ia": rank, "cote": odds[i], **chances(i, rk)})
-    if not rec["bon_rapport"] and rk["value"]:
+    if rk["value"]:  # keeps the last list if the odds disappear
+        rec.setdefault("bon_rapport_initial", rec["bon_rapport"])
         rec["bon_rapport"] = rk["value"]
         for n, h in by_num.items():
             h["bon_rapport"] = n in rk["value"]
