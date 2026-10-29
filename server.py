@@ -4,6 +4,8 @@ Railway service: serves the phone app (app/) and runs the daily job at 06:00 Par
 - GET /                 the app (app/index.html, styles.css, app.js)
 - GET /data/today.json  the day's file, kept on the volume so it survives redeploys
 - GET /status           last lines of the job log (plain text)
+- GET /odds-check       whether to offer a refresh: odds published and newer than the prono's
+                        (before the start only; at most one feed request every 2 minutes)
 - POST /refresh         re-ranks the day's prono with the latest odds (one feed request, ~2 s)
 
 First start on an empty volume: downloads 12 months of Quinté data (~1,460 requests at one per
@@ -31,6 +33,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 from clock import paris_now
+from fetch_programmes import HOSTS, PAUSE_S, fetch
 from paths import DATA, ROOT
 
 os.environ.setdefault("QUINTE_APP_JSON", str(DATA / "today.json"))  # inherited by the job scripts
@@ -41,8 +44,12 @@ LAST_RUN = DATA / "last_run.txt"
 RUN_AT_HOUR, GIVE_UP_HOUR, RETRY_MIN = 6, 12, 30
 REFRESH_MIN_S = 60  # a refresh within a minute of the last one is not sent to the feed
 SETTLE_AFTER_MIN, SETTLE_EVERY_MIN = 20, 15  # result: first try 20 min after the start, then every 15 min
+ODDS_CHECK_EVERY_S = 120  # the on-load check asks the feed at most this often
+ODDS_STALE_MIN = 10  # odds move until the start: after this long, the shown odds are worth refreshing
 JOB = threading.Lock()  # one job at a time: the daily run and refreshes write the same files
+ODDS_LOCK = threading.Lock()
 last_refresh = 0.0
+odds_published = {}  # (date, reunion, course) -> (time of the last feed check, odds published)
 PASSWORD = os.environ.get("APP_PASSWORD", "")
 
 
@@ -149,6 +156,49 @@ def refresh():
         JOB.release()
 
 
+def feed_has_odds(iso, reunion, course):
+    """One feed request: do all starters have odds (live, or the reference odds)? Same odds as a refresh."""
+    for i, host in enumerate(HOSTS):
+        if i:
+            time.sleep(PAUSE_S)
+        _, body = fetch(f"{host}{iso[8:10]}{iso[5:7]}{iso[:4]}/R{reunion}/C{course}/participants", tries=1)
+        try:
+            starters = [p for p in json.loads(body)["participants"] if p.get("statut") == "PARTANT"] if body else None
+        except (ValueError, KeyError):
+            starters = None
+        if starters:
+            return all((p.get("dernierRapportDirect") or p.get("dernierRapportReference") or {}).get("rapport")
+                       for p in starters)
+    return False
+
+
+def odds_check():
+    """Offer a refresh when the race has not started, the odds are published, and the prono has no odds
+    or odds at least ODDS_STALE_MIN old."""
+    if not LAST_RUN.exists():
+        return {"offer": False}
+    iso = LAST_RUN.read_text(encoding="utf-8").strip()
+    try:
+        rec = json.loads((DATA / "daily" / f"{iso}.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):  # no record, or being rewritten
+        return {"offer": False}
+    c, now = rec.get("course"), paris_now()
+    if not c or f"{now:%Y-%m-%d %H:%M}" >= c["heure_depart"]:
+        return {"offer": False}
+    shown = rec.get("cotes_maj")  # Paris time of the odds behind the prono, "9h12", or None
+    if shown:
+        h, m = map(int, shown.split("h"))
+        if now.hour * 60 + now.minute - (h * 60 + m) < ODDS_STALE_MIN:
+            return {"offer": False}
+    key = (iso, c["reunion"], c["course"])
+    with ODDS_LOCK:
+        checked, published = odds_published.get(key, (0.0, False))
+        if not published and time.time() - checked >= ODDS_CHECK_EVERY_S:  # once published, they stay
+            published = feed_has_odds(iso, c["reunion"], c["course"])
+            odds_published[key] = (time.time(), published)
+    return {"offer": published, "odds_shown": shown}
+
+
 # ---------------------------------------------------------------- web
 
 class Handler(SimpleHTTPRequestHandler):
@@ -191,6 +241,8 @@ class Handler(SimpleHTTPRequestHandler):
         if path == "/status":
             lines = LOG.read_text(encoding="utf-8").splitlines()[-80:] if LOG.exists() else ["no run yet"]
             return self.send_bytes("\n".join(lines).encode("utf-8"), "text/plain; charset=utf-8")
+        if path == "/odds-check":
+            return self.send_bytes(json.dumps(odds_check()).encode("utf-8"), "application/json")
         return super().do_GET()
 
     def do_POST(self):

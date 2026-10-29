@@ -68,7 +68,7 @@ function refreshHTML() {
     <span class="small muted" id="refresh-msg">${oddsLabel()}</span></div>`;
 }
 async function refreshOdds(btn) {
-  const before = D.modes.prono.picks.join("-");
+  const before = D.modes.prono.picks.join("-"), label = btn.textContent;
   btn.disabled = true; btn.textContent = "Actualisation…";
   try {
     const r = await fetch("refresh", { method: "POST" });
@@ -77,14 +77,32 @@ async function refreshOdds(btn) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     D = await res.json();
   } catch (e) {
-    btn.disabled = false; btn.textContent = "↻ Actualiser les cotes";
-    el("refresh-msg").textContent = "Actualisation impossible pour le moment, réessayez plus tard.";
+    btn.disabled = false; btn.textContent = label;
+    const where = btn.closest("#odds-nudge") ? el("odds-nudge").querySelector(".small") : el("refresh-msg");
+    if (where) where.textContent = "Actualisation impossible pour le moment, réessayez plus tard.";
     return;
   }
+  el("odds-nudge").hidden = true;
   BY_NUM = {}; D.runners.forEach(r => BY_NUM[r.num] = r);
   renderRace(); renderCompare();
   const msg = el("refresh-msg");
   if (msg) msg.textContent = `${oddsLabel()} · ${D.modes.prono.picks.join("-") === before ? "classement inchangé" : "classement mis à jour"}`;
+}
+/* On load: the server says whether newer odds are published (the prono is more precise with them). */
+async function checkOdds() {
+  if (!D || raceStarted()) return;
+  let c;
+  try {
+    const r = await fetch("odds-check", { cache: "no-store" });
+    if (!r.ok) return;
+    c = await r.json();
+  } catch (e) { return; }  // no check: the refresh button stays available
+  if (!c.offer) return;
+  el("odds-nudge").innerHTML = `<div><b>${c.odds_shown ? "Nouvelles cotes disponibles" : "Les cotes sont publiées"}</b>
+    <div class="small">${c.odds_shown ? `Le prono utilise les cotes de ${esc(c.odds_shown)}.` : "Le prono du matin a été fait sans les cotes."}
+    Actualisez pour un prono plus précis avant de jouer.</div></div>
+    <button class="btn primary" data-refresh>↻ Actualiser</button>`;
+  el("odds-nudge").hidden = false;
 }
 
 /* ---------- horse sheet ---------- */
@@ -243,5 +261,7 @@ async function boot() {
   }
   D.runners.forEach(r => BY_NUM[r.num] = r);
   renderRace(); renderInput(); renderCompare(); renderMatch(); wire();
+  checkOdds();
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) checkOdds(); });  // app reopened later
 }
 boot();

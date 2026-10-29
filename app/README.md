@@ -114,6 +114,10 @@ Mode object:
 06:00 Paris time. `/data/today.json` comes from the Railway volume, `/status` shows the job log.
 The "Actualiser les cotes" button posts to `/refresh`: the server re-ranks the prono and "Le bon rapport"
 with the latest odds (one feed request, no refit, at most once a minute) until the start.
+On load (and when the app is reopened) the page asks `/odds-check`. Before the start, if the odds are
+published and the prono has none or odds at least 10 minutes old, a banner above the two tickets
+offers the refresh (the prono is more precise with the odds). The check sends at most one feed
+request every 2 minutes.
 
 1. New Railway project → Deploy from GitHub repo `quinte-plus`. Railway builds the `Dockerfile`.
 2. Add a **volume** to the service (mount path e.g. `/data`, 1 GB is plenty). Railway sets
