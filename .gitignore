@@ -3,3 +3,4 @@ HANDOVER.md
 BRIEF.md
 __pycache__/
 app/data/
+.venv/
