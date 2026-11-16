@@ -17,7 +17,7 @@ import math
 import random
 from collections import defaultdict
 
-from features import ODDS
+from features import MORNING, ODDS
 from paths import DATA
 
 TEST_FROM = "2026-03"   # first test month (YYYY-MM); data starts 2025-10-27
@@ -191,7 +191,8 @@ def ticket_return(ticket, rows):
 def main():
     races, feats = load_races()
     payouts = load_payouts()
-    sets = {"sans_cote": [i for i in range(len(feats)) if feats[i] not in ODDS], "avec_cote": list(range(len(feats)))}
+    sets = {"sans_cote": [i for i in range(len(feats)) if feats[i] not in ODDS],
+            "avec_cote": [i for i in range(len(feats)) if feats[i] not in MORNING]}
     rng = random.Random(1)
     months = sorted({r["month"] for r in races if r["month"] >= TEST_FROM})
     tested, weights = [], {}

@@ -63,7 +63,7 @@ def main():
     rep = {"desordre_dividend": desordre_by_crowd(races, crowd)}
     print(rep["desordre_dividend"])
     months = {p: ev.months_between(races, *span) for p, span in PERIODS.items()}
-    preds = ev.walk_forward(races, feats, {"cols": feats, "l2": 10.0, "discount": True},
+    preds = ev.walk_forward(races, feats, {"cols": [c for c in feats if c not in ft.MORNING], "l2": 10.0, "discount": True},
                             sorted({m for ms in months.values() for m in ms}))
     payouts = ev.payout_table()
     for period, ms in months.items():

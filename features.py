@@ -12,7 +12,10 @@ Only information available before the race is used (research/checks.py tests thi
 - optional jockey/trainer form from all French races (data/all_runs.csv, when downloaded): races
   strictly before the race day, same discipline group, actual vs expected top-3 finishes;
 - the market features (ODDS) use the reference odds (30 min before the start), never the odds
-  taken after the start (cote_finale).
+  taken after the start (cote_finale);
+- the morning features (MORNING) are for the model without odds only: how the bettors rated the horse
+  in its earlier Quintés (reference odds of those races), form against the field, the 10-run form
+  line and trot times. With the day's odds they add nothing (research/REPORT.md §15).
 Missing values are left empty; the model fills them with the race average.
 
 Usage (Python 3.9+, no extra packages):
@@ -39,6 +42,10 @@ FAILED = {"DISQUALIFIE", "DISQUALIFIE_POUR_ALLURE_IRREGULIERE", "DISQUALIFIE_POT
 DISQUALIFIED = {"DISQUALIFIE", "DISQUALIFIE_POUR_ALLURE_IRREGULIERE", "DISQUALIFIE_POTEAU_GALOP"}
 # Features computed from the odds: left out of the model without odds.
 ODDS = ("f_mkt_logp", "f_outsider")
+# Features for the model without odds only (adopted 2026-11-16, research/ideas.py): the day's odds already
+# hold what they say, so the model with odds leaves them out.
+MORNING = ("f_prev_mkt", "f_prev_runs", "f_prev_top5", "f_form_pct", "f_form_pct_best", "f_class_perf",
+           "f_mus_place", "f_mus_top3", "f_mus_fail", "f_mus_win", "f_trot_gap", "f_trot_best_rel")
 
 
 def outsider(o):
@@ -98,6 +105,54 @@ def load(name):
         return list(csv.DictReader(f))
 
 
+def musique_tokens(text):
+    """Results of the form line, most recent first: an int place (0 = unplaced beyond 9th) or a letter
+    (D disqualified, A pulled up, T fell...). Two characters per run (result, discipline); a year
+    marker is "(25)" in recent files and a bare "25" in older ones."""
+    out, i, s = [], 0, text or ""
+    while i < len(s):
+        if s[i] == "(":
+            j = s.find(")", i)
+            i = j + 1 if j >= 0 else len(s)
+        elif s[i:i + 2].isdigit():
+            i += 2
+        elif s[i].isalnum() and i + 1 < len(s) and s[i + 1].isalpha():
+            out.append(int(s[i]) if s[i].isdigit() else s[i].upper())
+            i += 2
+        else:
+            i += 1
+    return out
+
+
+def field_share(run):
+    """Finishing position as a share of the field: 0 = won, 1 = last or unplaced. None for a run not
+    finished (disqualified, fell, pulled up): f_form_failed and f_dq_rate already count those."""
+    if run["status"] == "PLACE" and run["place"] and run["n"] and run["n"] >= 2:
+        return min(max((run["place"] - 1) / (run["n"] - 1), 0.0), 1.0)
+    return 1.0 if run["status"] == "NON_PLACE" else None
+
+
+def trot_times(run):
+    """(seconds per km, seconds per km behind the winner capped at 4) of a past trot run; the feed gives
+    centiseconds: the horse's time per km and the winner's total time."""
+    rk = run["rk"] / 100 if run["rk"] else None
+    ok = rk and run["t1"] and run["distance"]
+    return rk, min(max(rk - run["t1"] * 10 / run["distance"], 0.0), 4.0) if ok else None
+
+
+def quinte_starts(by_race):
+    """Horse name -> its Quinté starts: (day, log(market win chance x runners) from the reference odds
+    of that race or None, finished in the first five or None when the race has no result)."""
+    starts = defaultdict(list)
+    for field in by_race.values():
+        odds = [num(r["cote_reference"]) for r in field]
+        inv = sum(1 / o for o in odds if o)
+        for r, o in zip(field, odds):
+            rel = math.log((1 / o) / inv * len(field)) if o and all(odds) else None
+            starts[r["nom"]].append((date.fromisoformat(r["date"]), rel, (r["res_top5"] == "1") if r["res_top5"] != "" else None))
+    return starts
+
+
 def past_by_runner(past):
     out = defaultdict(list)
     for p in past:
@@ -117,6 +172,10 @@ def past_by_runner(past):
             "going": going(p["terrain"]),
             "allocation": num(p["allocation"]),
             "jockey": p["jockey"],
+            "status": status,
+            "n": num(p["nbParticipants"]),
+            "rk": num(p["reductionKilometrique"]),
+            "t1": num(p["tempsDuPremier"]),
         })
     for runs in out.values():
         runs.sort(key=lambda r: r["date"], reverse=True)
@@ -204,6 +263,7 @@ def compute(runners, past, all_runs=None):
     by_race = defaultdict(list)
     for r in runners:
         by_race[r["race_id"]].append(r)
+    starts = quinte_starts(by_race)
     trainer_hist = defaultdict(list)  # trainer -> [(date, top5)] from earlier Quinté races
     for r in runners:
         if r["res_top5"] != "":
@@ -225,6 +285,12 @@ def compute(runners, past, all_runs=None):
         known_days = [d for d in prior_days if d <= day]
         jockey_prior = prior_at[known_days[-1]] if known_days else 0.3
         inv = sum(1 / o for o in odds.values() if o)
+        trot = fam in ("ATTELE", "MONTE")
+        times = {r["numPmu"]: [trot_times(x) for x in runs_of.get((race_id, r["numPmu"]), [])
+                               if x["family"] in ("ATTELE", "MONTE")][:5] if trot else [] for r in field}
+        best = {k: min((rk for rk, _ in v if rk), default=None) for k, v in times.items()}
+        known_best = sorted(b for b in best.values() if b)
+        median_best = known_best[len(known_best) // 2] if known_best else None
 
         for r in field:
             runs = runs_of.get((race_id, r["numPmu"]), [])
@@ -300,6 +366,35 @@ def compute(runners, past, all_runs=None):
                         f[f"f_{kind}_form{span}"] = ratio
                         if span == 90:
                             f[f"f_{kind}_runs{span}"] = runs
+
+            # morning features (MORNING). Earlier Quinté starts of the horse, last 365 days:
+            prev = sorted((s for s in starts[r["nom"]] if day - timedelta(days=365) <= s[0] < day),
+                          key=lambda s: s[0], reverse=True)
+            rels = [rel for _, rel, _ in prev if rel is not None][:3]
+            done = [t5 for _, _, t5 in prev if t5 is not None]
+            f["f_prev_mkt"] = sum(rels) / len(rels) if rels else None
+            f["f_prev_runs"] = math.log1p(len(prev))
+            f["f_prev_top5"] = rate(sum(done), len(done), 0.3)
+            # form against the field, last 5 runs
+            shares = [(field_share(x), x["allocation"]) for x in last5]
+            shares = [(sh, alloc) for sh, alloc in shares if sh is not None]
+            f["f_form_pct"] = _mean(sh for sh, _ in shares)
+            f["f_form_pct_best"] = min((sh for sh, _ in shares), default=None)
+            level = [(1 - sh, math.log(alloc / prize)) for sh, alloc in shares if alloc and prize]
+            weight = sum(w for w, _ in level)
+            f["f_class_perf"] = sum(w * v for w, v in level) / weight if weight else None
+            # the form line of the runner file, up to 10 runs (unplaced or not finished = 10)
+            mus = musique_tokens(r["musique"])[:10]
+            places = [x if isinstance(x, int) and x else 10 for x in mus]
+            f["f_mus_place"] = sum(places) / len(places) if mus else None
+            f["f_mus_top3"] = rate(sum(1 <= p <= 3 for p in places), len(mus), 0.3) if mus else None
+            f["f_mus_fail"] = rate(sum(not isinstance(x, int) for x in mus), len(mus), 0.1) if mus else None
+            f["f_mus_win"] = rate(sum(p == 1 for p in places), len(mus), 0.1) if mus else None
+            # trot times of the last 5 trot runs (trot races only)
+            gaps = [g for _, g in times[r["numPmu"]] if g is not None]
+            f["f_trot_gap"] = sum(gaps) / len(gaps) if gaps else None
+            b = best[r["numPmu"]]
+            f["f_trot_best_rel"] = min(max(b - median_best, -5.0), 5.0) if b else None  # a few records are tens of seconds off
 
             o = odds[r["numPmu"]]
             f["f_mkt_logp"] = math.log((1 / o) / inv) if o and inv else None

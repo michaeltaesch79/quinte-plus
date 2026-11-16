@@ -78,7 +78,8 @@ def baseline_models(feats):
         {"name": MARKET, "cfg": {"cols": ["f_mkt_logp"], "l2": 0.01, "discount": True}},
         {"name": NO_ODDS, "cfg": {"cols": [c for c in cols if c not in ft.ODDS],
                                   "l2": daily.MODELS["sans_cote"]["l2"], "discount": True}},
-        {"name": WITH_ODDS, "versus": MARKET, "cfg": {"cols": cols, "l2": daily.MODELS["avec_cote"]["l2"], "discount": True}},
+        {"name": WITH_ODDS, "versus": MARKET, "cfg": {"cols": [c for c in cols if c not in ft.MORNING],
+                                                       "l2": daily.MODELS["avec_cote"]["l2"], "discount": True}},
     ]
 
 
@@ -196,7 +197,8 @@ def run(models=(), strategies=()):
     rep = {"generated": datetime.now().isoformat(timespec="seconds"),
            "data": {"races_in_data": len(races), "first": races[0]["date"], "last": races[-1]["date"],
                     "races_tested": len(tested), "tested_from": tested[0]["date"]},
-           "settings": {"sims": SIMS, "stake": ev.STAKE, "production": daily.MODELS, "features": len(baseline_models(feats)[-1]["cfg"]["cols"])},
+           "settings": {"sims": SIMS, "stake": ev.STAKE, "production": daily.MODELS,
+                        "features": {m["name"]: len(m["cfg"]["cols"]) for m in baseline_models(feats)[-2:]}},
            "periods": {}}
     for period, (lo, hi) in PERIODS.items():
         ids = {r["id"] for r in tested if lo <= r["date"] <= hi}

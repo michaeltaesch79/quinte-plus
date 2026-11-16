@@ -106,9 +106,10 @@ def load_versions():
 def frozen_v2(races, feats):
     """The v2 features as frozen for the protocol: the trainer-opinion split and the outsider feature
     were added to production later (signal_eval.py adds them back), so rebuild the single -1/0/+1
-    f_avis in place of f_avis_neg and drop f_avis_pos and f_outsider."""
+    f_avis in place of f_avis_neg and drop f_avis_pos and f_outsider. The morning features (ft.MORNING)
+    came later still and are dropped too."""
     neg, pos = feats.index("f_avis_neg"), feats.index("f_avis_pos")
-    keep = [i for i, c in enumerate(feats) if c not in ("f_avis_pos", "f_outsider")]
+    keep = [i for i, c in enumerate(feats) if c not in ("f_avis_pos", "f_outsider") and c not in ft.MORNING]
     for r in races:
         raw = r["raw"].copy()
         raw[:, neg] = raw[:, pos] - raw[:, neg]

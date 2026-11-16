@@ -13,6 +13,10 @@ Every idea, and the four together ("morning pack"), is scored on the production 
 morning prono) and with odds.
 
     <venv>/python research/benchmark.py --with research/ideas.py --tag morning
+
+Adopted on 2026-11-16: the columns now come from features.py (MORNING, model without odds only), checked
+equal to this file on every runner. To rerun the test itself, check out the pre-registration commit
+(0f71e08): on later code these columns are already in the production model.
 """
 import math
 from collections import defaultdict

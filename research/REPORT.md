@@ -390,7 +390,8 @@ the last digit (market fitted −11.783, model with odds −11.790), §12 gains 
 the top-5 ticket returns of §14 (€325.20 on the hold-out year, €343 on 2026). The §5 test rows are
 slightly better now (−11.813 against −11.839) because the fit uses three years instead of one.
 
-Baseline, 743 races, €1,486 staked per ticket (`results/baseline_2026-11-15.json`):
+Baseline before the morning features below, 743 races, €1,486 staked per ticket
+(`results/baseline_2026-11-15_before_morning.json`):
 
 | Model | Log-lik. top-5 order | Win log-loss | Top-5 Brier | Found /5 |
 |---|---|---|---|---|
@@ -486,9 +487,17 @@ What it means for the ticket (not part of the rule), 743 races:
 - The morning model stays 0.29 per race behind the fitted market.
 - On the 18 fresh races the gain is +0.20, too few to count.
 
-**Status:** passed, not yet in production. Porting the twelve columns to `features.py` for the no-odds
-model changes the morning prono, so it waits for the user's go-ahead. The clean test is the races from
-2026-11-16 on, read once 150 exist (PREREGISTRATION.md).
+**In production (branch `fable-review`), with the user's go-ahead:**
+- `features.py` writes the twelve columns and lists them in `MORNING`; `daily.py` gives them to the
+  no-odds model only. The with-odds model is unchanged (40 columns; the no-odds model has 50).
+- The port equals `ideas.py` on all 17,015 runners (largest difference 1e-15), and the leakage checks pass.
+- Rerun with the new production code, the benchmark gives the tested numbers exactly: no odds −12.025
+  over the 743 races, the same tickets and returns; with odds −11.707 as before
+  (`results/baseline_2026-11-15.json`, the new baseline).
+- The plain-Python fit matches the research fit on the 15 November races (same prono 15 of 15).
+- One explanation is added for the horse sheet: "Bien coté / Peu joué par les parieurs lors de ses
+  derniers Quintés".
+- The clean test is the races from 2026-11-16 on, read once 150 exist (PREREGISTRATION.md).
 
 ### Not done
 

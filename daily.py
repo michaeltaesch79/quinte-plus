@@ -44,13 +44,14 @@ WARNING = ("Les pourcentages sont des estimations du modèle, pas des certitudes
 
 # Model settings (research/REPORT.md): L2 penalty per model and stage discounts (2nd-5th places less
 # predictable than the win), chosen on the validation months. No feature group is dropped: the groups
-# dropped on validation made the test months worse.
+# dropped on validation made the test months worse. The model without odds also uses the morning
+# features (features.MORNING); the model with odds does not.
 MODELS = {"sans_cote": {"l2": 20.0}, "avec_cote": {"l2": 10.0}}
 DROPPED = set()
 
 # Features used in explanations, with the direction that makes sense (+1: more is better).
 # A feature is only explained when the fitted weight has that same sign.
-EXPECTED = {"f_class": 1, "f_jockey_rides": 1, "f_jockey_top3": 1, "f_draw_rel": -1, "f_avis_pos": 1, "f_avis_neg": -1,
+EXPECTED = {"f_prev_mkt": 1, "f_class": 1, "f_jockey_rides": 1, "f_jockey_top3": 1, "f_draw_rel": -1, "f_avis_pos": 1, "f_avis_neg": -1,
             "f_weight_rel": 1, "f_career_win": 1, "f_last_place": -1, "f_form_place": -1, "f_form_top3": 1,
             "f_form_win": 1, "f_going_top3": 1, "f_dist_top3": 1, "f_track_top3": 1, "f_trainer_top5": 1,
             "f_log_gains_year": 1, "f_days_since": -1, "f_unshod4": 1, "f_dist_handicap": -1}
@@ -213,6 +214,9 @@ def explain(i, X, w, cols, feats, frow, runner):
 def phrase(name, high, f, r):
     num = ft.num
     rider = "Driver" if r["specialite"].startswith("TROT") else "Jockey"
+    if name == "f_prev_mkt":
+        return ("Bien coté par les parieurs lors de ses derniers Quintés" if high
+                else "Peu joué par les parieurs lors de ses derniers Quintés")
     if name == "f_class":
         return "A déjà couru des courses mieux dotées" if high else "Monte de catégorie (courses précédentes moins dotées)"
     if name == "f_jockey_rides":
@@ -265,7 +269,8 @@ def phrase(name, high, f, r):
 
 
 def model_cols(name, feats):
-    return [i for i, f in enumerate(feats) if f not in DROPPED and (name == "avec_cote" or f not in ft.ODDS)]
+    skip = ft.MORNING if name == "avec_cote" else ft.ODDS
+    return [i for i, f in enumerate(feats) if f not in DROPPED and f not in skip]
 
 
 def unpack(fitted):
