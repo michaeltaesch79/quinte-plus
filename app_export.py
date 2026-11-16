@@ -3,7 +3,8 @@ Convert the pipeline's daily record (data/daily/YYYY-MM-DD.json, written by dail
 app's data file app/data/today.json, schema_version 1 (format in app/README.md).
 
 Also uses data/payouts.csv + data/runners.csv (usual payout ranges) and the daily records with a result
-(latest result, season score and history, the day itself included once its race is over).
+(latest result, season score and history, the day itself included once its race is over). The scoreboard
+sets the AI's ticket against the bettors' favourites: the five shortest odds 30 minutes before the start.
 
 Usage (Python 3.9+, no extra packages):
     python app_export.py 2026-10-28     # normally called by daily.py
@@ -20,7 +21,7 @@ from paths import APP_JSON, DATA
 DAILY = DATA / "daily"
 OUT = APP_JSON
 AI_NAME = "L'IA qui parle aux chevaux"
-VALUE_NAME = "Le bon rapport"
+FAV_NAME = "Les favoris des parieurs"
 STAKE = 2
 
 DAYS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
@@ -169,31 +170,32 @@ def ticket(nums, title, note=None):
 
 def modes(rec, payouts):
     prono = {
-        "title": "Mes 5 chevaux pour l'arrivée",
+        "title": f"{AI_NAME} : mes 5 chevaux pour l'arrivée",
         "intro": rec["modele"]["note"],
         "picks": rec["prono"],
         "ticket": ticket(rec["prono"], "Mon ticket conseillé", "Dans l'ordre de préférence de l'IA."),
         "payouts": payouts,
         "notices": [],
     }
-    if rec["bon_rapport"]:
-        value = {
-            "title": "Le bon rapport",
-            "intro": "Des chevaux que l'IA juge meilleurs que ne le disent leurs cotes : plus risqué, mieux payé si ça passe.",
-            "picks": rec["bon_rapport"],
-            "ticket": ticket(rec["bon_rapport"], "Ticket bon rapport"),
-            "payouts": payouts,
-            "notices": [],
-        }
-    else:
-        value = {
-            "title": "Le bon rapport",
-            "intro": "Il compare l'avis de l'IA aux cotes des parieurs.",
-            "picks": [],
-            "ticket": ticket([], "Ticket bon rapport", "Pas de ticket tant que les cotes ne sont pas connues."),
-            "notices": ["Les cotes ne sont pas encore publiées : le bon rapport sera calculé au prochain passage."],
-        }
+    # The "bon rapport" list was dropped. This empty entry only keeps a phone that still has the old page
+    # in its cache working; the current page does not read it.
+    value = {
+        "title": "Le bon rapport",
+        "intro": "Cette liste n'existe plus.",
+        "picks": [],
+        "ticket": ticket([], "Ticket bon rapport", "Plus de ticket bon rapport."),
+        "notices": ["Le bon rapport a été retiré de l'appli. Rechargez la page pour voir la nouvelle version."],
+    }
     return {"prono": prono, "value": value}
+
+
+def other_tips(rec):
+    """The bettors' favourites next to the AI's picks, once the odds are published."""
+    note = "Les pronos de la presse ne sont pas encore récupérés automatiquement."
+    if not rec.get("favoris"):
+        return {"sources": [], "note": f"Les favoris des parieurs s'afficheront quand les cotes seront publiées. {note}"}
+    return {"sources": [{"source": FAV_NAME, "picks": rec["favoris"]}],
+            "note": f"{FAV_NAME} : les 5 plus petites cotes à {rec.get('cotes_maj') or '?'}. {note}"}
 
 
 def settled(last):
@@ -213,11 +215,12 @@ def day_label(iso, today):
 
 
 def tickets(r):
-    """The day's tickets with what they won: the AI's prono, and the bon rapport when there was one."""
+    """The day's tickets with what they won: the AI's prono, and the bettors' favourites when every
+    starter had odds 30 minutes before the start."""
     res = r["resultat"]
     out = [{"source": AI_NAME, "picks": r["prono"], "won_eur": res["gain_euros"]}]
-    if r.get("bon_rapport"):
-        out.append({"source": VALUE_NAME, "picks": r["bon_rapport"], "won_eur": (res.get("bon_rapport") or {}).get("gain_euros")})
+    if res.get("favoris"):
+        out.append({"source": FAV_NAME, "picks": res["favoris"]["picks"], "won_eur": res["favoris"]["gain_euros"]})
     return out
 
 
@@ -240,13 +243,13 @@ def past_days(history, today):
 def season(history):
     played = [r for r in history if not r["resultat"].get("annulee")]
     players = []
-    for name in (AI_NAME, VALUE_NAME):
+    for name in (AI_NAME, FAV_NAME):
         won = [t["won_eur"] for r in played for t in tickets(r) if t["source"] == name and t["won_eur"] is not None]
         players.append({"name": name, "bet_eur": STAKE * len(won), "won_eur": round(sum(won), 2)})
     since = f"depuis le {date_label(played[0]['date']).split(' ', 1)[1]}" if played else "pas encore commencé"
     return {"players": players,
-            "note": f"Un ticket Quinté+ à {STAKE} € par jour sur chaque liste, {since}. "
-                    f"Les gains comptent les vrais rapports du PMU."}
+            "note": f"Un ticket Quinté+ à {STAKE} € par jour sur chaque liste, {since}. {FAV_NAME} : les 5 plus "
+                    f"petites cotes 30 minutes avant le départ. Les gains comptent les vrais rapports du PMU."}
 
 
 def build(iso):
@@ -276,7 +279,7 @@ def build(iso):
         },
         "runners": runners,
         "modes": modes(rec, payout_ranges(c["specialite"])),
-        "other_tips": {"sources": [], "note": "Les pronos de la presse ne sont pas encore récupérés automatiquement."},
+        "other_tips": other_tips(rec),
         "yesterday": latest(history, iso),
         "season": season(history),
         "history": past_days(history, iso),

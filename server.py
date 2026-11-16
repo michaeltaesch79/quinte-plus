@@ -4,6 +4,8 @@ Railway service: serves the phone app (app/) and runs the daily job at 06:00 Par
 - GET /                 the app (app/index.html, styles.css, app.js)
 - GET /data/today.json  the day's file, kept on the volume so it survives redeploys
 - GET /status           last lines of the job log (plain text)
+- GET /data/daily.zip   the daily records and the saved runner snapshots (morning and each refresh),
+                        to study offline what the feed publishes at 06:00 and how the odds move
 - GET /odds-check       whether to offer a refresh: odds published and newer than the prono's
                         (before the start only; at most one feed request every 2 minutes)
 - POST /refresh         re-ranks the day's prono with the latest odds (one feed request, ~2 s)
@@ -21,12 +23,14 @@ Environment (all optional):
 Usage: python server.py   (Python 3.9+, no extra packages)
 """
 import base64
+import io
 import json
 import os
 import subprocess
 import sys
 import threading
 import time
+import zipfile
 from datetime import datetime, timedelta
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -199,6 +203,16 @@ def odds_check():
     return {"offer": published, "odds_shown": shown}
 
 
+def daily_zip():
+    """The daily records and the runner snapshots of data/daily/, zipped (programmes and past performances
+    are left out: they are in data/raw/ and make the file ten times larger)."""
+    root, buf = DATA / "daily", io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        for f in sorted(root.glob("????-??-??.json")) + sorted(root.glob("raw/*/participants*.json")):
+            z.write(f, f.relative_to(DATA).as_posix())
+    return buf.getvalue()
+
+
 # ---------------------------------------------------------------- web
 
 class Handler(SimpleHTTPRequestHandler):
@@ -241,6 +255,8 @@ class Handler(SimpleHTTPRequestHandler):
         if path == "/status":
             lines = LOG.read_text(encoding="utf-8").splitlines()[-80:] if LOG.exists() else ["no run yet"]
             return self.send_bytes("\n".join(lines).encode("utf-8"), "text/plain; charset=utf-8")
+        if path == "/data/daily.zip":
+            return self.send_bytes(daily_zip(), "application/zip")
         if path == "/odds-check":
             return self.send_bytes(json.dumps(odds_check()).encode("utf-8"), "application/json")
         return super().do_GET()

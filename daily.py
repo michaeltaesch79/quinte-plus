@@ -4,7 +4,8 @@ Phase 7: today's Quinté+ -> data/daily/YYYY-MM-DD.json (pipeline record) and ap
 Each run:
   1. settles earlier days that have no result yet: downloads the final programme, runners and payouts
      (3 requests per day), saves them in data/raw/ like the bulk scripts, rebuilds the CSV tables, and
-     records the arrival and what the 2 € prono ticket would have returned (for the scoreboard);
+     records the arrival and what two 2 € tickets would have returned (for the scoreboard): the prono and
+     the bettors' favourites (the five shortest odds 30 minutes before the start);
   2. downloads today's programme, runners and past performances (3 requests);
   3. refits the model on every finished Quinté in data/ and writes the tips with short explanations;
   4. converts the record to the app's format (app_export.py, schema in app/README.md).
@@ -101,6 +102,16 @@ def saved_or_get(target, path):
     return data, True
 
 
+def reference_favourites(part):
+    """The five shortest reference odds (30 minutes before the start) among the starters, shortest first;
+    None when a starter has no reference odds."""
+    starters = [p for p in (part or {}).get("participants", []) if p.get("statut") == "PARTANT"]
+    odds = [(p.get("dernierRapportReference") or {}).get("rapport") for p in starters]
+    if not starters or not all(odds):
+        return None
+    return [n for _, n in sorted((o, p["numPmu"]) for o, p in zip(odds, starters))[:5]]
+
+
 def ticket_result(nums, arrival, rows):
     rank, eur = bt.ticket_return(nums, rows)
     return {"chevaux_trouves": len(set(arrival) & set(nums)), "rang": rank,
@@ -114,7 +125,7 @@ def settle(last):
     for f in sorted(DAILY.glob("????-??-??.json")):
         tip = json.loads(f.read_text(encoding="utf-8"))
         res = tip.get("resultat") or {}
-        if res.get("annulee") or "bon_rapport" in res or not tip.get("course") or f.stem > last:
+        if res.get("annulee") or "favoris" in res or not tip.get("course") or f.stem > last:
             continue
         iso, r, c = f.stem, tip["course"]["reunion"], tip["course"]["course"]
         key = f"{iso[8:10]}{iso[5:7]}{iso[:4]}"
@@ -131,7 +142,7 @@ def settle(last):
         reunion, course = find_quinte(prog)
         if course is None:
             continue
-        _, new = saved_or_get(RAW / "participants" / race_file, f"{key}/R{r}/C{c}/participants")
+        part, new = saved_or_get(RAW / "participants" / race_file, f"{key}/R{r}/C{c}/participants")
         saved |= new
         if course.get("statut") == "COURSE_ANNULEE":
             tip["resultat"] = {"annulee": True}
@@ -139,9 +150,9 @@ def settle(last):
             rows = [(p["pari"], [int(x) for x in p["combinaison"].split("-")], p["euros_pour_1_euro"])
                     for p in bd.payout_rows(tip["course"]["race_id"], rap) if p["pari"] in bt.BET_RANKS]
             arrival = [n for group in course.get("ordreArrivee", []) for n in group][:5]
+            fav = reference_favourites(part)
             tip["resultat"] = {"arrivee": arrival, **ticket_result(tip["prono"], arrival, rows),
-                               "bon_rapport": (ticket_result(tip["bon_rapport"], arrival, rows)
-                                               if tip.get("bon_rapport") else None)}
+                               "favoris": {"picks": fav, **ticket_result(fav, arrival, rows)} if fav else None}
         f.write_text(json.dumps(tip, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"{iso}: result recorded {tip['resultat']}")
     return saved
@@ -263,8 +274,8 @@ def unpack(fitted):
 
 
 def ranking(nums, raw, feats, stats, weights, odds):
-    """Prono, bon rapport and estimated chances of one race from fitted weights and the given odds
-    (None where unknown). The market features are recomputed from these odds as in features.py."""
+    """Prono, bettors' favourites and estimated chances of one race from fitted weights and the given
+    odds (None where unknown). The market features are recomputed from these odds as in features.py."""
     mkt = feats.index("f_mkt_logp")
     has_odds = all(odds)
     inv = sum(1 / o for o in odds if o)
@@ -272,27 +283,22 @@ def ranking(nums, raw, feats, stats, weights, odds):
     if "f_outsider" in feats:  # absent from records cached before it was added
         out = feats.index("f_outsider")
         raw = [row[:out] + [ft.outsider(o)] + row[out + 1:] for row, o in zip(raw, odds)]
-    s, lam = {}, {}
-    for name, fitted in weights.items():
-        w, lam[name] = unpack(fitted)
-        race = {"raw": raw}
-        bt.design([race], model_cols(name, feats), stats)
-        s[name] = bt.scores(race["X"], w)
     main = "avec_cote" if has_odds else "sans_cote"
+    w, lam = unpack(weights[main])
+    race = {"raw": raw}
+    bt.design([race], model_cols(main, feats), stats)
+    s = bt.scores(race["X"], w)
     rng = random.Random(1)
-    p5 = bt.p_top5(s[main], rng, lam[main])
-    pwin = [math.exp(x - max(s[main])) for x in s[main]]  # the win stage has factor 1
+    p5 = bt.p_top5(s, rng, lam)
+    pwin = [math.exp(x - max(s)) for x in s]  # the win stage has factor 1
     pwin = [x / sum(pwin) for x in pwin]
-    p5_form = bt.p_top5(s["sans_cote"], rng, lam["sans_cote"])
     p5_mkt = bt.p_top5([-math.log(o) for o in odds], rng) if has_odds else None
     n = len(nums)
-    order = sorted(range(n), key=lambda i: -p5[i])
-    value = []
-    if p5_mkt:  # same rule as the "Bon rapport" strategy of backtest.py
-        shortlist = sorted(range(n), key=lambda i: -p5_form[i])[:8]
-        picked = sorted(shortlist, key=lambda i: -p5_form[i] / max(p5_mkt[i], 1e-6))[:5]
-        value = [nums[i] for i in sorted(picked, key=lambda i: -p5_form[i])]
-    return {"main": main, "order": order, "prono": [nums[i] for i in order[:5]], "value": value,
+    # Ranked by strength: the chance of a top 5 rises with it, and ranking by the simulated chances
+    # (4,000 draws) swapped horses of nearly equal strength from one run to the next.
+    order = sorted(range(n), key=lambda i: -s[i])
+    favourites = [nums[i] for i in sorted(range(n), key=lambda i: odds[i])[:5]] if has_odds else []
+    return {"main": main, "order": order, "prono": [nums[i] for i in order[:5]], "favoris": favourites,
             "p5": p5, "pwin": pwin, "p5_mkt": p5_mkt}
 
 
@@ -337,11 +343,11 @@ def tips(race, runners, past):
         plus, minus = explain(i, form["X"], weights["sans_cote"][0], cols, feats, frows[str(num)], r)
         horses.append({
             **runner_info(r), "rang_ia": rank, "cote": odds[i], **chances(i, rk),
-            "bon_rapport": num in rk["value"], "atouts": plus, "points_faibles": minus,
+            "atouts": plus, "points_faibles": minus,
         })
     at = f"{paris_now():%Hh%M}"
     return {
-        "prono": rk["prono"], "bon_rapport": rk["value"], "chevaux": horses,
+        "prono": rk["prono"], "favoris": rk["favoris"], "chevaux": horses,
         "cotes_maj": at if rk["main"] == "avec_cote" else None,
         "modele": {
             "avec_cotes": rk["main"] == "avec_cote",
@@ -353,7 +359,7 @@ def tips(race, runners, past):
 
 
 def refresh(iso):
-    """Re-rank the prono and the bon rapport of a daily record with the latest odds: one request, no refit."""
+    """Re-rank the prono of a daily record with the latest odds (and update the favourites): one request, no refit."""
     f = DAILY / f"{iso}.json"
     rec = json.loads(f.read_text(encoding="utf-8"))
     c = rec.get("course")
@@ -384,11 +390,8 @@ def refresh(iso):
                                                       "musique", "poids_kg", "corde")})
     for rank, i in enumerate(rk["order"], 1):
         by_num[nums[i]].update({"rang_ia": rank, "cote": odds[i], **chances(i, rk)})
-    if rk["value"]:  # keeps the last list if the odds disappear
-        rec.setdefault("bon_rapport_initial", rec["bon_rapport"])
-        rec["bon_rapport"] = rk["value"]
-        for n, h in by_num.items():
-            h["bon_rapport"] = n in rk["value"]
+    if rk["favoris"]:  # keeps the last list if the odds disappear
+        rec["favoris"] = rk["favoris"]
     at = f"{paris_now():%Hh%M}"
     rec.setdefault("prono_initial", rec["prono"])
     rec["prono"] = rk["prono"]
@@ -442,7 +445,7 @@ def main():
         c = out["course"]
         print(f"\n{iso} {c['hippodrome']} R{c['reunion']}C{c['course']} {c['heure_depart'][11:]} "
               f"{c['specialite']} {c['distance']} m, {c['partants']} partants")
-        print(f"Prono: {'-'.join(map(str, out['prono']))}   Bon rapport: {'-'.join(map(str, out['bon_rapport'])) or '-'}   "
+        print(f"Prono: {'-'.join(map(str, out['prono']))}   Favoris: {'-'.join(map(str, out['favoris'])) or '-'}   "
               f"({out['modele']['note']})")
     print(f"Written: {DAILY / (iso + '.json')} and {target}")
 

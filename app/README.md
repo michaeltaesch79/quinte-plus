@@ -1,8 +1,8 @@
 # Le Quinté du Jour — phone web app
 
-Private web app for one person: the day's Quinté+ with the AI's picks, a "bon rapport"
-(value) mode, a one-tap explanation per horse, input for Le Veinard's picks, and a
-scoreboard. French UI, phone-sized, no login, no build step.
+Private web app for one person: the day's Quinté+ with the AI's picks, a one-tap explanation
+per horse, input for Le Veinard's picks, and a scoreboard that sets the AI against the bettors'
+favourites (the five shortest odds). French UI, phone-sized, no login, no build step.
 
 ## Run it locally
 The app loads its data with `fetch()`, which browsers block for files opened directly
@@ -59,13 +59,14 @@ ranks, chances, verdicts and factor explanations all come from the pipeline.
   }],
   "modes": {
     "prono": { /* mode object */ },
-    "value": { /* mode object */ }
+    "value": { /* mode object, empty: the "bon rapport" list was dropped. Kept only so that a phone
+                  with the old page in its cache still loads; the page no longer reads it. */ }
   },
-  "other_tips": { "sources": [{ "source": "Zone-Turf", "picks": [4, 9, 2, 7, 13] }], "note": "..." },
+  "other_tips": { "sources": [{ "source": "Les favoris des parieurs", "picks": [4, 9, 2, 7, 13] }], "note": "..." },
   "yesterday": {                     // latest result: the day itself once its race is over
     "label": "Hier · Lundi 26 octobre · Chantilly",
     "arrival": [12, 3, 10, 13, 9],
-    "sources": [{ "source": "Le bon rapport", "picks": [13, 12, 3, 16, 1], "won_eur": 0 }]  // empty picks = "Pas de prono"; won_eur optional
+    "sources": [{ "source": "Les favoris des parieurs", "picks": [13, 12, 3, 16, 1], "won_eur": 0 }]  // empty picks = "Pas de prono"; won_eur optional
   },
   "history": [{                      // every settled day, newest first
     "date": "2026-10-26", "label": "Lundi 26 octobre · Chantilly", "cancelled": false,
@@ -106,8 +107,8 @@ Mode object:
 - Picks for the phone ("Le Veinard", "Mon jeu") are saved in that phone's browser only.
   The scoreboard can't count them until they're sent somewhere durable (phase 7).
 - The fatigue and ground/weather factors are placeholders until the history data exists.
-- Odds were not published when this file was made, so the "bon rapport" payouts are estimates
-  from assumed odds.
+- "Les favoris des parieurs" on the tips page use the odds behind the prono; on the scoreboard they
+  are the five shortest odds 30 minutes before the start, taken when the result is recorded.
 
 ## Deploying on Railway
 `server.py` (repo root, standard library only) serves this folder and runs the daily job at

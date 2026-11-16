@@ -43,10 +43,6 @@ button.cloth{cursor:pointer}
 .cloth.miss{background:transparent;border:2px solid var(--line);color:var(--miss)}
 .tap-hint{font-size:15px;color:var(--muted)}
 
-/* mode switch */
-.mode{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:5px}
-.mode button{font-family:var(--display);font-size:19px;font-weight:700;line-height:1.1;min-height:58px;border:0;border-radius:10px;background:transparent;color:var(--muted);cursor:pointer;padding:6px}
-.mode button[aria-pressed="true"]{background:var(--turf);color:var(--turf-ink)}
 
 /* horse rows */
 .horse{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 0 0;border:0;border-top:1px solid var(--line);

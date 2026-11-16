@@ -137,7 +137,6 @@ function renderRace() {
   document.title = `Quinté · ${r.hippodrome}`;
 
   el("mode-prono").innerHTML = modeHTML(D.modes.prono, "Touchez un numéro pour savoir pourquoi.", refreshHTML());
-  el("mode-value").innerHTML = modeHTML(D.modes.value, "Touchez un numéro pour le détail.");
   el("runners").innerHTML = D.runners.map(h => h.non_runner ? `<span class="cloth np" title="Non-partant">${h.num}</span>` : cloth(h.num, "", true)).join("");
   el("cmp-note").textContent = D.other_tips.note || "";
 }
@@ -214,13 +213,6 @@ function renderMatch() {
   el("season-note").textContent = D.season.note || "";
 }
 
-function setMode(m) {
-  el("m-prono").setAttribute("aria-pressed", m === "prono");
-  el("m-value").setAttribute("aria-pressed", m === "value");
-  el("mode-prono").hidden = m !== "prono"; el("mode-value").hidden = m !== "value";
-  store.set("q-mode", m);
-}
-
 /* ---------- wiring ---------- */
 function wire() {
   el("scrim").onclick = closeSheet;
@@ -231,9 +223,6 @@ function wire() {
     const b = e.target.closest("[data-h]");
     if (b && BY_NUM[b.dataset.h] && !BY_NUM[b.dataset.h].non_runner) openSheet(+b.dataset.h);
   });
-  el("m-prono").onclick = () => setMode("prono");
-  el("m-value").onclick = () => setMode("value");
-  if (store.get("q-mode", "prono") === "value") setMode("value");
   document.querySelectorAll(".tabs button").forEach(t => t.onclick = () => {
     document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x === t));
     document.querySelectorAll("section.view").forEach(v => v.hidden = v.id !== t.dataset.v);
