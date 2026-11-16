@@ -372,6 +372,134 @@ difference must be positive with a 95% interval above 0 in both periods.
 with the crowd, and consensus outcomes pay little, so an edge would need the model to disagree with the
 crowd and be right, which no test has shown.
 
+## 15. One benchmark, a code review and the morning model (2026-11-16)
+
+Data now runs to 2026-11-15: 1,115 Quintés, 1,114 with a result. The 18 races from 2026-10-29 are the
+only ones no earlier research has seen.
+
+### The benchmark (`benchmark.py`)
+
+One command reruns the production model (settings read from `daily.py`), the market and the reference
+tickets, walk-forward by month, over the 743 races from 2024-11-01. A candidate model or ticket rule
+from a file is scored on the same races with the same random numbers. Model tickets are the five
+strongest horses in strength order; ranking by simulated chances moved the returns by €6–18 per €728
+from one run to the next.
+
+It reproduces this report. With the frozen v2 model as a candidate (`ref_v2.py`): §10 log-likelihoods to
+the last digit (market fitted −11.783, model with odds −11.790), §12 gains and intervals exactly, and
+the top-5 ticket returns of §14 (€325.20 on the hold-out year, €343 on 2026). The §5 test rows are
+slightly better now (−11.813 against −11.839) because the fit uses three years instead of one.
+
+Baseline, 743 races, €1,486 staked per ticket (`results/baseline_2026-11-15.json`):
+
+| Model | Log-lik. top-5 order | Win log-loss | Top-5 Brier | Found /5 |
+|---|---|---|---|---|
+| uniform | −12.875 | 2.723 | 0.2207 | 1.60 |
+| market raw (T-30) | −11.812 | 2.293 | 0.1933 | 2.59 |
+| market fitted (T-30) | −11.739 | 2.269 | 0.1928 | 2.60 |
+| production, no odds | −12.079 | 2.441 | 0.2001 | 2.41 |
+| production, with odds | −11.707 | 2.281 | 0.1922 | 2.59 |
+
+Production with odds minus the fitted market: +0.031 [+0.002, +0.060] over the 743 races (hold-out
++0.022, validation +0.021, test +0.078, fresh +0.119 on 18 races).
+
+| €2 ticket per race | Days it pays | Returned | ROI | 95% CI (weeks) | Among the 12 most-played sets |
+|---|---|---|---|---|---|
+| random | 22 | €196 | −87% | [−92%, −81%] | 5 |
+| favourites (T-30) | 183 | €753 | −49% | [−57%, −41%] | 727 |
+| top 5, no odds | 130 | €853 | −43% | [−64%, −13%] | 336 |
+| top 5, with odds | 176 | €773 | −48% | [−57%, −39%] | 677 |
+| bon rapport | 38 | €346 | −77% | [−85%, −67%] | 3 |
+
+No ticket has a demonstrated edge. The no-odds ticket's −43% rests on two Désordre payouts of about
+€132.
+
+### Code review
+
+No leak was found, and the plain-Python fit matches the research fit (same top five on the 15 November
+races, correlation 0.999998). Findings:
+
+- **The prono depended on simulation noise.** The app ranked by a simulated top-5 chance (4,000 draws).
+  On the 287 races of 2026 the five horses shown differed from the model's own top five in 34 races
+  with odds and 41 without. Fixed: `daily.py` ranks by strength.
+- **The bon rapport was "the model's top 8 minus the favourites".** The three horses it dropped had an
+  average market rank of 1.9 (0 = favourite). Dropped from the app at the user's request.
+- **The morning test may be optimistic.** It assumes the trainer opinion, shoeing and driver change of
+  the final runner file are published at 06:00. No real morning snapshot exists locally to check;
+  the server has them (`GET /data/daily.zip` was added to fetch them).
+- **The server probably fits on about 13 months** (its bootstrap downloads 12). Three years gave
+  +0.014 without odds and +0.024 with odds on 2026-02 onwards, neither conclusive.
+- Smaller: features use the final field, so late scratches are known too early; `backtest.py` still
+  tests the first settings and nothing reads its summary; the payout note in the app says "12 derniers
+  mois" but uses all saved races; the raw-odds top-5 chance shown for a horse under odds of 5 is 80%
+  against 68% observed (211 runners in 2026).
+
+### App changes (branch `fable-review`)
+
+- Prono ranked by strength.
+- Bon rapport removed. "Les favoris des parieurs" (five shortest odds) appear under "Les autres
+  pronos" and replace it on the scoreboard, settled with the odds 30 minutes before the start.
+
+### Morning model: four feature ideas (pre-registered, `ideas.py`)
+
+The morning prono is 0.34 per race behind the fitted market, so the ideas target what the bettors know
+and the no-odds model does not. Definitions and rule were committed (0f71e08) after looking at the
+design year only (2023-10-27 → 2024-10-31) and before any run on the test periods.
+
+- **memory:** how the bettors rated the horse in its earlier Quintés of the last 365 days (reference
+  odds of those races), how often it ran them and finished in the first five.
+- **field:** finishing position as a share of the field over the last 5 runs, and the level of the
+  races in which it finished well.
+- **musique:** the 10-run form line of the runner file (the past-performance file stops at 5 in trot).
+- **speed:** the two trot-time features of §13, unchanged. A re-test on the same periods, not new evidence.
+
+Log-likelihood gain over production, per race, with 95% intervals (`results/benchmark_morning_2026-11-15.json`):
+
+| No odds | Hold-out (364) | Validation (119) | Test (150) | All 743 |
+|---|---|---|---|---|
+| memory | +0.037 | +0.015 | +0.027 | +0.031 [+0.013, +0.049] |
+| field | +0.036 | +0.001 | +0.057 | +0.032 [+0.008, +0.061] |
+| musique | +0.006 | −0.000 | +0.015 | +0.004 [−0.004, +0.012] |
+| speed | +0.013 | +0.012 | +0.016 | +0.008 [−0.009, +0.025] |
+| **the four together** | **+0.067** [+0.030, +0.103] | **+0.020** [−0.030, +0.070] | **+0.082** [−0.016, +0.204] | **+0.054** [+0.021, +0.087] |
+
+| With odds | Hold-out | Validation | Test | All 743 |
+|---|---|---|---|---|
+| the four together | +0.000 | −0.005 | −0.011 | −0.008 [−0.024, +0.009] |
+
+Verdicts by the declared rule (positive in the three periods, and the interval over all races above 0):
+
+- **No odds, the four together: passes.** Memory and field also pass alone; musique and speed do not.
+- **With odds: fails.** The day's odds already hold what these features say. No change.
+
+What it means for the ticket (not part of the rule), 743 races:
+
+| Top-5 ticket, no odds | Found /5 | Days it pays | Returned of €1,486 |
+|---|---|---|---|
+| production | 2.41 | 130 (17.5%) | €853 |
+| with the four ideas | 2.43 | 149 (20.1%) | €762 |
+
+- Days the ticket pays: +2.6 points [+0.3, +4.7], up in each of the three periods (69→77, 18→22, 24→27).
+- Horses found is flat (2.42→2.47, 2.42→2.36, 2.39→2.38 by period).
+- Money back is lower by €0.12 per race [−0.68, +0.28]: the production ticket had the two €132
+  Désordres, the new one got a Bonus on those days. This is within luck, and no edge is shown either way.
+- The morning model stays 0.29 per race behind the fitted market.
+- On the 18 fresh races the gain is +0.20, too few to count.
+
+**Status:** passed, not yet in production. Porting the twelve columns to `features.py` for the no-odds
+model changes the morning prono, so it waits for the user's go-ahead. The clean test is the races from
+2026-11-16 on, read once 150 exist (PREREGISTRATION.md).
+
+### Not done
+
+- **Tirelire.** On 68 of the 743 days (58 Sundays) a "Tirelire" row pays the Ordre winners about
+  500,000 more in the feed's units (dividend per €1 × winners), roughly half as much again as that
+  day's whole Quinté+ payout. Whether a €2 unitaire ticket qualifies is not verified from the rules,
+  and the gain would sit in a very rare exact-order win. Not tested.
+- **A model that separates consistent placers from risky winners** (weights that change from the win to
+  the fifth place). Not built.
+- **What the feed publishes at 06:00**, from the server's snapshots.
+
 ## Reproduce
 
 ```
@@ -386,3 +514,18 @@ python -m venv .venv && .venv/Scripts/pip install -r research/requirements.txt
 ```
 `evaluate.py` also needs `data/research/features_v1.csv` (the pre-fix feature table, kept locally) for the
 "before" rows.
+
+The benchmark, and how to bring the data up to date before rerunning it (ask before downloading; the
+fetch scripts rewrite their log files, so copy `data/raw/*.txt` aside first):
+```
+python fetch_programmes.py <from> <to>                     # dates YYYY-MM-DD, both included
+python fetch_participants.py --quinte <from> <to>
+python fetch_rapports.py --quinte <from> <to>
+python fetch_performances.py --quinte <from> <to>
+python fetch_combinaisons.py --quinte <from> <to>
+python build_dataset.py && python features.py
+.venv/Scripts/python research/checks.py
+.venv/Scripts/python research/benchmark.py                 # baseline (~10 min), results/baseline_<last race>.json
+.venv/Scripts/python research/benchmark.py --with research/ref_v2.py --tag ref_v2    # check against §10 and §12
+.venv/Scripts/python research/benchmark.py --with research/ideas.py --tag morning    # §15 (~35 min), at commit 0f71e08
+```

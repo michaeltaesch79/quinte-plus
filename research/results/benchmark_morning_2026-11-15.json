@@ -1,0 +1,7878 @@
+{
+ "generated": "2026-11-16T13:59:54",
+ "data": {
+  "races_in_data": 1114,
+  "first": "2023-10-27",
+  "last": "2026-11-15",
+  "races_tested": 743,
+  "tested_from": "2024-11-01"
+ },
+ "settings": {
+  "sims": 20000,
+  "stake": 2.0,
+  "production": {
+   "sans_cote": {
+    "l2": 20.0
+   },
+   "avec_cote": {
+    "l2": 10.0
+   }
+  },
+  "features": 52
+ },
+ "periods": {
+  "hold-out 2024-11..2025-10": {
+   "races": 364,
+   "from": "2024-11-01",
+   "to": "2025-10-31",
+   "races_by_family": {
+    "PLAT": 141,
+    "TROT": 181,
+    "OBSTACLE": 42
+   },
+   "prediction": {
+    "uniform": {
+     "races": 364,
+     "ll_top5_order": -12.8632,
+     "win_logloss": 2.7204,
+     "top5_brier": 0.2211,
+     "found": 1.6,
+     "ece_top5": 0.0016,
+     "ece_win": 0.0
+    },
+    "market raw (T-30)": {
+     "races": 364,
+     "ll_top5_order": -11.8367,
+     "win_logloss": 2.3272,
+     "top5_brier": 0.1946,
+     "found": 2.52,
+     "ece_top5": 0.0273,
+     "ece_win": 0.0112
+    },
+    "market fitted (T-30)": {
+     "races": 364,
+     "ll_top5_order": -11.7826,
+     "win_logloss": 2.3103,
+     "top5_brier": 0.194,
+     "found": 2.54,
+     "ece_top5": 0.0166,
+     "ece_win": 0.0051
+    },
+    "prod, no odds": {
+     "races": 364,
+     "ll_top5_order": -12.103,
+     "win_logloss": 2.4467,
+     "top5_brier": 0.2012,
+     "found": 2.41,
+     "ece_top5": 0.0074,
+     "ece_win": 0.0059
+    },
+    "prod, with odds": {
+     "races": 364,
+     "ll_top5_order": -11.7601,
+     "win_logloss": 2.3247,
+     "top5_brier": 0.1935,
+     "found": 2.55,
+     "ece_top5": 0.0077,
+     "ece_win": 0.0043
+    },
+    "memory, no odds": {
+     "races": 364,
+     "ll_top5_order": -12.0659,
+     "win_logloss": 2.4321,
+     "top5_brier": 0.2001,
+     "found": 2.43,
+     "ece_top5": 0.0078,
+     "ece_win": 0.0051
+    },
+    "field, no odds": {
+     "races": 364,
+     "ll_top5_order": -12.0669,
+     "win_logloss": 2.4292,
+     "top5_brier": 0.2004,
+     "found": 2.43,
+     "ece_top5": 0.0081,
+     "ece_win": 0.0065
+    },
+    "musique, no odds": {
+     "races": 364,
+     "ll_top5_order": -12.0975,
+     "win_logloss": 2.4492,
+     "top5_brier": 0.2011,
+     "found": 2.39,
+     "ece_top5": 0.0087,
+     "ece_win": 0.0051
+    },
+    "speed, no odds": {
+     "races": 364,
+     "ll_top5_order": -12.0903,
+     "win_logloss": 2.4415,
+     "top5_brier": 0.2009,
+     "found": 2.46,
+     "ece_top5": 0.0095,
+     "ece_win": 0.0057
+    },
+    "morning pack, no odds": {
+     "races": 364,
+     "ll_top5_order": -12.036,
+     "win_logloss": 2.4213,
+     "top5_brier": 0.1996,
+     "found": 2.47,
+     "ece_top5": 0.0092,
+     "ece_win": 0.0054
+    },
+    "memory, with odds": {
+     "races": 364,
+     "ll_top5_order": -11.7579,
+     "win_logloss": 2.3242,
+     "top5_brier": 0.1934,
+     "found": 2.56,
+     "ece_top5": 0.0084,
+     "ece_win": 0.0048
+    },
+    "field, with odds": {
+     "races": 364,
+     "ll_top5_order": -11.7501,
+     "win_logloss": 2.3179,
+     "top5_brier": 0.1934,
+     "found": 2.55,
+     "ece_top5": 0.0071,
+     "ece_win": 0.0056
+    },
+    "musique, with odds": {
+     "races": 364,
+     "ll_top5_order": -11.7697,
+     "win_logloss": 2.3281,
+     "top5_brier": 0.1938,
+     "found": 2.55,
+     "ece_top5": 0.0076,
+     "ece_win": 0.0045
+    },
+    "speed, with odds": {
+     "races": 364,
+     "ll_top5_order": -11.7577,
+     "win_logloss": 2.3243,
+     "top5_brier": 0.1935,
+     "found": 2.55,
+     "ece_top5": 0.0069,
+     "ece_win": 0.0041
+    },
+    "morning pack, with odds": {
+     "races": 364,
+     "ll_top5_order": -11.7599,
+     "win_logloss": 2.3223,
+     "top5_brier": 0.1937,
+     "found": 2.54,
+     "ece_top5": 0.0084,
+     "ece_win": 0.0049
+    }
+   },
+   "prediction_by_family": {
+    "PLAT": {
+     "uniform": {
+      "races": 141,
+      "ll_top5_order": -12.9613,
+      "win_logloss": 2.737,
+      "top5_brier": 0.2195,
+      "found": 1.7,
+      "ece_top5": 0.0026,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 141,
+      "ll_top5_order": -12.4723,
+      "win_logloss": 2.5736,
+      "top5_brier": 0.2061,
+      "found": 2.26,
+      "ece_top5": 0.024,
+      "ece_win": 0.0056
+     },
+     "market fitted (T-30)": {
+      "races": 141,
+      "ll_top5_order": -12.4493,
+      "win_logloss": 2.58,
+      "top5_brier": 0.2055,
+      "found": 2.26,
+      "ece_top5": 0.0107,
+      "ece_win": 0.0118
+     },
+     "prod, no odds": {
+      "races": 141,
+      "ll_top5_order": -12.6676,
+      "win_logloss": 2.6412,
+      "top5_brier": 0.2114,
+      "found": 2.16,
+      "ece_top5": 0.0126,
+      "ece_win": 0.0138
+     },
+     "prod, with odds": {
+      "races": 141,
+      "ll_top5_order": -12.451,
+      "win_logloss": 2.5813,
+      "top5_brier": 0.2051,
+      "found": 2.29,
+      "ece_top5": 0.0085,
+      "ece_win": 0.0136
+     },
+     "memory, no odds": {
+      "races": 141,
+      "ll_top5_order": -12.6152,
+      "win_logloss": 2.6283,
+      "top5_brier": 0.2099,
+      "found": 2.21,
+      "ece_top5": 0.0178,
+      "ece_win": 0.0107
+     },
+     "field, no odds": {
+      "races": 141,
+      "ll_top5_order": -12.5878,
+      "win_logloss": 2.6157,
+      "top5_brier": 0.2094,
+      "found": 2.22,
+      "ece_top5": 0.0106,
+      "ece_win": 0.0152
+     },
+     "musique, no odds": {
+      "races": 141,
+      "ll_top5_order": -12.6623,
+      "win_logloss": 2.6457,
+      "top5_brier": 0.2112,
+      "found": 2.14,
+      "ece_top5": 0.0105,
+      "ece_win": 0.0137
+     },
+     "speed, no odds": {
+      "races": 141,
+      "ll_top5_order": -12.6657,
+      "win_logloss": 2.6398,
+      "top5_brier": 0.2113,
+      "found": 2.21,
+      "ece_top5": 0.016,
+      "ece_win": 0.0125
+     },
+     "morning pack, no odds": {
+      "races": 141,
+      "ll_top5_order": -12.5629,
+      "win_logloss": 2.6154,
+      "top5_brier": 0.2087,
+      "found": 2.26,
+      "ece_top5": 0.0138,
+      "ece_win": 0.0136
+     },
+     "memory, with odds": {
+      "races": 141,
+      "ll_top5_order": -12.4449,
+      "win_logloss": 2.5816,
+      "top5_brier": 0.205,
+      "found": 2.31,
+      "ece_top5": 0.0109,
+      "ece_win": 0.0152
+     },
+     "field, with odds": {
+      "races": 141,
+      "ll_top5_order": -12.4173,
+      "win_logloss": 2.5717,
+      "top5_brier": 0.2044,
+      "found": 2.34,
+      "ece_top5": 0.0169,
+      "ece_win": 0.0136
+     },
+     "musique, with odds": {
+      "races": 141,
+      "ll_top5_order": -12.4594,
+      "win_logloss": 2.5859,
+      "top5_brier": 0.2054,
+      "found": 2.32,
+      "ece_top5": 0.0079,
+      "ece_win": 0.0152
+     },
+     "speed, with odds": {
+      "races": 141,
+      "ll_top5_order": -12.4503,
+      "win_logloss": 2.5802,
+      "top5_brier": 0.2051,
+      "found": 2.29,
+      "ece_top5": 0.0105,
+      "ece_win": 0.0135
+     },
+     "morning pack, with odds": {
+      "races": 141,
+      "ll_top5_order": -12.4301,
+      "win_logloss": 2.578,
+      "top5_brier": 0.2048,
+      "found": 2.33,
+      "ece_top5": 0.0083,
+      "ece_win": 0.0124
+     }
+    },
+    "TROT": {
+     "uniform": {
+      "races": 181,
+      "ll_top5_order": -12.7704,
+      "win_logloss": 2.7045,
+      "top5_brier": 0.2228,
+      "found": 1.58,
+      "ece_top5": 0.0015,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 181,
+      "ll_top5_order": -11.248,
+      "win_logloss": 2.0789,
+      "top5_brier": 0.1844,
+      "found": 2.77,
+      "ece_top5": 0.0371,
+      "ece_win": 0.0202
+     },
+     "market fitted (T-30)": {
+      "races": 181,
+      "ll_top5_order": -11.156,
+      "win_logloss": 2.0372,
+      "top5_brier": 0.1837,
+      "found": 2.8,
+      "ece_top5": 0.0299,
+      "ece_win": 0.0118
+     },
+     "prod, no odds": {
+      "races": 181,
+      "ll_top5_order": -11.5593,
+      "win_logloss": 2.2256,
+      "top5_brier": 0.1922,
+      "found": 2.62,
+      "ece_top5": 0.0144,
+      "ece_win": 0.0118
+     },
+     "prod, with odds": {
+      "races": 181,
+      "ll_top5_order": -11.0856,
+      "win_logloss": 2.0482,
+      "top5_brier": 0.1826,
+      "found": 2.8,
+      "ece_top5": 0.0177,
+      "ece_win": 0.0086
+     },
+     "memory, no odds": {
+      "races": 181,
+      "ll_top5_order": -11.527,
+      "win_logloss": 2.203,
+      "top5_brier": 0.1913,
+      "found": 2.63,
+      "ece_top5": 0.0193,
+      "ece_win": 0.0161
+     },
+     "field, no odds": {
+      "races": 181,
+      "ll_top5_order": -11.5607,
+      "win_logloss": 2.2089,
+      "top5_brier": 0.1925,
+      "found": 2.62,
+      "ece_top5": 0.0139,
+      "ece_win": 0.0126
+     },
+     "musique, no odds": {
+      "races": 181,
+      "ll_top5_order": -11.5592,
+      "win_logloss": 2.2295,
+      "top5_brier": 0.1922,
+      "found": 2.6,
+      "ece_top5": 0.0208,
+      "ece_win": 0.0108
+     },
+     "speed, no odds": {
+      "races": 181,
+      "ll_top5_order": -11.5335,
+      "win_logloss": 2.2168,
+      "top5_brier": 0.1916,
+      "found": 2.69,
+      "ece_top5": 0.0132,
+      "ece_win": 0.0117
+     },
+     "morning pack, no odds": {
+      "races": 181,
+      "ll_top5_order": -11.5182,
+      "win_logloss": 2.1926,
+      "top5_brier": 0.1914,
+      "found": 2.67,
+      "ece_top5": 0.0123,
+      "ece_win": 0.013
+     },
+     "memory, with odds": {
+      "races": 181,
+      "ll_top5_order": -11.0845,
+      "win_logloss": 2.045,
+      "top5_brier": 0.1824,
+      "found": 2.82,
+      "ece_top5": 0.0187,
+      "ece_win": 0.0083
+     },
+     "field, with odds": {
+      "races": 181,
+      "ll_top5_order": -11.0939,
+      "win_logloss": 2.039,
+      "top5_brier": 0.1831,
+      "found": 2.79,
+      "ece_top5": 0.0181,
+      "ece_win": 0.0116
+     },
+     "musique, with odds": {
+      "races": 181,
+      "ll_top5_order": -11.0973,
+      "win_logloss": 2.0495,
+      "top5_brier": 0.183,
+      "found": 2.78,
+      "ece_top5": 0.0156,
+      "ece_win": 0.0075
+     },
+     "speed, with odds": {
+      "races": 181,
+      "ll_top5_order": -11.0818,
+      "win_logloss": 2.0484,
+      "top5_brier": 0.1826,
+      "found": 2.8,
+      "ece_top5": 0.0131,
+      "ece_win": 0.0069
+     },
+     "morning pack, with odds": {
+      "races": 181,
+      "ll_top5_order": -11.1002,
+      "win_logloss": 2.0393,
+      "top5_brier": 0.1833,
+      "found": 2.76,
+      "ece_top5": 0.0173,
+      "ece_win": 0.0111
+     }
+    },
+    "OBSTACLE": {
+     "uniform": {
+      "races": 42,
+      "ll_top5_order": -12.9335,
+      "win_logloss": 2.7328,
+      "top5_brier": 0.2191,
+      "found": 1.4,
+      "ece_top5": 0.0009,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 42,
+      "ll_top5_order": -12.2401,
+      "win_logloss": 2.5698,
+      "top5_brier": 0.1998,
+      "found": 2.33,
+      "ece_top5": 0.0435,
+      "ece_win": 0.0158
+     },
+     "market fitted (T-30)": {
+      "races": 42,
+      "ll_top5_order": -12.2443,
+      "win_logloss": 2.5816,
+      "top5_brier": 0.1997,
+      "found": 2.36,
+      "ece_top5": 0.0343,
+      "ece_win": 0.0168
+     },
+     "prod, no odds": {
+      "races": 42,
+      "ll_top5_order": -12.5508,
+      "win_logloss": 2.7464,
+      "top5_brier": 0.206,
+      "found": 2.31,
+      "ece_top5": 0.0194,
+      "ece_win": 0.0225
+     },
+     "prod, with odds": {
+      "races": 42,
+      "ll_top5_order": -12.3475,
+      "win_logloss": 2.6545,
+      "top5_brier": 0.2017,
+      "found": 2.33,
+      "ece_top5": 0.0282,
+      "ece_win": 0.0188
+     },
+     "memory, no odds": {
+      "races": 42,
+      "ll_top5_order": -12.5436,
+      "win_logloss": 2.7606,
+      "top5_brier": 0.2055,
+      "found": 2.26,
+      "ece_top5": 0.0231,
+      "ece_win": 0.0257
+     },
+     "field, no odds": {
+      "races": 42,
+      "ll_top5_order": -12.4995,
+      "win_logloss": 2.752,
+      "top5_brier": 0.2045,
+      "found": 2.33,
+      "ece_top5": 0.0225,
+      "ece_win": 0.0225
+     },
+     "musique, no odds": {
+      "races": 42,
+      "ll_top5_order": -12.5209,
+      "win_logloss": 2.7362,
+      "top5_brier": 0.2053,
+      "found": 2.29,
+      "ece_top5": 0.0266,
+      "ece_win": 0.0206
+     },
+     "speed, no odds": {
+      "races": 42,
+      "ll_top5_order": -12.5582,
+      "win_logloss": 2.7436,
+      "top5_brier": 0.2061,
+      "found": 2.31,
+      "ece_top5": 0.0155,
+      "ece_win": 0.0203
+     },
+     "morning pack, no odds": {
+      "races": 42,
+      "ll_top5_order": -12.4982,
+      "win_logloss": 2.756,
+      "top5_brier": 0.2041,
+      "found": 2.33,
+      "ece_top5": 0.031,
+      "ece_win": 0.0236
+     },
+     "memory, with odds": {
+      "races": 42,
+      "ll_top5_order": -12.3539,
+      "win_logloss": 2.663,
+      "top5_brier": 0.2016,
+      "found": 2.29,
+      "ece_top5": 0.0272,
+      "ece_win": 0.0208
+     },
+     "field, with odds": {
+      "races": 42,
+      "ll_top5_order": -12.3379,
+      "win_logloss": 2.6678,
+      "top5_brier": 0.2012,
+      "found": 2.26,
+      "ece_top5": 0.0302,
+      "ece_win": 0.0243
+     },
+     "musique, with odds": {
+      "races": 42,
+      "ll_top5_order": -12.3518,
+      "win_logloss": 2.6632,
+      "top5_brier": 0.2017,
+      "found": 2.33,
+      "ece_top5": 0.0282,
+      "ece_win": 0.0191
+     },
+     "speed, with odds": {
+      "races": 42,
+      "ll_top5_order": -12.3453,
+      "win_logloss": 2.6543,
+      "top5_brier": 0.2016,
+      "found": 2.33,
+      "ece_top5": 0.0254,
+      "ece_win": 0.0191
+     },
+     "morning pack, with odds": {
+      "races": 42,
+      "ll_top5_order": -12.3533,
+      "win_logloss": 2.6832,
+      "top5_brier": 0.2013,
+      "found": 2.31,
+      "ece_top5": 0.0331,
+      "ece_win": 0.0262
+     }
+    }
+   },
+   "comparisons": {
+    "prod, with odds minus market fitted (T-30)": {
+     "mean": 0.0224,
+     "ci95": [
+      -0.0179,
+      0.0612
+     ],
+     "races": 364
+    },
+    "memory, no odds minus prod, no odds": {
+     "mean": 0.0371,
+     "ci95": [
+      0.0116,
+      0.0629
+     ],
+     "races": 364
+    },
+    "field, no odds minus prod, no odds": {
+     "mean": 0.0361,
+     "ci95": [
+      0.0151,
+      0.0586
+     ],
+     "races": 364
+    },
+    "musique, no odds minus prod, no odds": {
+     "mean": 0.0055,
+     "ci95": [
+      -0.0068,
+      0.0174
+     ],
+     "races": 364
+    },
+    "speed, no odds minus prod, no odds": {
+     "mean": 0.0127,
+     "ci95": [
+      -0.005,
+      0.0296
+     ],
+     "races": 364
+    },
+    "morning pack, no odds minus prod, no odds": {
+     "mean": 0.067,
+     "ci95": [
+      0.0304,
+      0.1034
+     ],
+     "races": 364
+    },
+    "memory, with odds minus prod, with odds": {
+     "mean": 0.0022,
+     "ci95": [
+      -0.0085,
+      0.0128
+     ],
+     "races": 364
+    },
+    "field, with odds minus prod, with odds": {
+     "mean": 0.01,
+     "ci95": [
+      -0.0033,
+      0.0243
+     ],
+     "races": 364
+    },
+    "musique, with odds minus prod, with odds": {
+     "mean": -0.0096,
+     "ci95": [
+      -0.0204,
+      0.0009
+     ],
+     "races": 364
+    },
+    "speed, with odds minus prod, with odds": {
+     "mean": 0.0024,
+     "ci95": [
+      -0.0057,
+      0.0099
+     ],
+     "races": 364
+    },
+    "morning pack, with odds minus prod, with odds": {
+     "mean": 0.0002,
+     "ci95": [
+      -0.021,
+      0.0218
+     ],
+     "races": 364
+    },
+    "prod, no odds minus market fitted (T-30)": {
+     "mean": -0.3204,
+     "ci95": [
+      -0.4211,
+      -0.2238
+     ],
+     "races": 364
+    }
+   },
+   "betting": {
+    "random": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 118.8,
+     "net": -609.2,
+     "roi": -0.837,
+     "hits": {
+      "BONUS_4SUR5": 6,
+      "BONUS_3": 8
+     },
+     "max_drawdown": -617.4,
+     "roi_without_top1": -0.863,
+     "roi_without_top3": -0.904,
+     "largest_returns": [
+      19.4,
+      15.0,
+      15.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.9234,
+      -0.7376
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.827
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.869
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.733
+      }
+     },
+     "by_month": {
+      "2024-11": -44.8,
+      "2024-12": -62.0,
+      "2025-01": -62.0,
+      "2025-02": -50.0,
+      "2025-03": -62.0,
+      "2025-04": -45.0,
+      "2025-05": -37.4,
+      "2025-06": -57.4,
+      "2025-07": -58.4,
+      "2025-08": -48.4,
+      "2025-09": -54.2,
+      "2025-10": -27.6
+     },
+     "found_per_ticket": 1.7,
+     "among_12_most_played": "3/364"
+    },
+    "favourites (T-30)": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 316.6,
+     "net": -411.4,
+     "roi": -0.565,
+     "hits": {
+      "BONUS_4SUR5": 53,
+      "BONUS_3": 25,
+      "DESORDRE": 3
+     },
+     "max_drawdown": -425.8,
+     "roi_without_top1": -0.58,
+     "roi_without_top3": -0.609,
+     "largest_returns": [
+      11.8,
+      11.4,
+      11.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6566,
+      -0.4679
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.628
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.511
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.586
+      }
+     },
+     "by_month": {
+      "2024-11": -22.4,
+      "2024-12": -33.6,
+      "2025-01": -37.2,
+      "2025-02": -44.4,
+      "2025-03": -30.4,
+      "2025-04": -42.8,
+      "2025-05": -28.2,
+      "2025-06": -33.2,
+      "2025-07": -37.4,
+      "2025-08": -45.2,
+      "2025-09": -24.4,
+      "2025-10": -32.2
+     },
+     "found_per_ticket": 2.55,
+     "among_12_most_played": "353/364"
+    },
+    "top 5 prod, no odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 556.4,
+     "net": -171.6,
+     "roi": -0.236,
+     "hits": {
+      "BONUS_3": 21,
+      "BONUS_4SUR5": 46,
+      "DESORDRE": 2
+     },
+     "max_drawdown": -285.4,
+     "roi_without_top1": -0.417,
+     "roi_without_top3": -0.63,
+     "largest_returns": [
+      133.4,
+      131.6,
+      24.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6568,
+      0.334
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.272
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.466
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": 0.876
+      }
+     },
+     "by_month": {
+      "2024-11": -17.0,
+      "2024-12": -41.0,
+      "2025-01": 101.0,
+      "2025-02": -34.2,
+      "2025-03": -32.2,
+      "2025-04": -45.6,
+      "2025-05": -40.4,
+      "2025-06": -34.0,
+      "2025-07": -50.2,
+      "2025-08": 84.0,
+      "2025-09": -22.6,
+      "2025-10": -39.4
+     },
+     "found_per_ticket": 2.42,
+     "among_12_most_played": "171/364"
+    },
+    "top 5 prod, with odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 325.2,
+     "net": -402.8,
+     "roi": -0.553,
+     "hits": {
+      "BONUS_4SUR5": 45,
+      "BONUS_3": 28,
+      "DESORDRE": 5
+     },
+     "max_drawdown": -409.4,
+     "roi_without_top1": -0.569,
+     "roi_without_top3": -0.598,
+     "largest_returns": [
+      12.0,
+      11.8,
+      11.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6643,
+      -0.4388
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.628
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.469
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.664
+      }
+     },
+     "by_month": {
+      "2024-11": -37.0,
+      "2024-12": -43.0,
+      "2025-01": -2.8,
+      "2025-02": -49.2,
+      "2025-03": -18.2,
+      "2025-04": -42.8,
+      "2025-05": -46.4,
+      "2025-06": -21.4,
+      "2025-07": -38.6,
+      "2025-08": -49.0,
+      "2025-09": -22.8,
+      "2025-10": -31.6
+     },
+     "found_per_ticket": 2.55,
+     "among_12_most_played": "335/364"
+    },
+    "bon rapport (prod rule)": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 167.4,
+     "net": -560.6,
+     "roi": -0.77,
+     "hits": {
+      "BONUS_4SUR5": 11,
+      "BONUS_3": 5
+     },
+     "max_drawdown": -561.6,
+     "roi_without_top1": -0.802,
+     "roi_without_top3": -0.855,
+     "largest_returns": [
+      24.0,
+      20.2,
+      18.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.885,
+      -0.6443
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.935
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.646
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.75
+      }
+     },
+     "by_month": {
+      "2024-11": -29.6,
+      "2024-12": -62.0,
+      "2025-01": -56.0,
+      "2025-02": -35.8,
+      "2025-03": -62.0,
+      "2025-04": -41.4,
+      "2025-05": -48.4,
+      "2025-06": -32.2,
+      "2025-07": -57.6,
+      "2025-08": -52.6,
+      "2025-09": -60.0,
+      "2025-10": -23.0
+     },
+     "found_per_ticket": 1.92,
+     "among_12_most_played": "2/364"
+    },
+    "expected value > 2 € (prod, with odds)": {
+     "races": 364,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 11.0,
+     "net": -25.0,
+     "roi": -0.694,
+     "hits": {
+      "BONUS_4SUR5": 1,
+      "BONUS_3": 2
+     },
+     "max_drawdown": -25.6,
+     "roi_without_top1": -0.806,
+     "roi_without_top3": -1.0,
+     "largest_returns": [
+      4.4,
+      4.0,
+      2.6
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      -0.3737
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 1,
+       "roi": -1.0
+      },
+      "TROT": {
+       "bets": 15,
+       "roi": -0.633
+      },
+      "OBSTACLE": {
+       "bets": 2,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2024-11": -3.6,
+      "2024-12": -6.0,
+      "2025-01": -2.0,
+      "2025-02": -2.0,
+      "2025-03": -2.0,
+      "2025-04": -2.0,
+      "2025-07": -2.0,
+      "2025-09": -6.0,
+      "2025-10": 0.6
+     },
+     "found_per_ticket": 2.39,
+     "among_12_most_played": "0/18"
+    },
+    "top 5 memory, no odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 430.0,
+     "net": -298.0,
+     "roi": -0.409,
+     "hits": {
+      "BONUS_3": 20,
+      "BONUS_4SUR5": 45,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -342.0,
+     "roi_without_top1": -0.589,
+     "roi_without_top3": -0.622,
+     "largest_returns": [
+      131.6,
+      13.4,
+      12.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6695,
+      0.015
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.111
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.572
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.71
+      }
+     },
+     "by_month": {
+      "2024-11": -23.4,
+      "2024-12": -43.2,
+      "2025-01": -31.4,
+      "2025-02": -36.4,
+      "2025-03": -32.2,
+      "2025-04": -39.6,
+      "2025-05": -38.4,
+      "2025-06": -31.6,
+      "2025-07": -42.6,
+      "2025-08": 81.0,
+      "2025-09": -25.6,
+      "2025-10": -34.6
+     },
+     "found_per_ticket": 2.43,
+     "among_12_most_played": "180/364"
+    },
+    "top 5 field, no odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 479.0,
+     "net": -249.0,
+     "roi": -0.342,
+     "hits": {
+      "BONUS_3": 24,
+      "BONUS_4SUR5": 47,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -307.4,
+     "roi_without_top1": -0.521,
+     "roi_without_top3": -0.563,
+     "largest_returns": [
+      131.6,
+      18.6,
+      13.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6093,
+      0.0855
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.045
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.527
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.543
+      }
+     },
+     "by_month": {
+      "2024-11": -22.4,
+      "2024-12": -45.6,
+      "2025-01": -26.4,
+      "2025-02": -34.2,
+      "2025-03": -26.8,
+      "2025-04": -33.8,
+      "2025-05": -31.4,
+      "2025-06": -36.8,
+      "2025-07": -39.2,
+      "2025-08": 98.2,
+      "2025-09": -18.2,
+      "2025-10": -32.4
+     },
+     "found_per_ticket": 2.44,
+     "among_12_most_played": "164/364"
+    },
+    "top 5 musique, no odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 533.2,
+     "net": -194.8,
+     "roi": -0.268,
+     "hits": {
+      "BONUS_3": 22,
+      "BONUS_4SUR5": 42,
+      "DESORDRE": 2
+     },
+     "max_drawdown": -283.0,
+     "roi_without_top1": -0.449,
+     "roi_without_top3": -0.649,
+     "largest_returns": [
+      133.4,
+      131.6,
+      14.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6722,
+      0.2881
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.278
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.509
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": 0.807
+      }
+     },
+     "by_month": {
+      "2024-11": -35.8,
+      "2024-12": -28.6,
+      "2025-01": 95.0,
+      "2025-02": -34.2,
+      "2025-03": -35.6,
+      "2025-04": -46.0,
+      "2025-05": -34.4,
+      "2025-06": -34.0,
+      "2025-07": -44.0,
+      "2025-08": 75.4,
+      "2025-09": -32.2,
+      "2025-10": -40.4
+     },
+     "found_per_ticket": 2.38,
+     "among_12_most_played": "157/364"
+    },
+    "top 5 speed, no odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 933.6,
+     "net": 205.6,
+     "roi": 0.282,
+     "hits": {
+      "BONUS_3": 23,
+      "BONUS_4SUR5": 42,
+      "DESORDRE": 5
+     },
+     "max_drawdown": -204.6,
+     "roi_without_top1": -0.18,
+     "roi_without_top3": -0.542,
+     "largest_returns": [
+      338.0,
+      133.4,
+      131.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5327,
+      1.4976
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": 0.967
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.373
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": 0.807
+      }
+     },
+     "by_month": {
+      "2024-11": -7.4,
+      "2024-12": -17.8,
+      "2025-01": 95.0,
+      "2025-02": -34.2,
+      "2025-03": 295.2,
+      "2025-04": -43.2,
+      "2025-05": -42.0,
+      "2025-06": -31.6,
+      "2025-07": -50.0,
+      "2025-08": 87.6,
+      "2025-09": -12.2,
+      "2025-10": -33.8
+     },
+     "found_per_ticket": 2.45,
+     "among_12_most_played": "166/364"
+    },
+    "top 5 morning pack, no odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 413.0,
+     "net": -315.0,
+     "roi": -0.433,
+     "hits": {
+      "BONUS_3": 27,
+      "BONUS_4SUR5": 47,
+      "DESORDRE": 3
+     },
+     "max_drawdown": -321.0,
+     "roi_without_top1": -0.459,
+     "roi_without_top3": -0.506,
+     "largest_returns": [
+      20.2,
+      18.6,
+      17.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5587,
+      -0.2978
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.366
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.441
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.621
+      }
+     },
+     "by_month": {
+      "2024-11": -10.0,
+      "2024-12": -43.2,
+      "2025-01": -29.4,
+      "2025-02": -19.2,
+      "2025-03": -32.2,
+      "2025-04": -33.6,
+      "2025-05": -18.8,
+      "2025-06": -31.6,
+      "2025-07": -38.4,
+      "2025-08": -12.6,
+      "2025-09": -24.4,
+      "2025-10": -21.6
+     },
+     "found_per_ticket": 2.47,
+     "among_12_most_played": "170/364"
+    },
+    "top 5 memory, with odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 330.6,
+     "net": -397.4,
+     "roi": -0.546,
+     "hits": {
+      "BONUS_4SUR5": 45,
+      "BONUS_3": 30,
+      "DESORDRE": 5
+     },
+     "max_drawdown": -404.0,
+     "roi_without_top1": -0.561,
+     "roi_without_top3": -0.591,
+     "largest_returns": [
+      12.0,
+      11.8,
+      11.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6593,
+      -0.4271
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.639
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.464
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.586
+      }
+     },
+     "by_month": {
+      "2024-11": -26.4,
+      "2024-12": -43.0,
+      "2025-01": -2.8,
+      "2025-02": -49.2,
+      "2025-03": -17.8,
+      "2025-04": -47.2,
+      "2025-05": -40.6,
+      "2025-06": -21.4,
+      "2025-07": -44.6,
+      "2025-08": -49.0,
+      "2025-09": -23.8,
+      "2025-10": -31.6
+     },
+     "found_per_ticket": 2.56,
+     "among_12_most_played": "332/364"
+    },
+    "top 5 field, with odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 342.6,
+     "net": -385.4,
+     "roi": -0.529,
+     "hits": {
+      "BONUS_4SUR5": 43,
+      "BONUS_3": 29,
+      "DESORDRE": 5
+     },
+     "max_drawdown": -392.0,
+     "roi_without_top1": -0.556,
+     "roi_without_top3": -0.594,
+     "largest_returns": [
+      20.2,
+      17.2,
+      12.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6408,
+      -0.4133
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.64
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.435
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.562
+      }
+     },
+     "by_month": {
+      "2024-11": -37.0,
+      "2024-12": -32.8,
+      "2025-01": -18.4,
+      "2025-02": -44.4,
+      "2025-03": -15.4,
+      "2025-04": -38.6,
+      "2025-05": -47.2,
+      "2025-06": -15.2,
+      "2025-07": -44.4,
+      "2025-08": -28.0,
+      "2025-09": -33.4,
+      "2025-10": -30.6
+     },
+     "found_per_ticket": 2.57,
+     "among_12_most_played": "326/364"
+    },
+    "top 5 musique, with odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 344.6,
+     "net": -383.4,
+     "roi": -0.527,
+     "hits": {
+      "BONUS_4SUR5": 46,
+      "BONUS_3": 30,
+      "DESORDRE": 5
+     },
+     "max_drawdown": -390.0,
+     "roi_without_top1": -0.542,
+     "roi_without_top3": -0.571,
+     "largest_returns": [
+      12.0,
+      11.8,
+      11.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6422,
+      -0.4052
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.555
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.472
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.664
+      }
+     },
+     "by_month": {
+      "2024-11": -37.0,
+      "2024-12": -39.8,
+      "2025-01": -6.0,
+      "2025-02": -49.2,
+      "2025-03": -7.6,
+      "2025-04": -42.8,
+      "2025-05": -46.4,
+      "2025-06": -17.2,
+      "2025-07": -38.8,
+      "2025-08": -49.0,
+      "2025-09": -18.0,
+      "2025-10": -31.6
+     },
+     "found_per_ticket": 2.55,
+     "among_12_most_played": "329/364"
+    },
+    "top 5 speed, with odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 332.0,
+     "net": -396.0,
+     "roi": -0.544,
+     "hits": {
+      "BONUS_4SUR5": 49,
+      "BONUS_3": 29,
+      "DESORDRE": 4
+     },
+     "max_drawdown": -402.6,
+     "roi_without_top1": -0.559,
+     "roi_without_top3": -0.588,
+     "largest_returns": [
+      12.0,
+      11.4,
+      11.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6496,
+      -0.4303
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.628
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.45
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.664
+      }
+     },
+     "by_month": {
+      "2024-11": -37.0,
+      "2024-12": -34.8,
+      "2025-01": -2.8,
+      "2025-02": -49.2,
+      "2025-03": -18.2,
+      "2025-04": -42.8,
+      "2025-05": -42.6,
+      "2025-06": -21.4,
+      "2025-07": -39.0,
+      "2025-08": -49.0,
+      "2025-09": -27.6,
+      "2025-10": -31.6
+     },
+     "found_per_ticket": 2.55,
+     "among_12_most_played": "331/364"
+    },
+    "top 5 morning pack, with odds": {
+     "races": 364,
+     "bets": 364,
+     "staked": 728.0,
+     "returned": 329.2,
+     "net": -398.8,
+     "roi": -0.548,
+     "hits": {
+      "BONUS_4SUR5": 41,
+      "BONUS_3": 28,
+      "DESORDRE": 5
+     },
+     "max_drawdown": -405.4,
+     "roi_without_top1": -0.574,
+     "roi_without_top3": -0.604,
+     "largest_returns": [
+      20.2,
+      12.0,
+      11.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6581,
+      -0.4281
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 141,
+       "roi": -0.6
+      },
+      "TROT": {
+       "bets": 181,
+       "roi": -0.486
+      },
+      "OBSTACLE": {
+       "bets": 42,
+       "roi": -0.64
+      }
+     },
+     "by_month": {
+      "2024-11": -30.2,
+      "2024-12": -38.0,
+      "2025-01": -10.6,
+      "2025-02": -49.2,
+      "2025-03": -12.0,
+      "2025-04": -50.4,
+      "2025-05": -43.4,
+      "2025-06": -26.0,
+      "2025-07": -45.0,
+      "2025-08": -32.4,
+      "2025-09": -35.8,
+      "2025-10": -25.8
+     },
+     "found_per_ticket": 2.55,
+     "among_12_most_played": "305/364"
+    }
+   },
+   "betting_differences": {
+    "top 5 prod, with odds minus favourites (T-30)": {
+     "net_eur_per_race": 0.024,
+     "ci95": [
+      -0.124,
+      0.1911
+     ]
+    },
+    "top 5 memory, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.347,
+     "ci95": [
+      -1.1758,
+      0.1749
+     ]
+    },
+    "top 5 field, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.213,
+     "ci95": [
+      -0.9913,
+      0.2497
+     ]
+    },
+    "top 5 musique, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.064,
+     "ci95": [
+      -0.26,
+      0.1141
+     ]
+    },
+    "top 5 speed, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": 1.036,
+     "ci95": [
+      0.0115,
+      2.9489
+     ]
+    },
+    "top 5 morning pack, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.394,
+     "ci95": [
+      -1.5181,
+      0.4171
+     ]
+    },
+    "top 5 memory, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": 0.015,
+     "ci95": [
+      -0.0701,
+      0.0967
+     ]
+    },
+    "top 5 field, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": 0.048,
+     "ci95": [
+      -0.1158,
+      0.2265
+     ]
+    },
+    "top 5 musique, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": 0.053,
+     "ci95": [
+      -0.0255,
+      0.1452
+     ]
+    },
+    "top 5 speed, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": 0.019,
+     "ci95": [
+      -0.0621,
+      0.092
+     ]
+    },
+    "top 5 morning pack, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": 0.011,
+     "ci95": [
+      -0.1447,
+      0.1794
+     ]
+    }
+   }
+  },
+  "validation 2026-02..05": {
+   "races": 119,
+   "from": "2026-02-01",
+   "to": "2026-05-31",
+   "races_by_family": {
+    "PLAT": 48,
+    "TROT": 55,
+    "OBSTACLE": 16
+   },
+   "prediction": {
+    "uniform": {
+     "races": 119,
+     "ll_top5_order": -12.824,
+     "win_logloss": 2.7138,
+     "top5_brier": 0.2214,
+     "found": 1.67,
+     "ece_top5": 0.001,
+     "ece_win": 0.0
+    },
+    "market raw (T-30)": {
+     "races": 119,
+     "ll_top5_order": -11.7045,
+     "win_logloss": 2.2611,
+     "top5_brier": 0.1917,
+     "found": 2.73,
+     "ece_top5": 0.0262,
+     "ece_win": 0.0112
+    },
+    "market fitted (T-30)": {
+     "races": 119,
+     "ll_top5_order": -11.6362,
+     "win_logloss": 2.2281,
+     "top5_brier": 0.1915,
+     "found": 2.73,
+     "ece_top5": 0.0276,
+     "ece_win": 0.0077
+    },
+    "prod, no odds": {
+     "races": 119,
+     "ll_top5_order": -12.0195,
+     "win_logloss": 2.4461,
+     "top5_brier": 0.1993,
+     "found": 2.44,
+     "ece_top5": 0.0313,
+     "ece_win": 0.0073
+    },
+    "prod, with odds": {
+     "races": 119,
+     "ll_top5_order": -11.6156,
+     "win_logloss": 2.2245,
+     "top5_brier": 0.191,
+     "found": 2.66,
+     "ece_top5": 0.0198,
+     "ece_win": 0.0095
+    },
+    "memory, no odds": {
+     "races": 119,
+     "ll_top5_order": -12.0046,
+     "win_logloss": 2.4399,
+     "top5_brier": 0.1994,
+     "found": 2.4,
+     "ece_top5": 0.0135,
+     "ece_win": 0.0057
+    },
+    "field, no odds": {
+     "races": 119,
+     "ll_top5_order": -12.0185,
+     "win_logloss": 2.437,
+     "top5_brier": 0.1997,
+     "found": 2.42,
+     "ece_top5": 0.0294,
+     "ece_win": 0.012
+    },
+    "musique, no odds": {
+     "races": 119,
+     "ll_top5_order": -12.0199,
+     "win_logloss": 2.4491,
+     "top5_brier": 0.1993,
+     "found": 2.44,
+     "ece_top5": 0.0289,
+     "ece_win": 0.0107
+    },
+    "speed, no odds": {
+     "races": 119,
+     "ll_top5_order": -12.0079,
+     "win_logloss": 2.4465,
+     "top5_brier": 0.1989,
+     "found": 2.49,
+     "ece_top5": 0.02,
+     "ece_win": 0.0081
+    },
+    "morning pack, no odds": {
+     "races": 119,
+     "ll_top5_order": -11.9992,
+     "win_logloss": 2.4371,
+     "top5_brier": 0.1995,
+     "found": 2.36,
+     "ece_top5": 0.0255,
+     "ece_win": 0.0054
+    },
+    "memory, with odds": {
+     "races": 119,
+     "ll_top5_order": -11.6182,
+     "win_logloss": 2.2261,
+     "top5_brier": 0.1912,
+     "found": 2.63,
+     "ece_top5": 0.0256,
+     "ece_win": 0.0079
+    },
+    "field, with odds": {
+     "races": 119,
+     "ll_top5_order": -11.6173,
+     "win_logloss": 2.2231,
+     "top5_brier": 0.1911,
+     "found": 2.6,
+     "ece_top5": 0.0254,
+     "ece_win": 0.0074
+    },
+    "musique, with odds": {
+     "races": 119,
+     "ll_top5_order": -11.6158,
+     "win_logloss": 2.2251,
+     "top5_brier": 0.1909,
+     "found": 2.67,
+     "ece_top5": 0.0162,
+     "ece_win": 0.0066
+    },
+    "speed, with odds": {
+     "races": 119,
+     "ll_top5_order": -11.6174,
+     "win_logloss": 2.2228,
+     "top5_brier": 0.1911,
+     "found": 2.66,
+     "ece_top5": 0.0199,
+     "ece_win": 0.0107
+    },
+    "morning pack, with odds": {
+     "races": 119,
+     "ll_top5_order": -11.6209,
+     "win_logloss": 2.2224,
+     "top5_brier": 0.1913,
+     "found": 2.62,
+     "ece_top5": 0.0225,
+     "ece_win": 0.0085
+    }
+   },
+   "prediction_by_family": {
+    "PLAT": {
+     "uniform": {
+      "races": 48,
+      "ll_top5_order": -13.0641,
+      "win_logloss": 2.7547,
+      "top5_brier": 0.2172,
+      "found": 1.67,
+      "ece_top5": 0.0013,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 48,
+      "ll_top5_order": -12.3163,
+      "win_logloss": 2.4652,
+      "top5_brier": 0.1983,
+      "found": 2.62,
+      "ece_top5": 0.0294,
+      "ece_win": 0.0087
+     },
+     "market fitted (T-30)": {
+      "races": 48,
+      "ll_top5_order": -12.2497,
+      "win_logloss": 2.4437,
+      "top5_brier": 0.1983,
+      "found": 2.62,
+      "ece_top5": 0.033,
+      "ece_win": 0.0141
+     },
+     "prod, no odds": {
+      "races": 48,
+      "ll_top5_order": -12.6852,
+      "win_logloss": 2.6211,
+      "top5_brier": 0.2072,
+      "found": 2.23,
+      "ece_top5": 0.0222,
+      "ece_win": 0.0096
+     },
+     "prod, with odds": {
+      "races": 48,
+      "ll_top5_order": -12.3033,
+      "win_logloss": 2.4451,
+      "top5_brier": 0.1985,
+      "found": 2.48,
+      "ece_top5": 0.0206,
+      "ece_win": 0.0104
+     },
+     "memory, no odds": {
+      "races": 48,
+      "ll_top5_order": -12.6535,
+      "win_logloss": 2.6053,
+      "top5_brier": 0.2069,
+      "found": 2.19,
+      "ece_top5": 0.0267,
+      "ece_win": 0.0182
+     },
+     "field, no odds": {
+      "races": 48,
+      "ll_top5_order": -12.6511,
+      "win_logloss": 2.6016,
+      "top5_brier": 0.2067,
+      "found": 2.23,
+      "ece_top5": 0.0203,
+      "ece_win": 0.0124
+     },
+     "musique, no odds": {
+      "races": 48,
+      "ll_top5_order": -12.7212,
+      "win_logloss": 2.6324,
+      "top5_brier": 0.2081,
+      "found": 2.25,
+      "ece_top5": 0.0284,
+      "ece_win": 0.0114
+     },
+     "speed, no odds": {
+      "races": 48,
+      "ll_top5_order": -12.693,
+      "win_logloss": 2.6251,
+      "top5_brier": 0.2074,
+      "found": 2.23,
+      "ece_top5": 0.0258,
+      "ece_win": 0.0103
+     },
+     "morning pack, no odds": {
+      "races": 48,
+      "ll_top5_order": -12.6679,
+      "win_logloss": 2.605,
+      "top5_brier": 0.2074,
+      "found": 2.15,
+      "ece_top5": 0.0296,
+      "ece_win": 0.0109
+     },
+     "memory, with odds": {
+      "races": 48,
+      "ll_top5_order": -12.3019,
+      "win_logloss": 2.444,
+      "top5_brier": 0.1987,
+      "found": 2.46,
+      "ece_top5": 0.0308,
+      "ece_win": 0.0148
+     },
+     "field, with odds": {
+      "races": 48,
+      "ll_top5_order": -12.2802,
+      "win_logloss": 2.434,
+      "top5_brier": 0.1982,
+      "found": 2.44,
+      "ece_top5": 0.0301,
+      "ece_win": 0.0082
+     },
+     "musique, with odds": {
+      "races": 48,
+      "ll_top5_order": -12.3093,
+      "win_logloss": 2.4469,
+      "top5_brier": 0.1986,
+      "found": 2.46,
+      "ece_top5": 0.0198,
+      "ece_win": 0.0096
+     },
+     "speed, with odds": {
+      "races": 48,
+      "ll_top5_order": -12.3077,
+      "win_logloss": 2.446,
+      "top5_brier": 0.1987,
+      "found": 2.52,
+      "ece_top5": 0.0228,
+      "ece_win": 0.0125
+     },
+     "morning pack, with odds": {
+      "races": 48,
+      "ll_top5_order": -12.2914,
+      "win_logloss": 2.4372,
+      "top5_brier": 0.1984,
+      "found": 2.42,
+      "ece_top5": 0.0172,
+      "ece_win": 0.0088
+     }
+    },
+    "TROT": {
+     "uniform": {
+      "races": 55,
+      "ll_top5_order": -12.6099,
+      "win_logloss": 2.6772,
+      "top5_brier": 0.2252,
+      "found": 1.65,
+      "ece_top5": 0.0,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 55,
+      "ll_top5_order": -10.9905,
+      "win_logloss": 1.9952,
+      "top5_brier": 0.1814,
+      "found": 2.91,
+      "ece_top5": 0.0353,
+      "ece_win": 0.0182
+     },
+     "market fitted (T-30)": {
+      "races": 55,
+      "ll_top5_order": -10.8971,
+      "win_logloss": 1.9373,
+      "top5_brier": 0.1813,
+      "found": 2.91,
+      "ece_top5": 0.0362,
+      "ece_win": 0.0134
+     },
+     "prod, no odds": {
+      "races": 55,
+      "ll_top5_order": -11.2521,
+      "win_logloss": 2.2123,
+      "top5_brier": 0.1874,
+      "found": 2.75,
+      "ece_top5": 0.057,
+      "ece_win": 0.0167
+     },
+     "prod, with odds": {
+      "races": 55,
+      "ll_top5_order": -10.798,
+      "win_logloss": 1.929,
+      "top5_brier": 0.1799,
+      "found": 2.87,
+      "ece_top5": 0.0293,
+      "ece_win": 0.0199
+     },
+     "memory, no odds": {
+      "races": 55,
+      "ll_top5_order": -11.2288,
+      "win_logloss": 2.2121,
+      "top5_brier": 0.1871,
+      "found": 2.71,
+      "ece_top5": 0.0246,
+      "ece_win": 0.0131
+     },
+     "field, no odds": {
+      "races": 55,
+      "ll_top5_order": -11.2889,
+      "win_logloss": 2.215,
+      "top5_brier": 0.1889,
+      "found": 2.69,
+      "ece_top5": 0.0431,
+      "ece_win": 0.0132
+     },
+     "musique, no odds": {
+      "races": 55,
+      "ll_top5_order": -11.223,
+      "win_logloss": 2.2068,
+      "top5_brier": 0.1866,
+      "found": 2.71,
+      "ece_top5": 0.0533,
+      "ece_win": 0.0177
+     },
+     "speed, no odds": {
+      "races": 55,
+      "ll_top5_order": -11.2229,
+      "win_logloss": 2.2095,
+      "top5_brier": 0.1865,
+      "found": 2.82,
+      "ece_top5": 0.0382,
+      "ece_win": 0.0173
+     },
+     "morning pack, no odds": {
+      "races": 55,
+      "ll_top5_order": -11.2179,
+      "win_logloss": 2.2086,
+      "top5_brier": 0.1871,
+      "found": 2.69,
+      "ece_top5": 0.0333,
+      "ece_win": 0.02
+     },
+     "memory, with odds": {
+      "races": 55,
+      "ll_top5_order": -10.7974,
+      "win_logloss": 1.9322,
+      "top5_brier": 0.18,
+      "found": 2.84,
+      "ece_top5": 0.0224,
+      "ece_win": 0.0161
+     },
+     "field, with odds": {
+      "races": 55,
+      "ll_top5_order": -10.8214,
+      "win_logloss": 1.9367,
+      "top5_brier": 0.1804,
+      "found": 2.82,
+      "ece_top5": 0.0246,
+      "ece_win": 0.0176
+     },
+     "musique, with odds": {
+      "races": 55,
+      "ll_top5_order": -10.7931,
+      "win_logloss": 1.9277,
+      "top5_brier": 0.1797,
+      "found": 2.91,
+      "ece_top5": 0.023,
+      "ece_win": 0.0194
+     },
+     "speed, with odds": {
+      "races": 55,
+      "ll_top5_order": -10.7985,
+      "win_logloss": 1.9249,
+      "top5_brier": 0.18,
+      "found": 2.84,
+      "ece_top5": 0.031,
+      "ece_win": 0.0213
+     },
+     "morning pack, with odds": {
+      "races": 55,
+      "ll_top5_order": -10.815,
+      "win_logloss": 1.9307,
+      "top5_brier": 0.1804,
+      "found": 2.89,
+      "ece_top5": 0.0311,
+      "ece_win": 0.0198
+     }
+    },
+    "OBSTACLE": {
+     "uniform": {
+      "races": 16,
+      "ll_top5_order": -12.8399,
+      "win_logloss": 2.7165,
+      "top5_brier": 0.2208,
+      "found": 1.75,
+      "ece_top5": 0.0033,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 16,
+      "ll_top5_order": -12.3236,
+      "win_logloss": 2.563,
+      "top5_brier": 0.2074,
+      "found": 2.44,
+      "ece_top5": 0.0595,
+      "ece_win": 0.0154
+     },
+     "market fitted (T-30)": {
+      "races": 16,
+      "ll_top5_order": -12.336,
+      "win_logloss": 2.5812,
+      "top5_brier": 0.2066,
+      "found": 2.44,
+      "ece_top5": 0.0342,
+      "ece_win": 0.0216
+     },
+     "prod, no odds": {
+      "races": 16,
+      "ll_top5_order": -12.6602,
+      "win_logloss": 2.7252,
+      "top5_brier": 0.2163,
+      "found": 2.0,
+      "ece_top5": 0.0364,
+      "ece_win": 0.0248
+     },
+     "prod, with odds": {
+      "races": 16,
+      "ll_top5_order": -12.363,
+      "win_logloss": 2.5786,
+      "top5_brier": 0.2065,
+      "found": 2.5,
+      "ece_top5": 0.0621,
+      "ece_win": 0.0214
+     },
+     "memory, no odds": {
+      "races": 16,
+      "ll_top5_order": -12.725,
+      "win_logloss": 2.7268,
+      "top5_brier": 0.2193,
+      "found": 1.94,
+      "ece_top5": 0.0386,
+      "ece_win": 0.0231
+     },
+     "field, no odds": {
+      "races": 16,
+      "ll_top5_order": -12.6291,
+      "win_logloss": 2.7061,
+      "top5_brier": 0.2161,
+      "found": 2.06,
+      "ece_top5": 0.0462,
+      "ece_win": 0.0286
+     },
+     "musique, no odds": {
+      "races": 16,
+      "ll_top5_order": -12.6557,
+      "win_logloss": 2.7316,
+      "top5_brier": 0.2161,
+      "found": 2.06,
+      "ece_top5": 0.0512,
+      "ece_win": 0.0326
+     },
+     "speed, no odds": {
+      "races": 16,
+      "ll_top5_order": -12.6513,
+      "win_logloss": 2.7252,
+      "top5_brier": 0.216,
+      "found": 2.12,
+      "ece_top5": 0.0244,
+      "ece_win": 0.0316
+     },
+     "morning pack, no odds": {
+      "races": 16,
+      "ll_top5_order": -12.6792,
+      "win_logloss": 2.7191,
+      "top5_brier": 0.2183,
+      "found": 1.88,
+      "ece_top5": 0.0528,
+      "ece_win": 0.0334
+     },
+     "memory, with odds": {
+      "races": 16,
+      "ll_top5_order": -12.389,
+      "win_logloss": 2.5824,
+      "top5_brier": 0.2078,
+      "found": 2.44,
+      "ece_top5": 0.0665,
+      "ece_win": 0.0207
+     },
+     "field, with odds": {
+      "races": 16,
+      "ll_top5_order": -12.3646,
+      "win_logloss": 2.5752,
+      "top5_brier": 0.2069,
+      "found": 2.31,
+      "ece_top5": 0.0396,
+      "ece_win": 0.0128
+     },
+     "musique, with odds": {
+      "races": 16,
+      "ll_top5_order": -12.3634,
+      "win_logloss": 2.582,
+      "top5_brier": 0.2066,
+      "found": 2.5,
+      "ece_top5": 0.0469,
+      "ece_win": 0.0216
+     },
+     "speed, with odds": {
+      "races": 16,
+      "ll_top5_order": -12.3619,
+      "win_logloss": 2.5775,
+      "top5_brier": 0.2065,
+      "found": 2.5,
+      "ece_top5": 0.0621,
+      "ece_win": 0.0214
+     },
+     "morning pack, with odds": {
+      "races": 16,
+      "ll_top5_order": -12.3798,
+      "win_logloss": 2.5806,
+      "top5_brier": 0.2077,
+      "found": 2.31,
+      "ece_top5": 0.0277,
+      "ece_win": 0.0214
+     }
+    }
+   },
+   "comparisons": {
+    "prod, with odds minus market fitted (T-30)": {
+     "mean": 0.0206,
+     "ci95": [
+      -0.0403,
+      0.0847
+     ],
+     "races": 119
+    },
+    "memory, no odds minus prod, no odds": {
+     "mean": 0.0149,
+     "ci95": [
+      -0.026,
+      0.0555
+     ],
+     "races": 119
+    },
+    "field, no odds minus prod, no odds": {
+     "mean": 0.001,
+     "ci95": [
+      -0.0467,
+      0.0447
+     ],
+     "races": 119
+    },
+    "musique, no odds minus prod, no odds": {
+     "mean": -0.0004,
+     "ci95": [
+      -0.0204,
+      0.023
+     ],
+     "races": 119
+    },
+    "speed, no odds minus prod, no odds": {
+     "mean": 0.0115,
+     "ci95": [
+      -0.0061,
+      0.0299
+     ],
+     "races": 119
+    },
+    "morning pack, no odds minus prod, no odds": {
+     "mean": 0.0202,
+     "ci95": [
+      -0.0304,
+      0.0695
+     ],
+     "races": 119
+    },
+    "memory, with odds minus prod, with odds": {
+     "mean": -0.0026,
+     "ci95": [
+      -0.0157,
+      0.0086
+     ],
+     "races": 119
+    },
+    "field, with odds minus prod, with odds": {
+     "mean": -0.0017,
+     "ci95": [
+      -0.0262,
+      0.0212
+     ],
+     "races": 119
+    },
+    "musique, with odds minus prod, with odds": {
+     "mean": -0.0002,
+     "ci95": [
+      -0.0103,
+      0.0099
+     ],
+     "races": 119
+    },
+    "speed, with odds minus prod, with odds": {
+     "mean": -0.0018,
+     "ci95": [
+      -0.0093,
+      0.0057
+     ],
+     "races": 119
+    },
+    "morning pack, with odds minus prod, with odds": {
+     "mean": -0.0053,
+     "ci95": [
+      -0.0348,
+      0.0223
+     ],
+     "races": 119
+    },
+    "prod, no odds minus market fitted (T-30)": {
+     "mean": -0.3833,
+     "ci95": [
+      -0.5957,
+      -0.1646
+     ],
+     "races": 119
+    }
+   },
+   "betting": {
+    "random": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 46.0,
+     "net": -192.0,
+     "roi": -0.807,
+     "hits": {
+      "BONUS_4SUR5": 3,
+      "BONUS_3": 2
+     },
+     "max_drawdown": -197.0,
+     "roi_without_top1": -0.866,
+     "roi_without_top3": -0.958,
+     "largest_returns": [
+      14.4,
+      12.8,
+      9.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.9513,
+      -0.6296
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.865
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.7
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-02": -41.2,
+      "2026-03": -56.0,
+      "2026-04": -60.0,
+      "2026-05": -34.8
+     },
+     "found_per_ticket": 1.78,
+     "among_12_most_played": "1/119"
+    },
+    "favourites (T-30)": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 151.8,
+     "net": -86.2,
+     "roi": -0.362,
+     "hits": {
+      "BONUS_4SUR5": 25,
+      "BONUS_3": 14,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -86.2,
+     "roi_without_top1": -0.388,
+     "roi_without_top3": -0.429,
+     "largest_returns": [
+      7.4,
+      6.2,
+      5.8
+     ],
+     "roi_ci95_week_blocks": [
+      -0.542,
+      -0.1516
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.296
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.267
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.887
+      }
+     },
+     "by_month": {
+      "2026-02": -34.4,
+      "2026-03": -19.0,
+      "2026-04": -15.4,
+      "2026-05": -17.4
+     },
+     "found_per_ticket": 2.76,
+     "among_12_most_played": "118/119"
+    },
+    "top 5 prod, no odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 64.4,
+     "net": -173.6,
+     "roi": -0.729,
+     "hits": {
+      "BONUS_4SUR5": 13,
+      "BONUS_3": 4,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -173.6,
+     "roi_without_top1": -0.765,
+     "roi_without_top3": -0.812,
+     "largest_returns": [
+      9.0,
+      6.2,
+      5.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.8381,
+      -0.6063
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.877
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.604
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.719
+      }
+     },
+     "by_month": {
+      "2026-02": -47.0,
+      "2026-03": -47.0,
+      "2026-04": -31.0,
+      "2026-05": -48.6
+     },
+     "found_per_ticket": 2.42,
+     "among_12_most_played": "48/119"
+    },
+    "top 5 prod, with odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 152.8,
+     "net": -85.2,
+     "roi": -0.358,
+     "hits": {
+      "BONUS_4SUR5": 20,
+      "BONUS_3": 12,
+      "DESORDRE": 2
+     },
+     "max_drawdown": -85.2,
+     "roi_without_top1": -0.414,
+     "roi_without_top3": -0.494,
+     "largest_returns": [
+      14.6,
+      11.4,
+      9.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5433,
+      -0.1581
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.533
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.251
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.2
+      }
+     },
+     "by_month": {
+      "2026-02": -17.0,
+      "2026-03": -20.8,
+      "2026-04": -24.6,
+      "2026-05": -22.8
+     },
+     "found_per_ticket": 2.68,
+     "among_12_most_played": "100/119"
+    },
+    "bon rapport (prod rule)": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 28.8,
+     "net": -209.2,
+     "roi": -0.879,
+     "hits": {
+      "BONUS_4SUR5": 2,
+      "BONUS_3": 2
+     },
+     "max_drawdown": -209.2,
+     "roi_without_top1": -0.922,
+     "roi_without_top3": -0.991,
+     "largest_returns": [
+      10.4,
+      9.0,
+      7.2
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      -0.7136
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.892
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.915
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.719
+      }
+     },
+     "by_month": {
+      "2026-02": -53.8,
+      "2026-03": -60.0,
+      "2026-04": -33.4,
+      "2026-05": -62.0
+     },
+     "found_per_ticket": 1.87,
+     "among_12_most_played": "0/119"
+    },
+    "expected value > 2 € (prod, with odds)": {
+     "races": 119,
+     "bets": 7,
+     "staked": 14.0,
+     "returned": 10.4,
+     "net": -3.6,
+     "roi": -0.257,
+     "hits": {
+      "BONUS_4SUR5": 2
+     },
+     "max_drawdown": -6.0,
+     "roi_without_top1": -0.733,
+     "roi_without_top3": -1.0,
+     "largest_returns": [
+      7.2,
+      3.2,
+      0.0
+     ],
+     "by_family": {
+      "TROT": {
+       "bets": 7,
+       "roi": -0.257
+      }
+     },
+     "by_month": {
+      "2026-03": -4.0,
+      "2026-04": 3.2,
+      "2026-05": -2.8
+     },
+     "found_per_ticket": 2.86,
+     "among_12_most_played": "0/7"
+    },
+    "top 5 memory, no odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 66.0,
+     "net": -172.0,
+     "roi": -0.723,
+     "hits": {
+      "BONUS_4SUR5": 13,
+      "BONUS_3": 5,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -172.0,
+     "roi_without_top1": -0.751,
+     "roi_without_top3": -0.797,
+     "largest_returns": [
+      7.2,
+      6.2,
+      5.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.8504,
+      -0.5796
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.935
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.456
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-02": -47.0,
+      "2026-03": -43.6,
+      "2026-04": -27.2,
+      "2026-05": -54.2
+     },
+     "found_per_ticket": 2.41,
+     "among_12_most_played": "51/119"
+    },
+    "top 5 field, no odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 96.6,
+     "net": -141.4,
+     "roi": -0.594,
+     "hits": {
+      "BONUS_4SUR5": 16,
+      "BONUS_3": 6,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -141.4,
+     "roi_without_top1": -0.64,
+     "roi_without_top3": -0.708,
+     "largest_returns": [
+      11.6,
+      11.0,
+      6.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.7184,
+      -0.469
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.756
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.435
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.656
+      }
+     },
+     "by_month": {
+      "2026-02": -30.8,
+      "2026-03": -38.6,
+      "2026-04": -23.4,
+      "2026-05": -48.6
+     },
+     "found_per_ticket": 2.41,
+     "among_12_most_played": "52/119"
+    },
+    "top 5 musique, no odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 62.4,
+     "net": -175.6,
+     "roi": -0.738,
+     "hits": {
+      "BONUS_3": 4,
+      "BONUS_4SUR5": 14,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -175.6,
+     "roi_without_top1": -0.765,
+     "roi_without_top3": -0.806,
+     "largest_returns": [
+      7.0,
+      5.6,
+      4.8
+     ],
+     "roi_ci95_week_blocks": [
+      -0.8505,
+      -0.6008
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.754
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.647
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-02": -47.0,
+      "2026-03": -40.0,
+      "2026-04": -38.8,
+      "2026-05": -49.8
+     },
+     "found_per_ticket": 2.44,
+     "among_12_most_played": "53/119"
+    },
+    "top 5 speed, no odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 76.8,
+     "net": -161.2,
+     "roi": -0.677,
+     "hits": {
+      "BONUS_4SUR5": 15,
+      "BONUS_3": 5,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -161.2,
+     "roi_without_top1": -0.713,
+     "roi_without_top3": -0.766,
+     "largest_returns": [
+      9.0,
+      7.4,
+      6.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.8277,
+      -0.5116
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.877
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.491
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.719
+      }
+     },
+     "by_month": {
+      "2026-02": -47.0,
+      "2026-03": -40.2,
+      "2026-04": -21.0,
+      "2026-05": -53.0
+     },
+     "found_per_ticket": 2.47,
+     "among_12_most_played": "51/119"
+    },
+    "top 5 morning pack, no odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 84.4,
+     "net": -153.6,
+     "roi": -0.645,
+     "hits": {
+      "BONUS_3": 8,
+      "BONUS_4SUR5": 13,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -153.6,
+     "roi_without_top1": -0.689,
+     "roi_without_top3": -0.741,
+     "largest_returns": [
+      11.0,
+      7.2,
+      6.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.7921,
+      -0.4858
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.971
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.358
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.656
+      }
+     },
+     "by_month": {
+      "2026-02": -42.4,
+      "2026-03": -43.6,
+      "2026-04": -13.4,
+      "2026-05": -54.2
+     },
+     "found_per_ticket": 2.36,
+     "among_12_most_played": "50/119"
+    },
+    "top 5 memory, with odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 124.8,
+     "net": -113.2,
+     "roi": -0.476,
+     "hits": {
+      "BONUS_4SUR5": 21,
+      "BONUS_3": 11,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -113.2,
+     "roi_without_top1": -0.503,
+     "roi_without_top3": -0.547,
+     "largest_returns": [
+      7.4,
+      6.2,
+      6.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6017,
+      -0.3512
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.46
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.424
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.7
+      }
+     },
+     "by_month": {
+      "2026-02": -41.4,
+      "2026-03": -25.6,
+      "2026-04": -28.6,
+      "2026-05": -17.6
+     },
+     "found_per_ticket": 2.65,
+     "among_12_most_played": "101/119"
+    },
+    "top 5 field, with odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 133.8,
+     "net": -104.2,
+     "roi": -0.438,
+     "hits": {
+      "BONUS_4SUR5": 22,
+      "BONUS_3": 11,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -104.2,
+     "roi_without_top1": -0.473,
+     "roi_without_top3": -0.526,
+     "largest_returns": [
+      9.4,
+      7.4,
+      7.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5755,
+      -0.2967
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.413
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.384
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.7
+      }
+     },
+     "by_month": {
+      "2026-02": -28.2,
+      "2026-03": -11.8,
+      "2026-04": -32.0,
+      "2026-05": -32.2
+     },
+     "found_per_ticket": 2.64,
+     "among_12_most_played": "101/119"
+    },
+    "top 5 musique, with odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 147.4,
+     "net": -90.6,
+     "roi": -0.381,
+     "hits": {
+      "BONUS_4SUR5": 20,
+      "DESORDRE": 2,
+      "BONUS_3": 11
+     },
+     "max_drawdown": -90.6,
+     "roi_without_top1": -0.437,
+     "roi_without_top3": -0.512,
+     "largest_returns": [
+      14.6,
+      11.4,
+      8.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5712,
+      -0.1666
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.554
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.282
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.2
+      }
+     },
+     "by_month": {
+      "2026-02": -22.6,
+      "2026-03": -24.8,
+      "2026-04": -17.2,
+      "2026-05": -26.0
+     },
+     "found_per_ticket": 2.68,
+     "among_12_most_played": "101/119"
+    },
+    "top 5 speed, with odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 134.6,
+     "net": -103.4,
+     "roi": -0.434,
+     "hits": {
+      "BONUS_4SUR5": 19,
+      "BONUS_3": 12,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -103.4,
+     "roi_without_top1": -0.492,
+     "roi_without_top3": -0.559,
+     "largest_returns": [
+      14.6,
+      11.4,
+      6.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.616,
+      -0.2387
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.592
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.365
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.2
+      }
+     },
+     "by_month": {
+      "2026-02": -32.4,
+      "2026-03": -21.0,
+      "2026-04": -27.2,
+      "2026-05": -22.8
+     },
+     "found_per_ticket": 2.66,
+     "among_12_most_played": "101/119"
+    },
+    "top 5 morning pack, with odds": {
+     "races": 119,
+     "bets": 119,
+     "staked": 238.0,
+     "returned": 127.8,
+     "net": -110.2,
+     "roi": -0.463,
+     "hits": {
+      "BONUS_4SUR5": 22,
+      "BONUS_3": 11,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -110.2,
+     "roi_without_top1": -0.49,
+     "roi_without_top3": -0.537,
+     "largest_returns": [
+      7.4,
+      7.0,
+      6.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5952,
+      -0.3267
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 48,
+       "roi": -0.465
+      },
+      "TROT": {
+       "bets": 55,
+       "roi": -0.393
+      },
+      "OBSTACLE": {
+       "bets": 16,
+       "roi": -0.7
+      }
+     },
+     "by_month": {
+      "2026-02": -37.6,
+      "2026-03": -11.0,
+      "2026-04": -29.4,
+      "2026-05": -32.2
+     },
+     "found_per_ticket": 2.64,
+     "among_12_most_played": "98/119"
+    }
+   },
+   "betting_differences": {
+    "top 5 prod, with odds minus favourites (T-30)": {
+     "net_eur_per_race": 0.008,
+     "ci95": [
+      -0.5334,
+      0.5127
+     ]
+    },
+    "top 5 memory, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": 0.013,
+     "ci95": [
+      -0.1246,
+      0.1554
+     ]
+    },
+    "top 5 field, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": 0.271,
+     "ci95": [
+      -0.0393,
+      0.5899
+     ]
+    },
+    "top 5 musique, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.017,
+     "ci95": [
+      -0.24,
+      0.2125
+     ]
+    },
+    "top 5 speed, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": 0.104,
+     "ci95": [
+      -0.0549,
+      0.2752
+     ]
+    },
+    "top 5 morning pack, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": 0.168,
+     "ci95": [
+      -0.0832,
+      0.4833
+     ]
+    },
+    "top 5 memory, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.235,
+     "ci95": [
+      -0.6048,
+      0.092
+     ]
+    },
+    "top 5 field, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.16,
+     "ci95": [
+      -0.5543,
+      0.2208
+     ]
+    },
+    "top 5 musique, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.045,
+     "ci95": [
+      -0.2746,
+      0.1776
+     ]
+    },
+    "top 5 speed, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.153,
+     "ci95": [
+      -0.3642,
+      0.0233
+     ]
+    },
+    "top 5 morning pack, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.21,
+     "ci95": [
+      -0.5899,
+      0.1393
+     ]
+    }
+   }
+  },
+  "test 2026-06..10": {
+   "races": 150,
+   "from": "2026-06-01",
+   "to": "2026-10-28",
+   "races_by_family": {
+    "PLAT": 68,
+    "TROT": 68,
+    "OBSTACLE": 14
+   },
+   "prediction": {
+    "uniform": {
+     "races": 150,
+     "ll_top5_order": -12.8964,
+     "win_logloss": 2.7261,
+     "top5_brier": 0.2202,
+     "found": 1.58,
+     "ece_top5": 0.0009,
+     "ece_win": 0.0
+    },
+    "market raw (T-30)": {
+     "races": 150,
+     "ll_top5_order": -11.9711,
+     "win_logloss": 2.313,
+     "top5_brier": 0.1962,
+     "found": 2.56,
+     "ece_top5": 0.0305,
+     "ece_win": 0.0089
+    },
+    "market fitted (T-30)": {
+     "races": 150,
+     "ll_top5_order": -11.853,
+     "win_logloss": 2.2927,
+     "top5_brier": 0.1955,
+     "found": 2.57,
+     "ece_top5": 0.0198,
+     "ece_win": 0.0098
+    },
+    "prod, no odds": {
+     "races": 150,
+     "ll_top5_order": -12.126,
+     "win_logloss": 2.4425,
+     "top5_brier": 0.201,
+     "found": 2.4,
+     "ece_top5": 0.0169,
+     "ece_win": 0.0051
+    },
+    "prod, with odds": {
+     "races": 150,
+     "ll_top5_order": -11.7749,
+     "win_logloss": 2.281,
+     "top5_brier": 0.1944,
+     "found": 2.56,
+     "ece_top5": 0.0176,
+     "ece_win": 0.0115
+    },
+    "memory, no odds": {
+     "races": 150,
+     "ll_top5_order": -12.0994,
+     "win_logloss": 2.4461,
+     "top5_brier": 0.2006,
+     "found": 2.4,
+     "ece_top5": 0.0162,
+     "ece_win": 0.0044
+    },
+    "field, no odds": {
+     "races": 150,
+     "ll_top5_order": -12.0692,
+     "win_logloss": 2.4248,
+     "top5_brier": 0.2005,
+     "found": 2.39,
+     "ece_top5": 0.0146,
+     "ece_win": 0.0042
+    },
+    "musique, no odds": {
+     "races": 150,
+     "ll_top5_order": -12.1108,
+     "win_logloss": 2.4454,
+     "top5_brier": 0.2005,
+     "found": 2.39,
+     "ece_top5": 0.0182,
+     "ece_win": 0.0092
+    },
+    "speed, no odds": {
+     "races": 150,
+     "ll_top5_order": -12.1098,
+     "win_logloss": 2.4159,
+     "top5_brier": 0.2013,
+     "found": 2.39,
+     "ece_top5": 0.0192,
+     "ece_win": 0.0061
+    },
+    "morning pack, no odds": {
+     "races": 150,
+     "ll_top5_order": -12.0442,
+     "win_logloss": 2.4153,
+     "top5_brier": 0.2003,
+     "found": 2.39,
+     "ece_top5": 0.0266,
+     "ece_win": 0.0034
+    },
+    "memory, with odds": {
+     "races": 150,
+     "ll_top5_order": -11.7805,
+     "win_logloss": 2.289,
+     "top5_brier": 0.1944,
+     "found": 2.56,
+     "ece_top5": 0.0195,
+     "ece_win": 0.0063
+    },
+    "field, with odds": {
+     "races": 150,
+     "ll_top5_order": -11.7755,
+     "win_logloss": 2.2825,
+     "top5_brier": 0.1944,
+     "found": 2.5,
+     "ece_top5": 0.0189,
+     "ece_win": 0.006
+    },
+    "musique, with odds": {
+     "races": 150,
+     "ll_top5_order": -11.7748,
+     "win_logloss": 2.2827,
+     "top5_brier": 0.1943,
+     "found": 2.55,
+     "ece_top5": 0.0221,
+     "ece_win": 0.0101
+    },
+    "speed, with odds": {
+     "races": 150,
+     "ll_top5_order": -11.778,
+     "win_logloss": 2.2801,
+     "top5_brier": 0.1945,
+     "found": 2.54,
+     "ece_top5": 0.0207,
+     "ece_win": 0.0131
+    },
+    "morning pack, with odds": {
+     "races": 150,
+     "ll_top5_order": -11.7854,
+     "win_logloss": 2.2894,
+     "top5_brier": 0.1946,
+     "found": 2.51,
+     "ece_top5": 0.0242,
+     "ece_win": 0.0073
+    }
+   },
+   "prediction_by_family": {
+    "PLAT": {
+     "uniform": {
+      "races": 68,
+      "ll_top5_order": -12.9848,
+      "win_logloss": 2.7411,
+      "top5_brier": 0.2189,
+      "found": 1.71,
+      "ece_top5": 0.0019,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 68,
+      "ll_top5_order": -12.3046,
+      "win_logloss": 2.4545,
+      "top5_brier": 0.2018,
+      "found": 2.47,
+      "ece_top5": 0.023,
+      "ece_win": 0.0064
+     },
+     "market fitted (T-30)": {
+      "races": 68,
+      "ll_top5_order": -12.2531,
+      "win_logloss": 2.4355,
+      "top5_brier": 0.2014,
+      "found": 2.49,
+      "ece_top5": 0.012,
+      "ece_win": 0.0056
+     },
+     "prod, no odds": {
+      "races": 68,
+      "ll_top5_order": -12.6017,
+      "win_logloss": 2.5791,
+      "top5_brier": 0.2078,
+      "found": 2.28,
+      "ece_top5": 0.0155,
+      "ece_win": 0.0056
+     },
+     "prod, with odds": {
+      "races": 68,
+      "ll_top5_order": -12.2283,
+      "win_logloss": 2.4274,
+      "top5_brier": 0.2005,
+      "found": 2.49,
+      "ece_top5": 0.0202,
+      "ece_win": 0.0125
+     },
+     "memory, no odds": {
+      "races": 68,
+      "ll_top5_order": -12.5432,
+      "win_logloss": 2.5628,
+      "top5_brier": 0.2073,
+      "found": 2.31,
+      "ece_top5": 0.0108,
+      "ece_win": 0.0065
+     },
+     "field, no odds": {
+      "races": 68,
+      "ll_top5_order": -12.5551,
+      "win_logloss": 2.5852,
+      "top5_brier": 0.2082,
+      "found": 2.25,
+      "ece_top5": 0.0179,
+      "ece_win": 0.0104
+     },
+     "musique, no odds": {
+      "races": 68,
+      "ll_top5_order": -12.5908,
+      "win_logloss": 2.5745,
+      "top5_brier": 0.2077,
+      "found": 2.24,
+      "ece_top5": 0.014,
+      "ece_win": 0.0081
+     },
+     "speed, no odds": {
+      "races": 68,
+      "ll_top5_order": -12.5877,
+      "win_logloss": 2.5801,
+      "top5_brier": 0.2075,
+      "found": 2.31,
+      "ece_top5": 0.0192,
+      "ece_win": 0.0069
+     },
+     "morning pack, no odds": {
+      "races": 68,
+      "ll_top5_order": -12.5035,
+      "win_logloss": 2.5647,
+      "top5_brier": 0.2071,
+      "found": 2.22,
+      "ece_top5": 0.0305,
+      "ece_win": 0.0054
+     },
+     "memory, with odds": {
+      "races": 68,
+      "ll_top5_order": -12.2374,
+      "win_logloss": 2.4345,
+      "top5_brier": 0.2007,
+      "found": 2.46,
+      "ece_top5": 0.0216,
+      "ece_win": 0.0076
+     },
+     "field, with odds": {
+      "races": 68,
+      "ll_top5_order": -12.2453,
+      "win_logloss": 2.4447,
+      "top5_brier": 0.201,
+      "found": 2.38,
+      "ece_top5": 0.0139,
+      "ece_win": 0.0074
+     },
+     "musique, with odds": {
+      "races": 68,
+      "ll_top5_order": -12.2236,
+      "win_logloss": 2.4212,
+      "top5_brier": 0.2005,
+      "found": 2.46,
+      "ece_top5": 0.0194,
+      "ece_win": 0.0085
+     },
+     "speed, with odds": {
+      "races": 68,
+      "ll_top5_order": -12.2268,
+      "win_logloss": 2.4282,
+      "top5_brier": 0.2005,
+      "found": 2.47,
+      "ece_top5": 0.0188,
+      "ece_win": 0.0127
+     },
+     "morning pack, with odds": {
+      "races": 68,
+      "ll_top5_order": -12.2433,
+      "win_logloss": 2.4379,
+      "top5_brier": 0.2011,
+      "found": 2.41,
+      "ece_top5": 0.0157,
+      "ece_win": 0.0084
+     }
+    },
+    "TROT": {
+     "uniform": {
+      "races": 68,
+      "ll_top5_order": -12.7988,
+      "win_logloss": 2.7095,
+      "top5_brier": 0.2218,
+      "found": 1.56,
+      "ece_top5": 0.0018,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 68,
+      "ll_top5_order": -11.5856,
+      "win_logloss": 2.1276,
+      "top5_brier": 0.1902,
+      "found": 2.66,
+      "ece_top5": 0.0476,
+      "ece_win": 0.0206
+     },
+     "market fitted (T-30)": {
+      "races": 68,
+      "ll_top5_order": -11.3785,
+      "win_logloss": 2.1019,
+      "top5_brier": 0.1888,
+      "found": 2.68,
+      "ece_top5": 0.0394,
+      "ece_win": 0.0177
+     },
+     "prod, no odds": {
+      "races": 68,
+      "ll_top5_order": -11.5414,
+      "win_logloss": 2.2383,
+      "top5_brier": 0.1923,
+      "found": 2.62,
+      "ece_top5": 0.0323,
+      "ece_win": 0.0165
+     },
+     "prod, with odds": {
+      "races": 68,
+      "ll_top5_order": -11.2285,
+      "win_logloss": 2.0783,
+      "top5_brier": 0.1868,
+      "found": 2.68,
+      "ece_top5": 0.0238,
+      "ece_win": 0.0142
+     },
+     "memory, no odds": {
+      "races": 68,
+      "ll_top5_order": -11.5423,
+      "win_logloss": 2.2569,
+      "top5_brier": 0.1922,
+      "found": 2.59,
+      "ece_top5": 0.027,
+      "ece_win": 0.0117
+     },
+     "field, no odds": {
+      "races": 68,
+      "ll_top5_order": -11.4903,
+      "win_logloss": 2.2046,
+      "top5_brier": 0.1916,
+      "found": 2.54,
+      "ece_top5": 0.0237,
+      "ece_win": 0.0093
+     },
+     "musique, no odds": {
+      "races": 68,
+      "ll_top5_order": -11.5097,
+      "win_logloss": 2.2401,
+      "top5_brier": 0.1911,
+      "found": 2.62,
+      "ece_top5": 0.0356,
+      "ece_win": 0.014
+     },
+     "speed, no odds": {
+      "races": 68,
+      "ll_top5_order": -11.5197,
+      "win_logloss": 2.1785,
+      "top5_brier": 0.1933,
+      "found": 2.57,
+      "ece_top5": 0.031,
+      "ece_win": 0.0119
+     },
+     "morning pack, no odds": {
+      "races": 68,
+      "ll_top5_order": -11.4759,
+      "win_logloss": 2.1892,
+      "top5_brier": 0.1922,
+      "found": 2.6,
+      "ece_top5": 0.0411,
+      "ece_win": 0.011
+     },
+     "memory, with odds": {
+      "races": 68,
+      "ll_top5_order": -11.2301,
+      "win_logloss": 2.0857,
+      "top5_brier": 0.1869,
+      "found": 2.71,
+      "ece_top5": 0.0277,
+      "ece_win": 0.0116
+     },
+     "field, with odds": {
+      "races": 68,
+      "ll_top5_order": -11.2213,
+      "win_logloss": 2.0677,
+      "top5_brier": 0.1868,
+      "found": 2.65,
+      "ece_top5": 0.0301,
+      "ece_win": 0.012
+     },
+     "musique, with odds": {
+      "races": 68,
+      "ll_top5_order": -11.2297,
+      "win_logloss": 2.0828,
+      "top5_brier": 0.1867,
+      "found": 2.69,
+      "ece_top5": 0.0288,
+      "ece_win": 0.016
+     },
+     "speed, with odds": {
+      "races": 68,
+      "ll_top5_order": -11.2366,
+      "win_logloss": 2.0754,
+      "top5_brier": 0.1871,
+      "found": 2.65,
+      "ece_top5": 0.0278,
+      "ece_win": 0.0147
+     },
+     "morning pack, with odds": {
+      "races": 68,
+      "ll_top5_order": -11.2399,
+      "win_logloss": 2.0816,
+      "top5_brier": 0.1871,
+      "found": 2.66,
+      "ece_top5": 0.0375,
+      "ece_win": 0.0135
+     }
+    },
+    "OBSTACLE": {
+     "uniform": {
+      "races": 14,
+      "ll_top5_order": -12.9408,
+      "win_logloss": 2.7336,
+      "top5_brier": 0.2192,
+      "found": 1.07,
+      "ece_top5": 0.0,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 14,
+      "ll_top5_order": -12.2234,
+      "win_logloss": 2.526,
+      "top5_brier": 0.1991,
+      "found": 2.5,
+      "ece_top5": 0.0541,
+      "ece_win": 0.0314
+     },
+     "market fitted (T-30)": {
+      "races": 14,
+      "ll_top5_order": -12.2148,
+      "win_logloss": 2.5258,
+      "top5_brier": 0.1992,
+      "found": 2.5,
+      "ece_top5": 0.0508,
+      "ece_win": 0.0139
+     },
+     "prod, no odds": {
+      "races": 14,
+      "ll_top5_order": -12.6544,
+      "win_logloss": 2.7706,
+      "top5_brier": 0.2103,
+      "found": 1.93,
+      "ece_top5": 0.0595,
+      "ece_win": 0.0296
+     },
+     "prod, with odds": {
+      "races": 14,
+      "ll_top5_order": -12.2265,
+      "win_logloss": 2.5542,
+      "top5_brier": 0.201,
+      "found": 2.36,
+      "ece_top5": 0.0384,
+      "ece_win": 0.0241
+     },
+     "memory, no odds": {
+      "races": 14,
+      "ll_top5_order": -12.6502,
+      "win_logloss": 2.7982,
+      "top5_brier": 0.2092,
+      "found": 1.93,
+      "ece_top5": 0.0213,
+      "ece_win": 0.0321
+     },
+     "field, no odds": {
+      "races": 14,
+      "ll_top5_order": -12.5209,
+      "win_logloss": 2.7151,
+      "top5_brier": 0.2061,
+      "found": 2.36,
+      "ece_top5": 0.0385,
+      "ece_win": 0.0299
+     },
+     "musique, no odds": {
+      "races": 14,
+      "ll_top5_order": -12.6991,
+      "win_logloss": 2.8154,
+      "top5_brier": 0.211,
+      "found": 2.0,
+      "ece_top5": 0.0654,
+      "ece_win": 0.0302
+     },
+     "speed, no odds": {
+      "races": 14,
+      "ll_top5_order": -12.6539,
+      "win_logloss": 2.7713,
+      "top5_brier": 0.2104,
+      "found": 1.93,
+      "ece_top5": 0.0514,
+      "ece_win": 0.0292
+     },
+     "morning pack, no odds": {
+      "races": 14,
+      "ll_top5_order": -12.5739,
+      "win_logloss": 2.7875,
+      "top5_brier": 0.2066,
+      "found": 2.14,
+      "ece_top5": 0.0246,
+      "ece_win": 0.0292
+     },
+     "memory, with odds": {
+      "races": 14,
+      "ll_top5_order": -12.2345,
+      "win_logloss": 2.5696,
+      "top5_brier": 0.2007,
+      "found": 2.36,
+      "ece_top5": 0.0282,
+      "ece_win": 0.0297
+     },
+     "field, with odds": {
+      "races": 14,
+      "ll_top5_order": -12.1854,
+      "win_logloss": 2.5385,
+      "top5_brier": 0.1993,
+      "found": 2.36,
+      "ece_top5": 0.0368,
+      "ece_win": 0.0138
+     },
+     "musique, with odds": {
+      "races": 14,
+      "ll_top5_order": -12.2428,
+      "win_logloss": 2.5815,
+      "top5_brier": 0.2007,
+      "found": 2.36,
+      "ece_top5": 0.0429,
+      "ece_win": 0.0251
+     },
+     "speed, with odds": {
+      "races": 14,
+      "ll_top5_order": -12.2272,
+      "win_logloss": 2.5553,
+      "top5_brier": 0.201,
+      "found": 2.36,
+      "ece_top5": 0.0384,
+      "ece_win": 0.0324
+     },
+     "morning pack, with odds": {
+      "races": 14,
+      "ll_top5_order": -12.211,
+      "win_logloss": 2.577,
+      "top5_brier": 0.1991,
+      "found": 2.29,
+      "ece_top5": 0.0292,
+      "ece_win": 0.0155
+     }
+    }
+   },
+   "comparisons": {
+    "prod, with odds minus market fitted (T-30)": {
+     "mean": 0.0781,
+     "ci95": [
+      0.0301,
+      0.1261
+     ],
+     "races": 150
+    },
+    "memory, no odds minus prod, no odds": {
+     "mean": 0.0266,
+     "ci95": [
+      -0.0152,
+      0.0767
+     ],
+     "races": 150
+    },
+    "field, no odds minus prod, no odds": {
+     "mean": 0.0568,
+     "ci95": [
+      -0.0232,
+      0.1757
+     ],
+     "races": 150
+    },
+    "musique, no odds minus prod, no odds": {
+     "mean": 0.0151,
+     "ci95": [
+      -0.0011,
+      0.0308
+     ],
+     "races": 150
+    },
+    "speed, no odds minus prod, no odds": {
+     "mean": 0.0162,
+     "ci95": [
+      -0.0302,
+      0.0674
+     ],
+     "races": 150
+    },
+    "morning pack, no odds minus prod, no odds": {
+     "mean": 0.0818,
+     "ci95": [
+      -0.0156,
+      0.204
+     ],
+     "races": 150
+    },
+    "memory, with odds minus prod, with odds": {
+     "mean": -0.0056,
+     "ci95": [
+      -0.0165,
+      0.0056
+     ],
+     "races": 150
+    },
+    "field, with odds minus prod, with odds": {
+     "mean": -0.0006,
+     "ci95": [
+      -0.0294,
+      0.0299
+     ],
+     "races": 150
+    },
+    "musique, with odds minus prod, with odds": {
+     "mean": 0.0001,
+     "ci95": [
+      -0.0075,
+      0.0078
+     ],
+     "races": 150
+    },
+    "speed, with odds minus prod, with odds": {
+     "mean": -0.003,
+     "ci95": [
+      -0.0226,
+      0.0161
+     ],
+     "races": 150
+    },
+    "morning pack, with odds minus prod, with odds": {
+     "mean": -0.0105,
+     "ci95": [
+      -0.0544,
+      0.0355
+     ],
+     "races": 150
+    },
+    "prod, no odds minus market fitted (T-30)": {
+     "mean": -0.2729,
+     "ci95": [
+      -0.4854,
+      -0.1012
+     ],
+     "races": 150
+    }
+   },
+   "betting": {
+    "random": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 15.0,
+     "net": -285.0,
+     "roi": -0.95,
+     "hits": {
+      "BONUS_3": 1
+     },
+     "max_drawdown": -285.0,
+     "roi_without_top1": -1.0,
+     "roi_without_top3": -1.0,
+     "largest_returns": [
+      15.0,
+      0.0,
+      0.0
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      -0.8459
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.89
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -1.0
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-06": -60.0,
+      "2026-07": -62.0,
+      "2026-08": -47.0,
+      "2026-09": -60.0,
+      "2026-10": -56.0
+     },
+     "found_per_ticket": 1.63,
+     "among_12_most_played": "0/150"
+    },
+    "favourites (T-30)": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 171.4,
+     "net": -128.6,
+     "roi": -0.429,
+     "hits": {
+      "BONUS_4SUR5": 18,
+      "BONUS_3": 15,
+      "DESORDRE": 2
+     },
+     "max_drawdown": -160.2,
+     "roi_without_top1": -0.551,
+     "roi_without_top3": -0.635,
+     "largest_returns": [
+      37.6,
+      19.4,
+      7.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6624,
+      -0.1145
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.378
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.434
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.65
+      }
+     },
+     "by_month": {
+      "2026-06": -16.6,
+      "2026-07": -34.0,
+      "2026-08": -56.2,
+      "2026-09": -20.6,
+      "2026-10": -1.2
+     },
+     "found_per_ticket": 2.55,
+     "among_12_most_played": "149/150"
+    },
+    "top 5 prod, no odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 136.8,
+     "net": -163.2,
+     "roi": -0.544,
+     "hits": {
+      "BONUS_4SUR5": 15,
+      "BONUS_3": 9
+     },
+     "max_drawdown": -163.2,
+     "roi_without_top1": -0.636,
+     "roi_without_top3": -0.695,
+     "largest_returns": [
+      28.4,
+      9.4,
+      9.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.7384,
+      -0.3039
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.394
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.6
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-06": -41.2,
+      "2026-07": 2.6,
+      "2026-08": -37.0,
+      "2026-09": -40.6,
+      "2026-10": -47.0
+     },
+     "found_per_ticket": 2.39,
+     "among_12_most_played": "68/150"
+    },
+    "top 5 prod, with odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 190.6,
+     "net": -109.4,
+     "roi": -0.365,
+     "hits": {
+      "BONUS_4SUR5": 19,
+      "BONUS_3": 14,
+      "DESORDRE": 2
+     },
+     "max_drawdown": -146.8,
+     "roi_without_top1": -0.487,
+     "roi_without_top3": -0.578,
+     "largest_returns": [
+      37.6,
+      19.4,
+      9.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6208,
+      -0.0321
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.254
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.487
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.307
+      }
+     },
+     "by_month": {
+      "2026-06": -13.2,
+      "2026-07": -35.6,
+      "2026-08": -47.0,
+      "2026-09": -22.0,
+      "2026-10": 8.4
+     },
+     "found_per_ticket": 2.55,
+     "among_12_most_played": "137/150"
+    },
+    "bon rapport (prod rule)": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 74.4,
+     "net": -225.6,
+     "roi": -0.752,
+     "hits": {
+      "BONUS_4SUR5": 4,
+      "BONUS_3": 5
+     },
+     "max_drawdown": -227.4,
+     "roi_without_top1": -0.815,
+     "roi_without_top3": -0.897,
+     "largest_returns": [
+      19.2,
+      15.0,
+      9.8
+     ],
+     "roi_ci95_week_blocks": [
+      -0.9393,
+      -0.4935
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.676
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.776
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-06": -56.4,
+      "2026-07": -19.4,
+      "2026-08": -47.0,
+      "2026-09": -60.0,
+      "2026-10": -42.8
+     },
+     "found_per_ticket": 1.93,
+     "among_12_most_played": "0/150"
+    },
+    "expected value > 2 € (prod, with odds)": {
+     "races": 150,
+     "bets": 6,
+     "staked": 12.0,
+     "returned": 0.0,
+     "net": -12.0,
+     "roi": -1.0,
+     "hits": {},
+     "max_drawdown": -12.0,
+     "roi_without_top1": -1.0,
+     "roi_without_top3": -1.0,
+     "largest_returns": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 1,
+       "roi": -1.0
+      },
+      "TROT": {
+       "bets": 5,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-06": -2.0,
+      "2026-07": -4.0,
+      "2026-08": -2.0,
+      "2026-09": -2.0,
+      "2026-10": -2.0
+     },
+     "found_per_ticket": 1.83,
+     "among_12_most_played": "2/6"
+    },
+    "top 5 memory, no odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 121.0,
+     "net": -179.0,
+     "roi": -0.597,
+     "hits": {
+      "BONUS_3": 14,
+      "BONUS_4SUR5": 11
+     },
+     "max_drawdown": -179.0,
+     "roi_without_top1": -0.689,
+     "roi_without_top3": -0.743,
+     "largest_returns": [
+      28.4,
+      9.4,
+      7.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.7887,
+      -0.339
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.546
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.585
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.9
+      }
+     },
+     "by_month": {
+      "2026-06": -42.2,
+      "2026-07": -8.6,
+      "2026-08": -45.6,
+      "2026-09": -38.4,
+      "2026-10": -44.2
+     },
+     "found_per_ticket": 2.42,
+     "among_12_most_played": "79/150"
+    },
+    "top 5 field, no odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 85.8,
+     "net": -214.2,
+     "roi": -0.714,
+     "hits": {
+      "BONUS_4SUR5": 13,
+      "BONUS_3": 8
+     },
+     "max_drawdown": -214.2,
+     "roi_without_top1": -0.756,
+     "roi_without_top3": -0.799,
+     "largest_returns": [
+      13.2,
+      7.6,
+      5.8
+     ],
+     "roi_ci95_week_blocks": [
+      -0.8107,
+      -0.6
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.719
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.671
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.9
+      }
+     },
+     "by_month": {
+      "2026-06": -48.2,
+      "2026-07": -37.0,
+      "2026-08": -49.6,
+      "2026-09": -35.2,
+      "2026-10": -44.2
+     },
+     "found_per_ticket": 2.41,
+     "among_12_most_played": "76/150"
+    },
+    "top 5 musique, no odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 136.2,
+     "net": -163.8,
+     "roi": -0.546,
+     "hits": {
+      "BONUS_4SUR5": 15,
+      "BONUS_3": 9
+     },
+     "max_drawdown": -163.8,
+     "roi_without_top1": -0.638,
+     "roi_without_top3": -0.697,
+     "largest_returns": [
+      28.4,
+      9.4,
+      9.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.7479,
+      -0.2922
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.46
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.538
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-06": -48.0,
+      "2026-07": 4.6,
+      "2026-08": -29.6,
+      "2026-09": -40.4,
+      "2026-10": -50.4
+     },
+     "found_per_ticket": 2.35,
+     "among_12_most_played": "75/150"
+    },
+    "top 5 speed, no odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 160.0,
+     "net": -140.0,
+     "roi": -0.467,
+     "hits": {
+      "BONUS_4SUR5": 15,
+      "BONUS_3": 9,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -140.0,
+     "roi_without_top1": -0.558,
+     "roi_without_top3": -0.66,
+     "largest_returns": [
+      28.4,
+      22.2,
+      9.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6909,
+      -0.2039
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.394
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.429
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-06": -53.2,
+      "2026-07": 24.4,
+      "2026-08": -29.6,
+      "2026-09": -35.2,
+      "2026-10": -46.4
+     },
+     "found_per_ticket": 2.41,
+     "among_12_most_played": "72/150"
+    },
+    "top 5 morning pack, no odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 140.0,
+     "net": -160.0,
+     "roi": -0.533,
+     "hits": {
+      "BONUS_4SUR5": 18,
+      "BONUS_3": 9
+     },
+     "max_drawdown": -160.0,
+     "roi_without_top1": -0.626,
+     "roi_without_top3": -0.691,
+     "largest_returns": [
+      28.4,
+      13.2,
+      7.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.7039,
+      -0.3136
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.46
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.531
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.9
+      }
+     },
+     "by_month": {
+      "2026-06": -46.4,
+      "2026-07": -6.0,
+      "2026-08": -42.2,
+      "2026-09": -35.4,
+      "2026-10": -30.0
+     },
+     "found_per_ticket": 2.38,
+     "among_12_most_played": "76/150"
+    },
+    "top 5 memory, with odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 202.0,
+     "net": -98.0,
+     "roi": -0.327,
+     "hits": {
+      "BONUS_4SUR5": 20,
+      "BONUS_3": 16,
+      "DESORDRE": 2
+     },
+     "max_drawdown": -135.4,
+     "roi_without_top1": -0.448,
+     "roi_without_top3": -0.539,
+     "largest_returns": [
+      37.6,
+      19.4,
+      9.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5948,
+      0.0197
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.219
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.387
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.557
+      }
+     },
+     "by_month": {
+      "2026-06": -16.4,
+      "2026-07": -32.6,
+      "2026-08": -43.2,
+      "2026-09": -21.6,
+      "2026-10": 15.8
+     },
+     "found_per_ticket": 2.57,
+     "among_12_most_played": "137/150"
+    },
+    "top 5 field, with odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 140.2,
+     "net": -159.8,
+     "roi": -0.533,
+     "hits": {
+      "BONUS_4SUR5": 17,
+      "BONUS_3": 14,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -163.4,
+     "roi_without_top1": -0.595,
+     "roi_without_top3": -0.654,
+     "largest_returns": [
+      19.4,
+      9.6,
+      9.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6994,
+      -0.3493
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.569
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.491
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.557
+      }
+     },
+     "by_month": {
+      "2026-06": -23.2,
+      "2026-07": -34.8,
+      "2026-08": -49.4,
+      "2026-09": -27.0,
+      "2026-10": -25.4
+     },
+     "found_per_ticket": 2.51,
+     "among_12_most_played": "138/150"
+    },
+    "top 5 musique, with odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 178.4,
+     "net": -121.6,
+     "roi": -0.405,
+     "hits": {
+      "BONUS_4SUR5": 17,
+      "BONUS_3": 14,
+      "DESORDRE": 2
+     },
+     "max_drawdown": -153.2,
+     "roi_without_top1": -0.528,
+     "roi_without_top3": -0.619,
+     "largest_returns": [
+      37.6,
+      19.4,
+      9.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6448,
+      -0.076
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.278
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.482
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.65
+      }
+     },
+     "by_month": {
+      "2026-06": -13.2,
+      "2026-07": -35.0,
+      "2026-08": -54.0,
+      "2026-09": -25.6,
+      "2026-10": 6.2
+     },
+     "found_per_ticket": 2.55,
+     "among_12_most_played": "138/150"
+    },
+    "top 5 speed, with odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 188.4,
+     "net": -111.6,
+     "roi": -0.372,
+     "hits": {
+      "BONUS_4SUR5": 18,
+      "BONUS_3": 15,
+      "DESORDRE": 2
+     },
+     "max_drawdown": -149.0,
+     "roi_without_top1": -0.494,
+     "roi_without_top3": -0.586,
+     "largest_returns": [
+      37.6,
+      19.4,
+      9.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.626,
+      -0.0349
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.254
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.503
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.307
+      }
+     },
+     "by_month": {
+      "2026-06": -13.2,
+      "2026-07": -34.8,
+      "2026-08": -51.6,
+      "2026-09": -20.4,
+      "2026-10": 8.4
+     },
+     "found_per_ticket": 2.53,
+     "among_12_most_played": "137/150"
+    },
+    "top 5 morning pack, with odds": {
+     "races": 150,
+     "bets": 150,
+     "staked": 300.0,
+     "returned": 149.2,
+     "net": -150.8,
+     "roi": -0.503,
+     "hits": {
+      "BONUS_4SUR5": 19,
+      "BONUS_3": 15,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -150.8,
+     "roi_without_top1": -0.564,
+     "roi_without_top3": -0.616,
+     "largest_returns": [
+      19.4,
+      9.4,
+      7.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6678,
+      -0.3273
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 68,
+       "roi": -0.465
+      },
+      "TROT": {
+       "bets": 68,
+       "roi": -0.459
+      },
+      "OBSTACLE": {
+       "bets": 14,
+       "roi": -0.9
+      }
+     },
+     "by_month": {
+      "2026-06": -16.4,
+      "2026-07": -29.4,
+      "2026-08": -50.4,
+      "2026-09": -27.0,
+      "2026-10": -27.6
+     },
+     "found_per_ticket": 2.51,
+     "among_12_most_played": "137/150"
+    }
+   },
+   "betting_differences": {
+    "top 5 prod, with odds minus favourites (T-30)": {
+     "net_eur_per_race": 0.128,
+     "ci95": [
+      -0.1427,
+      0.408
+     ]
+    },
+    "top 5 memory, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.105,
+     "ci95": [
+      -0.3247,
+      0.0867
+     ]
+    },
+    "top 5 field, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.34,
+     "ci95": [
+      -0.8001,
+      -0.0078
+     ]
+    },
+    "top 5 musique, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.004,
+     "ci95": [
+      -0.1707,
+      0.1584
+     ]
+    },
+    "top 5 speed, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": 0.155,
+     "ci95": [
+      -0.1254,
+      0.5466
+     ]
+    },
+    "top 5 morning pack, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": 0.021,
+     "ci95": [
+      -0.208,
+      0.2425
+     ]
+    },
+    "top 5 memory, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": 0.076,
+     "ci95": [
+      -0.1039,
+      0.2688
+     ]
+    },
+    "top 5 field, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.336,
+     "ci95": [
+      -0.8887,
+      0.013
+     ]
+    },
+    "top 5 musique, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.081,
+     "ci95": [
+      -0.2649,
+      0.1
+     ]
+    },
+    "top 5 speed, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.015,
+     "ci95": [
+      -0.0986,
+      0.0589
+     ]
+    },
+    "top 5 morning pack, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.276,
+     "ci95": [
+      -0.8718,
+      0.113
+     ]
+    }
+   }
+  },
+  "fresh 2026-10-29..": {
+   "races": 18,
+   "from": "2026-10-29",
+   "to": "2026-11-15",
+   "races_by_family": {
+    "PLAT": 6,
+    "TROT": 11,
+    "OBSTACLE": 1
+   },
+   "prediction": {
+    "uniform": {
+     "races": 18,
+     "ll_top5_order": -13.1586,
+     "win_logloss": 2.7715,
+     "top5_brier": 0.2147,
+     "found": 1.39,
+     "ece_top5": 0.0076,
+     "ece_win": 0.0
+    },
+    "market raw (T-30)": {
+     "races": 18,
+     "ll_top5_order": -11.2054,
+     "win_logloss": 1.9343,
+     "top5_brier": 0.1682,
+     "found": 2.78,
+     "ece_top5": 0.0397,
+     "ece_win": 0.0384
+    },
+    "market fitted (T-30)": {
+     "races": 18,
+     "ll_top5_order": -11.0998,
+     "win_logloss": 1.8181,
+     "top5_brier": 0.1689,
+     "found": 2.83,
+     "ece_top5": 0.0484,
+     "ece_win": 0.0283
+    },
+    "prod, no odds": {
+     "races": 18,
+     "ll_top5_order": -11.636,
+     "win_logloss": 2.215,
+     "top5_brier": 0.177,
+     "found": 2.72,
+     "ece_top5": 0.0829,
+     "ece_win": 0.0153
+    },
+    "prod, with odds": {
+     "races": 18,
+     "ll_top5_order": -10.9807,
+     "win_logloss": 1.8942,
+     "top5_brier": 0.1666,
+     "found": 2.89,
+     "ece_top5": 0.0316,
+     "ece_win": 0.0192
+    },
+    "memory, no odds": {
+     "races": 18,
+     "ll_top5_order": -11.5153,
+     "win_logloss": 2.1628,
+     "top5_brier": 0.174,
+     "found": 2.83,
+     "ece_top5": 0.0845,
+     "ece_win": 0.0235
+    },
+    "field, no odds": {
+     "races": 18,
+     "ll_top5_order": -11.5745,
+     "win_logloss": 2.1809,
+     "top5_brier": 0.1757,
+     "found": 2.89,
+     "ece_top5": 0.0614,
+     "ece_win": 0.0281
+    },
+    "musique, no odds": {
+     "races": 18,
+     "ll_top5_order": -11.6672,
+     "win_logloss": 2.2053,
+     "top5_brier": 0.1781,
+     "found": 2.83,
+     "ece_top5": 0.0608,
+     "ece_win": 0.0284
+    },
+    "speed, no odds": {
+     "races": 18,
+     "ll_top5_order": -11.5094,
+     "win_logloss": 2.1451,
+     "top5_brier": 0.1745,
+     "found": 2.83,
+     "ece_top5": 0.0518,
+     "ece_win": 0.0211
+    },
+    "morning pack, no odds": {
+     "races": 18,
+     "ll_top5_order": -11.4322,
+     "win_logloss": 2.0876,
+     "top5_brier": 0.1732,
+     "found": 2.94,
+     "ece_top5": 0.0592,
+     "ece_win": 0.0335
+    },
+    "memory, with odds": {
+     "races": 18,
+     "ll_top5_order": -10.9522,
+     "win_logloss": 1.8844,
+     "top5_brier": 0.1658,
+     "found": 2.94,
+     "ece_top5": 0.0421,
+     "ece_win": 0.019
+    },
+    "field, with odds": {
+     "races": 18,
+     "ll_top5_order": -10.9483,
+     "win_logloss": 1.8738,
+     "top5_brier": 0.1658,
+     "found": 2.89,
+     "ece_top5": 0.0362,
+     "ece_win": 0.0236
+    },
+    "musique, with odds": {
+     "races": 18,
+     "ll_top5_order": -10.9955,
+     "win_logloss": 1.8873,
+     "top5_brier": 0.1672,
+     "found": 2.94,
+     "ece_top5": 0.0306,
+     "ece_win": 0.0186
+    },
+    "speed, with odds": {
+     "races": 18,
+     "ll_top5_order": -10.9713,
+     "win_logloss": 1.8877,
+     "top5_brier": 0.1665,
+     "found": 2.78,
+     "ece_top5": 0.0318,
+     "ece_win": 0.0208
+    },
+    "morning pack, with odds": {
+     "races": 18,
+     "ll_top5_order": -10.9552,
+     "win_logloss": 1.8627,
+     "top5_brier": 0.1664,
+     "found": 2.83,
+     "ece_top5": 0.0397,
+     "ece_win": 0.0207
+    }
+   },
+   "prediction_by_family": {
+    "PLAT": {
+     "uniform": {
+      "races": 6,
+      "ll_top5_order": -13.1071,
+      "win_logloss": 2.7618,
+      "top5_brier": 0.2167,
+      "found": 1.33,
+      "ece_top5": 0.0,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 6,
+      "ll_top5_order": -11.7422,
+      "win_logloss": 2.1607,
+      "top5_brier": 0.1826,
+      "found": 2.33,
+      "ece_top5": 0.0638,
+      "ece_win": 0.0425
+     },
+     "market fitted (T-30)": {
+      "races": 6,
+      "ll_top5_order": -11.6378,
+      "win_logloss": 2.0687,
+      "top5_brier": 0.1833,
+      "found": 2.33,
+      "ece_top5": 0.0593,
+      "ece_win": 0.0439
+     },
+     "prod, no odds": {
+      "races": 6,
+      "ll_top5_order": -11.6257,
+      "win_logloss": 2.0881,
+      "top5_brier": 0.1796,
+      "found": 2.83,
+      "ece_top5": 0.0953,
+      "ece_win": 0.0441
+     },
+     "prod, with odds": {
+      "races": 6,
+      "ll_top5_order": -11.4999,
+      "win_logloss": 2.0374,
+      "top5_brier": 0.1798,
+      "found": 2.5,
+      "ece_top5": 0.0527,
+      "ece_win": 0.0487
+     },
+     "memory, no odds": {
+      "races": 6,
+      "ll_top5_order": -11.5589,
+      "win_logloss": 2.0392,
+      "top5_brier": 0.1781,
+      "found": 2.67,
+      "ece_top5": 0.1047,
+      "ece_win": 0.0399
+     },
+     "field, no odds": {
+      "races": 6,
+      "ll_top5_order": -11.6065,
+      "win_logloss": 2.0048,
+      "top5_brier": 0.1808,
+      "found": 3.0,
+      "ece_top5": 0.0946,
+      "ece_win": 0.0445
+     },
+     "musique, no odds": {
+      "races": 6,
+      "ll_top5_order": -11.6301,
+      "win_logloss": 2.0463,
+      "top5_brier": 0.1807,
+      "found": 2.83,
+      "ece_top5": 0.0899,
+      "ece_win": 0.0641
+     },
+     "speed, no odds": {
+      "races": 6,
+      "ll_top5_order": -11.6532,
+      "win_logloss": 2.1025,
+      "top5_brier": 0.1802,
+      "found": 3.0,
+      "ece_top5": 0.0971,
+      "ece_win": 0.0463
+     },
+     "morning pack, no odds": {
+      "races": 6,
+      "ll_top5_order": -11.5871,
+      "win_logloss": 1.964,
+      "top5_brier": 0.181,
+      "found": 3.0,
+      "ece_top5": 0.0959,
+      "ece_win": 0.0408
+     },
+     "memory, with odds": {
+      "races": 6,
+      "ll_top5_order": -11.4886,
+      "win_logloss": 2.0293,
+      "top5_brier": 0.1795,
+      "found": 2.67,
+      "ece_top5": 0.052,
+      "ece_win": 0.0459
+     },
+     "field, with odds": {
+      "races": 6,
+      "ll_top5_order": -11.5077,
+      "win_logloss": 1.9934,
+      "top5_brier": 0.1806,
+      "found": 2.67,
+      "ece_top5": 0.052,
+      "ece_win": 0.0391
+     },
+     "musique, with odds": {
+      "races": 6,
+      "ll_top5_order": -11.5141,
+      "win_logloss": 2.0304,
+      "top5_brier": 0.1804,
+      "found": 2.67,
+      "ece_top5": 0.0529,
+      "ece_win": 0.0448
+     },
+     "speed, with odds": {
+      "races": 6,
+      "ll_top5_order": -11.5072,
+      "win_logloss": 2.0423,
+      "top5_brier": 0.18,
+      "found": 2.5,
+      "ece_top5": 0.0528,
+      "ece_win": 0.0489
+     },
+     "morning pack, with odds": {
+      "races": 6,
+      "ll_top5_order": -11.5176,
+      "win_logloss": 1.9891,
+      "top5_brier": 0.181,
+      "found": 2.67,
+      "ece_top5": 0.0528,
+      "ece_win": 0.0391
+     }
+    },
+    "TROT": {
+     "uniform": {
+      "races": 11,
+      "ll_top5_order": -13.2197,
+      "win_logloss": 2.7826,
+      "top5_brier": 0.213,
+      "found": 1.45,
+      "ece_top5": 0.0123,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 11,
+      "ll_top5_order": -10.7606,
+      "win_logloss": 1.771,
+      "top5_brier": 0.1549,
+      "found": 3.0,
+      "ece_top5": 0.0612,
+      "ece_win": 0.047
+     },
+     "market fitted (T-30)": {
+      "races": 11,
+      "ll_top5_order": -10.6744,
+      "win_logloss": 1.6349,
+      "top5_brier": 0.156,
+      "found": 3.09,
+      "ece_top5": 0.0656,
+      "ece_win": 0.0327
+     },
+     "prod, no odds": {
+      "races": 11,
+      "ll_top5_order": -11.5885,
+      "win_logloss": 2.2754,
+      "top5_brier": 0.1717,
+      "found": 2.73,
+      "ece_top5": 0.0985,
+      "ece_win": 0.0178
+     },
+     "prod, with odds": {
+      "races": 11,
+      "ll_top5_order": -10.5515,
+      "win_logloss": 1.772,
+      "top5_brier": 0.1538,
+      "found": 3.18,
+      "ece_top5": 0.0437,
+      "ece_win": 0.0327
+     },
+     "memory, no odds": {
+      "races": 11,
+      "ll_top5_order": -11.4211,
+      "win_logloss": 2.2295,
+      "top5_brier": 0.1671,
+      "found": 3.0,
+      "ece_top5": 0.09,
+      "ece_win": 0.0194
+     },
+     "field, no odds": {
+      "races": 11,
+      "ll_top5_order": -11.5039,
+      "win_logloss": 2.2297,
+      "top5_brier": 0.1698,
+      "found": 2.91,
+      "ece_top5": 0.0633,
+      "ece_win": 0.0439
+     },
+     "musique, no odds": {
+      "races": 11,
+      "ll_top5_order": -11.6349,
+      "win_logloss": 2.2848,
+      "top5_brier": 0.1728,
+      "found": 2.91,
+      "ece_top5": 0.0638,
+      "ece_win": 0.0176
+     },
+     "speed, no odds": {
+      "races": 11,
+      "ll_top5_order": -11.3678,
+      "win_logloss": 2.1551,
+      "top5_brier": 0.1673,
+      "found": 2.82,
+      "ece_top5": 0.0615,
+      "ece_win": 0.0323
+     },
+     "morning pack, no odds": {
+      "races": 11,
+      "ll_top5_order": -11.2799,
+      "win_logloss": 2.1222,
+      "top5_brier": 0.1651,
+      "found": 3.0,
+      "ece_top5": 0.0775,
+      "ece_win": 0.0306
+     },
+     "memory, with odds": {
+      "races": 11,
+      "ll_top5_order": -10.5124,
+      "win_logloss": 1.7646,
+      "top5_brier": 0.1526,
+      "found": 3.18,
+      "ece_top5": 0.0529,
+      "ece_win": 0.0325
+     },
+     "field, with odds": {
+      "races": 11,
+      "ll_top5_order": -10.499,
+      "win_logloss": 1.7459,
+      "top5_brier": 0.1526,
+      "found": 3.09,
+      "ece_top5": 0.0419,
+      "ece_win": 0.0381
+     },
+     "musique, with odds": {
+      "races": 11,
+      "ll_top5_order": -10.5665,
+      "win_logloss": 1.7669,
+      "top5_brier": 0.1544,
+      "found": 3.18,
+      "ece_top5": 0.0414,
+      "ece_win": 0.0305
+     },
+     "speed, with odds": {
+      "races": 11,
+      "ll_top5_order": -10.5324,
+      "win_logloss": 1.7592,
+      "top5_brier": 0.1537,
+      "found": 3.0,
+      "ece_top5": 0.0502,
+      "ece_win": 0.026
+     },
+     "morning pack, with odds": {
+      "races": 11,
+      "ll_top5_order": -10.5052,
+      "win_logloss": 1.7381,
+      "top5_brier": 0.1533,
+      "found": 3.0,
+      "ece_top5": 0.0498,
+      "ece_win": 0.029
+     }
+    },
+    "OBSTACLE": {
+     "uniform": {
+      "races": 1,
+      "ll_top5_order": -12.7949,
+      "win_logloss": 2.7081,
+      "top5_brier": 0.2219,
+      "found": 1.0,
+      "ece_top5": 0.0,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 1,
+      "ll_top5_order": -12.877,
+      "win_logloss": 2.3724,
+      "top5_brier": 0.2269,
+      "found": 3.0,
+      "ece_top5": 0.1585,
+      "ece_win": 0.0608
+     },
+     "market fitted (T-30)": {
+      "races": 1,
+      "ll_top5_order": -12.5519,
+      "win_logloss": 2.3301,
+      "top5_brier": 0.2246,
+      "found": 3.0,
+      "ece_top5": 0.1906,
+      "ece_win": 0.0876
+     },
+     "prod, no odds": {
+      "races": 1,
+      "ll_top5_order": -12.22,
+      "win_logloss": 2.3114,
+      "top5_brier": 0.2199,
+      "found": 2.0,
+      "ece_top5": 0.1328,
+      "ece_win": 0.0553
+     },
+     "prod, with odds": {
+      "races": 1,
+      "ll_top5_order": -12.5874,
+      "win_logloss": 2.3804,
+      "top5_brier": 0.2278,
+      "found": 2.0,
+      "ece_top5": 0.1945,
+      "ece_win": 0.0936
+     },
+     "memory, no odds": {
+      "races": 1,
+      "ll_top5_order": -12.2894,
+      "win_logloss": 2.1716,
+      "top5_brier": 0.225,
+      "found": 2.0,
+      "ece_top5": 0.1355,
+      "ece_win": 0.1048
+     },
+     "field, no odds": {
+      "races": 1,
+      "ll_top5_order": -12.1591,
+      "win_logloss": 2.7015,
+      "top5_brier": 0.21,
+      "found": 2.0,
+      "ece_top5": 0.1939,
+      "ece_win": 0.0883
+     },
+     "musique, no odds": {
+      "races": 1,
+      "ll_top5_order": -12.2439,
+      "win_logloss": 2.2842,
+      "top5_brier": 0.2208,
+      "found": 2.0,
+      "ece_top5": 0.1561,
+      "ece_win": 0.0912
+     },
+     "speed, no odds": {
+      "races": 1,
+      "ll_top5_order": -12.2036,
+      "win_logloss": 2.2909,
+      "top5_brier": 0.219,
+      "found": 2.0,
+      "ece_top5": 0.1109,
+      "ece_win": 0.1042
+     },
+     "morning pack, no odds": {
+      "races": 1,
+      "ll_top5_order": -12.1775,
+      "win_logloss": 2.4477,
+      "top5_brier": 0.2147,
+      "found": 2.0,
+      "ece_top5": 0.1037,
+      "ece_win": 0.0776
+     },
+     "memory, with odds": {
+      "races": 1,
+      "ll_top5_order": -12.5708,
+      "win_logloss": 2.3335,
+      "top5_brier": 0.2287,
+      "found": 2.0,
+      "ece_top5": 0.1932,
+      "ece_win": 0.0798
+     },
+     "field, with odds": {
+      "races": 1,
+      "ll_top5_order": -12.5351,
+      "win_logloss": 2.5632,
+      "top5_brier": 0.2215,
+      "found": 2.0,
+      "ece_top5": 0.1134,
+      "ece_win": 0.0779
+     },
+     "musique, with odds": {
+      "races": 1,
+      "ll_top5_order": -12.6024,
+      "win_logloss": 2.3515,
+      "top5_brier": 0.2294,
+      "found": 2.0,
+      "ece_top5": 0.2775,
+      "ece_win": 0.0809
+     },
+     "speed, with odds": {
+      "races": 1,
+      "ll_top5_order": -12.5849,
+      "win_logloss": 2.3729,
+      "top5_brier": 0.2276,
+      "found": 2.0,
+      "ece_top5": 0.195,
+      "ece_win": 0.0934
+     },
+     "morning pack, with odds": {
+      "races": 1,
+      "ll_top5_order": -12.5302,
+      "win_logloss": 2.4744,
+      "top5_brier": 0.2236,
+      "found": 2.0,
+      "ece_top5": 0.123,
+      "ece_win": 0.0714
+     }
+    }
+   },
+   "comparisons": {
+    "prod, with odds minus market fitted (T-30)": {
+     "mean": 0.1191,
+     "ci95": [
+      0.0401,
+      0.2501
+     ],
+     "races": 18
+    },
+    "memory, no odds minus prod, no odds": {
+     "mean": 0.1208,
+     "ci95": [
+      0.0863,
+      0.1494
+     ],
+     "races": 18
+    },
+    "field, no odds minus prod, no odds": {
+     "mean": 0.0615,
+     "ci95": [
+      -0.0528,
+      0.1866
+     ],
+     "races": 18
+    },
+    "musique, no odds minus prod, no odds": {
+     "mean": -0.0311,
+     "ci95": [
+      -0.0813,
+      -0.013
+     ],
+     "races": 18
+    },
+    "speed, no odds minus prod, no odds": {
+     "mean": 0.1266,
+     "ci95": [
+      0.075,
+      0.1806
+     ],
+     "races": 18
+    },
+    "morning pack, no odds minus prod, no odds": {
+     "mean": 0.2038,
+     "ci95": [
+      0.1167,
+      0.258
+     ],
+     "races": 18
+    },
+    "memory, with odds minus prod, with odds": {
+     "mean": 0.0285,
+     "ci95": [
+      0.0241,
+      0.0341
+     ],
+     "races": 18
+    },
+    "field, with odds minus prod, with odds": {
+     "mean": 0.0324,
+     "ci95": [
+      -0.0185,
+      0.0774
+     ],
+     "races": 18
+    },
+    "musique, with odds minus prod, with odds": {
+     "mean": -0.0148,
+     "ci95": [
+      -0.035,
+      0.0029
+     ],
+     "races": 18
+    },
+    "speed, with odds minus prod, with odds": {
+     "mean": 0.0094,
+     "ci95": [
+      -0.054,
+      0.0458
+     ],
+     "races": 18
+    },
+    "morning pack, with odds minus prod, with odds": {
+     "mean": 0.0255,
+     "ci95": [
+      -0.0443,
+      0.0612
+     ],
+     "races": 18
+    },
+    "prod, no odds minus market fitted (T-30)": {
+     "mean": -0.5362,
+     "ci95": [
+      -0.6714,
+      -0.3836
+     ],
+     "races": 18
+    }
+   },
+   "betting": {
+    "random": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 0.0,
+     "net": -36.0,
+     "roi": -1.0,
+     "hits": {},
+     "max_drawdown": -36.0,
+     "roi_without_top1": -1.0,
+     "roi_without_top3": -1.0,
+     "largest_returns": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      -1.0
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -1.0
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -1.0
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": -30.0
+     },
+     "found_per_ticket": 1.44,
+     "among_12_most_played": "0/18"
+    },
+    "favourites (T-30)": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 26.8,
+     "net": -9.2,
+     "roi": -0.256,
+     "hits": {
+      "BONUS_4SUR5": 5,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -14.0,
+     "roi_without_top1": -0.476,
+     "roi_without_top3": -0.72,
+     "largest_returns": [
+      9.0,
+      5.2,
+      4.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.675,
+      0.0857
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.767
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": 0.091
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -3.4,
+      "2026-11": -5.8
+     },
+     "found_per_ticket": 2.83,
+     "among_12_most_played": "18/18"
+    },
+    "top 5 prod, no odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 27.6,
+     "net": -8.4,
+     "roi": -0.233,
+     "hits": {
+      "BONUS_4SUR5": 3,
+      "BONUS_3": 1,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -13.2,
+     "roi_without_top1": -0.453,
+     "roi_without_top3": -0.76,
+     "largest_returns": [
+      9.0,
+      5.8,
+      5.6
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      0.0571
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.05
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -0.264
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": -2.4
+     },
+     "found_per_ticket": 2.72,
+     "among_12_most_played": "6/18"
+    },
+    "top 5 prod, with odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 26.4,
+     "net": -9.6,
+     "roi": -0.267,
+     "hits": {
+      "BONUS_4SUR5": 5,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -14.0,
+     "roi_without_top1": -0.488,
+     "roi_without_top3": -0.72,
+     "largest_returns": [
+      9.0,
+      4.8,
+      4.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.3571,
+      -0.075
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.767
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": 0.073
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -3.4,
+      "2026-11": -6.2
+     },
+     "found_per_ticket": 2.89,
+     "among_12_most_played": "18/18"
+    },
+    "bon rapport (prod rule)": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 17.4,
+     "net": -18.6,
+     "roi": -0.517,
+     "hits": {
+      "BONUS_4SUR5": 1,
+      "BONUS_3": 1
+     },
+     "max_drawdown": -18.6,
+     "roi_without_top1": -0.829,
+     "roi_without_top3": -1.0,
+     "largest_returns": [
+      11.6,
+      5.8,
+      0.0
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      -0.1714
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": 0.45
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -1.0
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": -12.6
+     },
+     "found_per_ticket": 2.11,
+     "among_12_most_played": "0/18"
+    },
+    "expected value > 2 € (prod, with odds)": {
+     "races": 18,
+     "bets": 2,
+     "staked": 4.0,
+     "returned": 0.0,
+     "net": -4.0,
+     "roi": -1.0,
+     "hits": {},
+     "max_drawdown": -4.0,
+     "roi_without_top1": -1.0,
+     "roi_without_top3": null,
+     "largest_returns": [
+      0.0,
+      0.0
+     ],
+     "by_family": {
+      "TROT": {
+       "bets": 2,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-11": -4.0
+     },
+     "found_per_ticket": 2.0,
+     "among_12_most_played": "0/2"
+    },
+    "top 5 memory, no odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 22.8,
+     "net": -13.2,
+     "roi": -0.367,
+     "hits": {
+      "BONUS_3": 2,
+      "BONUS_4SUR5": 1,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -18.0,
+     "roi_without_top1": -0.594,
+     "roi_without_top3": -0.873,
+     "largest_returns": [
+      9.0,
+      5.8,
+      4.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.7,
+      0.0571
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.517
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -0.227
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": -7.2
+     },
+     "found_per_ticket": 2.83,
+     "among_12_most_played": "8/18"
+    },
+    "top 5 field, no odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 24.8,
+     "net": -11.2,
+     "roi": -0.311,
+     "hits": {
+      "BONUS_4SUR5": 3,
+      "BONUS_3": 1,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -16.0,
+     "roi_without_top1": -0.535,
+     "roi_without_top3": -0.807,
+     "largest_returns": [
+      9.0,
+      5.8,
+      4.2
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      0.0571
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.283
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -0.264
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": -5.2
+     },
+     "found_per_ticket": 2.89,
+     "among_12_most_played": "9/18"
+    },
+    "top 5 musique, no odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 32.8,
+     "net": -3.2,
+     "roi": -0.089,
+     "hits": {
+      "BONUS_4SUR5": 4,
+      "BONUS_3": 1,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -10.0,
+     "roi_without_top1": -0.3,
+     "roi_without_top3": -0.587,
+     "largest_returns": [
+      9.0,
+      5.8,
+      5.6
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      0.2857
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.05
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -0.027
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": 2.8
+     },
+     "found_per_ticket": 2.72,
+     "among_12_most_played": "8/18"
+    },
+    "top 5 speed, no odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 24.6,
+     "net": -11.4,
+     "roi": -0.317,
+     "hits": {
+      "BONUS_4SUR5": 2,
+      "BONUS_3": 1,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -16.2,
+     "roi_without_top1": -0.541,
+     "roi_without_top3": -0.86,
+     "largest_returns": [
+      9.0,
+      5.8,
+      5.6
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      0.0571
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.05
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -0.4
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": -5.4
+     },
+     "found_per_ticket": 2.78,
+     "among_12_most_played": "9/18"
+    },
+    "top 5 morning pack, no odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 24.8,
+     "net": -11.2,
+     "roi": -0.311,
+     "hits": {
+      "BONUS_4SUR5": 3,
+      "BONUS_3": 1,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -16.0,
+     "roi_without_top1": -0.535,
+     "roi_without_top3": -0.807,
+     "largest_returns": [
+      9.0,
+      5.8,
+      4.2
+     ],
+     "roi_ci95_week_blocks": [
+      -1.0,
+      0.0571
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.283
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -0.264
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": -5.2
+     },
+     "found_per_ticket": 2.94,
+     "among_12_most_played": "9/18"
+    },
+    "top 5 memory, with odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 26.4,
+     "net": -9.6,
+     "roi": -0.267,
+     "hits": {
+      "BONUS_4SUR5": 5,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -14.0,
+     "roi_without_top1": -0.488,
+     "roi_without_top3": -0.72,
+     "largest_returns": [
+      9.0,
+      4.8,
+      4.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.3571,
+      -0.075
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.767
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": 0.073
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -3.4,
+      "2026-11": -6.2
+     },
+     "found_per_ticket": 2.94,
+     "among_12_most_played": "18/18"
+    },
+    "top 5 field, with odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 23.8,
+     "net": -12.2,
+     "roi": -0.339,
+     "hits": {
+      "BONUS_4SUR5": 4,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -15.2,
+     "roi_without_top1": -0.565,
+     "roi_without_top3": -0.807,
+     "largest_returns": [
+      9.0,
+      4.8,
+      4.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.4,
+      -0.2857
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.767
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -0.045
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": -6.2
+     },
+     "found_per_ticket": 2.89,
+     "among_12_most_played": "17/18"
+    },
+    "top 5 musique, with odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 26.4,
+     "net": -9.6,
+     "roi": -0.267,
+     "hits": {
+      "BONUS_4SUR5": 5,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -14.0,
+     "roi_without_top1": -0.488,
+     "roi_without_top3": -0.72,
+     "largest_returns": [
+      9.0,
+      4.8,
+      4.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.3571,
+      -0.075
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.767
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": 0.073
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -3.4,
+      "2026-11": -6.2
+     },
+     "found_per_ticket": 2.94,
+     "among_12_most_played": "18/18"
+    },
+    "top 5 speed, with odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 21.6,
+     "net": -14.4,
+     "roi": -0.4,
+     "hits": {
+      "BONUS_4SUR5": 4,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -18.0,
+     "roi_without_top1": -0.629,
+     "roi_without_top3": -0.82,
+     "largest_returns": [
+      9.0,
+      4.2,
+      3.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.675,
+      -0.2857
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.767
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": -0.145
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -3.4,
+      "2026-11": -11.0
+     },
+     "found_per_ticket": 2.78,
+     "among_12_most_played": "18/18"
+    },
+    "top 5 morning pack, with odds": {
+     "races": 18,
+     "bets": 18,
+     "staked": 36.0,
+     "returned": 28.0,
+     "net": -8.0,
+     "roi": -0.222,
+     "hits": {
+      "BONUS_3": 1,
+      "BONUS_4SUR5": 4,
+      "DESORDRE": 1
+     },
+     "max_drawdown": -14.0,
+     "roi_without_top1": -0.441,
+     "roi_without_top3": -0.68,
+     "largest_returns": [
+      9.0,
+      5.2,
+      4.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.525,
+      0.0857
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 6,
+       "roi": -0.767
+      },
+      "TROT": {
+       "bets": 11,
+       "roi": 0.145
+      },
+      "OBSTACLE": {
+       "bets": 1,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2026-10": -6.0,
+      "2026-11": -2.0
+     },
+     "found_per_ticket": 2.89,
+     "among_12_most_played": "17/18"
+    }
+   },
+   "betting_differences": {
+    "top 5 prod, with odds minus favourites (T-30)": {
+     "net_eur_per_race": -0.022,
+     "ci95": [
+      -0.7429,
+      1.2
+     ]
+    },
+    "top 5 memory, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.267,
+     "ci95": [
+      -1.2286,
+      0.95
+     ]
+    },
+    "top 5 field, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.156,
+     "ci95": [
+      -0.4,
+      0.0
+     ]
+    },
+    "top 5 musique, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": 0.289,
+     "ci95": [
+      0.0,
+      0.7429
+     ]
+    },
+    "top 5 speed, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.167,
+     "ci95": [
+      -0.4286,
+      0.0
+     ]
+    },
+    "top 5 morning pack, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.156,
+     "ci95": [
+      -0.4,
+      0.0
+     ]
+    },
+    "top 5 memory, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    "top 5 field, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.144,
+     "ci95": [
+      -0.65,
+      0.0
+     ]
+    },
+    "top 5 musique, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    "top 5 speed, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.267,
+     "ci95": [
+      -1.2,
+      0.0
+     ]
+    },
+    "top 5 morning pack, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": 0.089,
+     "ci95": [
+      -0.9,
+      0.7429
+     ]
+    }
+   }
+  },
+  "all": {
+   "races": 743,
+   "from": "2024-11-01",
+   "to": "2026-11-15",
+   "races_by_family": {
+    "PLAT": 288,
+    "TROT": 373,
+    "OBSTACLE": 82
+   },
+   "prediction": {
+    "uniform": {
+     "races": 743,
+     "ll_top5_order": -12.8751,
+     "win_logloss": 2.7225,
+     "top5_brier": 0.2207,
+     "found": 1.6,
+     "ece_top5": 0.0012,
+     "ece_win": 0.0
+    },
+    "market raw (T-30)": {
+     "races": 743,
+     "ll_top5_order": -11.8122,
+     "win_logloss": 2.2929,
+     "top5_brier": 0.1933,
+     "found": 2.59,
+     "ece_top5": 0.0268,
+     "ece_win": 0.0112
+    },
+    "market fitted (T-30)": {
+     "races": 743,
+     "ll_top5_order": -11.7387,
+     "win_logloss": 2.2692,
+     "top5_brier": 0.1928,
+     "found": 2.6,
+     "ece_top5": 0.0177,
+     "ece_win": 0.004
+    },
+    "prod, no odds": {
+     "races": 743,
+     "ll_top5_order": -12.0786,
+     "win_logloss": 2.4405,
+     "top5_brier": 0.2001,
+     "found": 2.41,
+     "ece_top5": 0.0125,
+     "ece_win": 0.0038
+    },
+    "prod, with odds": {
+     "races": 743,
+     "ll_top5_order": -11.7074,
+     "win_logloss": 2.2808,
+     "top5_brier": 0.1922,
+     "found": 2.59,
+     "ece_top5": 0.0094,
+     "ece_win": 0.0029
+    },
+    "memory, no odds": {
+     "races": 743,
+     "ll_top5_order": -12.0477,
+     "win_logloss": 2.4306,
+     "top5_brier": 0.1993,
+     "found": 2.42,
+     "ece_top5": 0.0104,
+     "ece_win": 0.0032
+    },
+    "field, no odds": {
+     "races": 743,
+     "ll_top5_order": -12.0463,
+     "win_logloss": 2.4255,
+     "top5_brier": 0.1996,
+     "found": 2.42,
+     "ece_top5": 0.0134,
+     "ece_win": 0.0041
+    },
+    "musique, no odds": {
+     "races": 743,
+     "ll_top5_order": -12.0745,
+     "win_logloss": 2.4437,
+     "top5_brier": 0.1999,
+     "found": 2.39,
+     "ece_top5": 0.0127,
+     "ece_win": 0.0038
+    },
+    "speed, no odds": {
+     "races": 743,
+     "ll_top5_order": -12.0702,
+     "win_logloss": 2.4365,
+     "top5_brier": 0.1998,
+     "found": 2.45,
+     "ece_top5": 0.0119,
+     "ece_win": 0.0034
+    },
+    "morning pack, no odds": {
+     "races": 743,
+     "ll_top5_order": -12.0251,
+     "win_logloss": 2.4224,
+     "top5_brier": 0.199,
+     "found": 2.44,
+     "ece_top5": 0.0125,
+     "ece_win": 0.0021
+    },
+    "memory, with odds": {
+     "races": 743,
+     "ll_top5_order": -11.7076,
+     "win_logloss": 2.2825,
+     "top5_brier": 0.1922,
+     "found": 2.59,
+     "ece_top5": 0.011,
+     "ece_win": 0.0041
+    },
+    "field, with odds": {
+     "races": 743,
+     "ll_top5_order": -11.7034,
+     "win_logloss": 2.2775,
+     "top5_brier": 0.1922,
+     "found": 2.57,
+     "ece_top5": 0.0098,
+     "ece_win": 0.0046
+    },
+    "musique, with odds": {
+     "races": 743,
+     "ll_top5_order": -11.713,
+     "win_logloss": 2.2835,
+     "top5_brier": 0.1923,
+     "found": 2.58,
+     "ece_top5": 0.0102,
+     "ece_win": 0.0024
+    },
+    "speed, with odds": {
+     "races": 743,
+     "ll_top5_order": -11.7094,
+     "win_logloss": 2.2817,
+     "top5_brier": 0.1922,
+     "found": 2.58,
+     "ece_top5": 0.01,
+     "ece_win": 0.002
+    },
+    "morning pack, with odds": {
+     "races": 743,
+     "ll_top5_order": -11.7149,
+     "win_logloss": 2.2832,
+     "top5_brier": 0.1925,
+     "found": 2.56,
+     "ece_top5": 0.0119,
+     "ece_win": 0.0041
+    }
+   },
+   "prediction_by_family": {
+    "PLAT": {
+     "uniform": {
+      "races": 288,
+      "ll_top5_order": -12.9973,
+      "win_logloss": 2.7432,
+      "top5_brier": 0.2187,
+      "found": 1.69,
+      "ece_top5": 0.0019,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 288,
+      "ll_top5_order": -12.3651,
+      "win_logloss": 2.5092,
+      "top5_brier": 0.2021,
+      "found": 2.39,
+      "ece_top5": 0.0137,
+      "ece_win": 0.0067
+     },
+     "market fitted (T-30)": {
+      "races": 288,
+      "ll_top5_order": -12.3286,
+      "win_logloss": 2.5009,
+      "top5_brier": 0.2018,
+      "found": 2.39,
+      "ece_top5": 0.0075,
+      "ece_win": 0.0052
+     },
+     "prod, no odds": {
+      "races": 288,
+      "ll_top5_order": -12.6235,
+      "win_logloss": 2.6083,
+      "top5_brier": 0.2085,
+      "found": 2.22,
+      "ece_top5": 0.0096,
+      "ece_win": 0.0099
+     },
+     "prod, with odds": {
+      "races": 288,
+      "ll_top5_order": -12.3327,
+      "win_logloss": 2.5013,
+      "top5_brier": 0.2015,
+      "found": 2.38,
+      "ece_top5": 0.0079,
+      "ece_win": 0.0059
+     },
+     "memory, no odds": {
+      "races": 288,
+      "ll_top5_order": -12.5784,
+      "win_logloss": 2.5969,
+      "top5_brier": 0.2076,
+      "found": 2.24,
+      "ece_top5": 0.0115,
+      "ece_win": 0.0079
+     },
+     "field, no odds": {
+      "races": 288,
+      "ll_top5_order": -12.5625,
+      "win_logloss": 2.5917,
+      "top5_brier": 0.2074,
+      "found": 2.25,
+      "ece_top5": 0.0104,
+      "ece_win": 0.0065
+     },
+     "musique, no odds": {
+      "races": 288,
+      "ll_top5_order": -12.6266,
+      "win_logloss": 2.6118,
+      "top5_brier": 0.2086,
+      "found": 2.2,
+      "ece_top5": 0.0095,
+      "ece_win": 0.009
+     },
+     "speed, no odds": {
+      "races": 288,
+      "ll_top5_order": -12.6215,
+      "win_logloss": 2.6089,
+      "top5_brier": 0.2085,
+      "found": 2.25,
+      "ece_top5": 0.0117,
+      "ece_win": 0.0096
+     },
+     "morning pack, no odds": {
+      "races": 288,
+      "ll_top5_order": -12.5443,
+      "win_logloss": 2.5895,
+      "top5_brier": 0.207,
+      "found": 2.23,
+      "ece_top5": 0.01,
+      "ece_win": 0.0063
+     },
+     "memory, with odds": {
+      "races": 288,
+      "ll_top5_order": -12.3327,
+      "win_logloss": 2.5043,
+      "top5_brier": 0.2015,
+      "found": 2.38,
+      "ece_top5": 0.0093,
+      "ece_win": 0.007
+     },
+     "field, with odds": {
+      "races": 288,
+      "ll_top5_order": -12.3143,
+      "win_logloss": 2.4979,
+      "top5_brier": 0.2012,
+      "found": 2.38,
+      "ece_top5": 0.0065,
+      "ece_win": 0.0059
+     },
+     "musique, with odds": {
+      "races": 288,
+      "ll_top5_order": -12.3365,
+      "win_logloss": 2.5028,
+      "top5_brier": 0.2016,
+      "found": 2.38,
+      "ece_top5": 0.0085,
+      "ece_win": 0.006
+     },
+     "speed, with odds": {
+      "races": 288,
+      "ll_top5_order": -12.3332,
+      "win_logloss": 2.5013,
+      "top5_brier": 0.2015,
+      "found": 2.38,
+      "ece_top5": 0.0078,
+      "ece_win": 0.0046
+     },
+     "morning pack, with odds": {
+      "races": 288,
+      "ll_top5_order": -12.3229,
+      "win_logloss": 2.5012,
+      "top5_brier": 0.2014,
+      "found": 2.38,
+      "ece_top5": 0.0064,
+      "ece_win": 0.0058
+     }
+    },
+    "TROT": {
+     "uniform": {
+      "races": 373,
+      "ll_top5_order": -12.7758,
+      "win_logloss": 2.7056,
+      "top5_brier": 0.2224,
+      "found": 1.57,
+      "ece_top5": 0.0008,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 373,
+      "ll_top5_order": -11.2875,
+      "win_logloss": 2.0714,
+      "top5_brier": 0.1845,
+      "found": 2.79,
+      "ece_top5": 0.0381,
+      "ece_win": 0.0186
+     },
+     "market fitted (T-30)": {
+      "races": 373,
+      "ll_top5_order": -11.1695,
+      "win_logloss": 2.0292,
+      "top5_brier": 0.1838,
+      "found": 2.8,
+      "ece_top5": 0.027,
+      "ece_win": 0.0093
+     },
+     "prod, no odds": {
+      "races": 373,
+      "ll_top5_order": -11.5441,
+      "win_logloss": 2.2476,
+      "top5_brier": 0.1913,
+      "found": 2.62,
+      "ece_top5": 0.0236,
+      "ece_win": 0.0104
+     },
+     "prod, with odds": {
+      "races": 373,
+      "ll_top5_order": -11.0889,
+      "win_logloss": 2.0421,
+      "top5_brier": 0.1825,
+      "found": 2.79,
+      "ece_top5": 0.0158,
+      "ece_win": 0.008
+     },
+     "memory, no odds": {
+      "races": 373,
+      "ll_top5_order": -11.5188,
+      "win_logloss": 2.2362,
+      "top5_brier": 0.1907,
+      "found": 2.62,
+      "ece_top5": 0.0186,
+      "ece_win": 0.0099
+     },
+     "field, no odds": {
+      "races": 373,
+      "ll_top5_order": -11.5411,
+      "win_logloss": 2.2347,
+      "top5_brier": 0.1915,
+      "found": 2.6,
+      "ece_top5": 0.0203,
+      "ece_win": 0.0082
+     },
+     "musique, no odds": {
+      "races": 373,
+      "ll_top5_order": -11.5354,
+      "win_logloss": 2.2502,
+      "top5_brier": 0.191,
+      "found": 2.6,
+      "ece_top5": 0.0258,
+      "ece_win": 0.0105
+     },
+     "speed, no odds": {
+      "races": 373,
+      "ll_top5_order": -11.5289,
+      "win_logloss": 2.2398,
+      "top5_brier": 0.1909,
+      "found": 2.66,
+      "ece_top5": 0.0152,
+      "ece_win": 0.0092
+     },
+     "morning pack, no odds": {
+      "races": 373,
+      "ll_top5_order": -11.5106,
+      "win_logloss": 2.2278,
+      "top5_brier": 0.1907,
+      "found": 2.65,
+      "ece_top5": 0.017,
+      "ece_win": 0.0075
+     },
+     "memory, with odds": {
+      "races": 373,
+      "ll_top5_order": -11.0881,
+      "win_logloss": 2.0421,
+      "top5_brier": 0.1825,
+      "found": 2.8,
+      "ece_top5": 0.0164,
+      "ece_win": 0.0088
+     },
+     "field, with odds": {
+      "races": 373,
+      "ll_top5_order": -11.0978,
+      "win_logloss": 2.0387,
+      "top5_brier": 0.1828,
+      "found": 2.77,
+      "ece_top5": 0.016,
+      "ece_win": 0.0094
+     },
+     "musique, with odds": {
+      "races": 373,
+      "ll_top5_order": -11.0953,
+      "win_logloss": 2.0441,
+      "top5_brier": 0.1827,
+      "found": 2.78,
+      "ece_top5": 0.0164,
+      "ece_win": 0.0076
+     },
+     "speed, with odds": {
+      "races": 373,
+      "ll_top5_order": -11.093,
+      "win_logloss": 2.0441,
+      "top5_brier": 0.1826,
+      "found": 2.77,
+      "ece_top5": 0.016,
+      "ece_win": 0.0065
+     },
+     "morning pack, with odds": {
+      "races": 373,
+      "ll_top5_order": -11.1104,
+      "win_logloss": 2.0442,
+      "top5_brier": 0.1831,
+      "found": 2.76,
+      "ece_top5": 0.0193,
+      "ece_win": 0.0097
+     }
+    },
+    "OBSTACLE": {
+     "uniform": {
+      "races": 82,
+      "ll_top5_order": -12.8981,
+      "win_logloss": 2.7265,
+      "top5_brier": 0.2198,
+      "found": 1.4,
+      "ece_top5": 0.0002,
+      "ece_win": 0.0
+     },
+     "market raw (T-30)": {
+      "races": 82,
+      "ll_top5_order": -12.2572,
+      "win_logloss": 2.5408,
+      "top5_brier": 0.2022,
+      "found": 2.43,
+      "ece_top5": 0.027,
+      "ece_win": 0.0131
+     },
+     "market fitted (T-30)": {
+      "races": 82,
+      "ll_top5_order": -12.2555,
+      "win_logloss": 2.5474,
+      "top5_brier": 0.2019,
+      "found": 2.44,
+      "ece_top5": 0.023,
+      "ece_win": 0.0104
+     },
+     "prod, no odds": {
+      "races": 82,
+      "ll_top5_order": -12.5959,
+      "win_logloss": 2.7284,
+      "top5_brier": 0.2102,
+      "found": 2.15,
+      "ece_top5": 0.0267,
+      "ece_win": 0.0232
+     },
+     "prod, with odds": {
+      "races": 82,
+      "ll_top5_order": -12.3247,
+      "win_logloss": 2.5916,
+      "top5_brier": 0.2036,
+      "found": 2.39,
+      "ece_top5": 0.0317,
+      "ece_win": 0.0213
+     },
+     "memory, no odds": {
+      "races": 82,
+      "ll_top5_order": -12.5894,
+      "win_logloss": 2.7306,
+      "top5_brier": 0.2098,
+      "found": 2.12,
+      "ece_top5": 0.0177,
+      "ece_win": 0.0225
+     },
+     "field, no odds": {
+      "races": 82,
+      "ll_top5_order": -12.5316,
+      "win_logloss": 2.7096,
+      "top5_brier": 0.2084,
+      "found": 2.23,
+      "ece_top5": 0.0333,
+      "ece_win": 0.0221
+     },
+     "musique, no odds": {
+      "races": 82,
+      "ll_top5_order": -12.5879,
+      "win_logloss": 2.7332,
+      "top5_brier": 0.21,
+      "found": 2.13,
+      "ece_top5": 0.0315,
+      "ece_win": 0.0208
+     },
+     "speed, no odds": {
+      "races": 82,
+      "ll_top5_order": -12.5959,
+      "win_logloss": 2.7257,
+      "top5_brier": 0.2101,
+      "found": 2.17,
+      "ece_top5": 0.0194,
+      "ece_win": 0.0199
+     },
+     "morning pack, no odds": {
+      "races": 82,
+      "ll_top5_order": -12.5421,
+      "win_logloss": 2.7206,
+      "top5_brier": 0.2084,
+      "found": 2.18,
+      "ece_top5": 0.0272,
+      "ece_win": 0.0223
+     },
+     "memory, with odds": {
+      "races": 82,
+      "ll_top5_order": -12.3298,
+      "win_logloss": 2.5968,
+      "top5_brier": 0.2036,
+      "found": 2.34,
+      "ece_top5": 0.0355,
+      "ece_win": 0.0215
+     },
+     "field, with odds": {
+      "races": 82,
+      "ll_top5_order": -12.3121,
+      "win_logloss": 2.5901,
+      "top5_brier": 0.2032,
+      "found": 2.3,
+      "ece_top5": 0.0248,
+      "ece_win": 0.0175
+     },
+     "musique, with odds": {
+      "races": 82,
+      "ll_top5_order": -12.3329,
+      "win_logloss": 2.6018,
+      "top5_brier": 0.2037,
+      "found": 2.39,
+      "ece_top5": 0.032,
+      "ece_win": 0.021
+     },
+     "speed, with odds": {
+      "races": 82,
+      "ll_top5_order": -12.323,
+      "win_logloss": 2.591,
+      "top5_brier": 0.2035,
+      "found": 2.39,
+      "ece_top5": 0.0308,
+      "ece_win": 0.0228
+     },
+     "morning pack, with odds": {
+      "races": 82,
+      "ll_top5_order": -12.3293,
+      "win_logloss": 2.6046,
+      "top5_brier": 0.2034,
+      "found": 2.29,
+      "ece_top5": 0.0214,
+      "ece_win": 0.0205
+     }
+    }
+   },
+   "comparisons": {
+    "prod, with odds minus market fitted (T-30)": {
+     "mean": 0.0313,
+     "ci95": [
+      0.0021,
+      0.0601
+     ],
+     "races": 743
+    },
+    "memory, no odds minus prod, no odds": {
+     "mean": 0.0309,
+     "ci95": [
+      0.0133,
+      0.0493
+     ],
+     "races": 743
+    },
+    "field, no odds minus prod, no odds": {
+     "mean": 0.0323,
+     "ci95": [
+      0.0081,
+      0.0607
+     ],
+     "races": 743
+    },
+    "musique, no odds minus prod, no odds": {
+     "mean": 0.0041,
+     "ci95": [
+      -0.0043,
+      0.0123
+     ],
+     "races": 743
+    },
+    "speed, no odds minus prod, no odds": {
+     "mean": 0.0084,
+     "ci95": [
+      -0.0093,
+      0.0248
+     ],
+     "races": 743
+    },
+    "morning pack, no odds minus prod, no odds": {
+     "mean": 0.0535,
+     "ci95": [
+      0.0211,
+      0.0869
+     ],
+     "races": 743
+    },
+    "memory, with odds minus prod, with odds": {
+     "mean": -0.0002,
+     "ci95": [
+      -0.0065,
+      0.0061
+     ],
+     "races": 743
+    },
+    "field, with odds minus prod, with odds": {
+     "mean": 0.004,
+     "ci95": [
+      -0.0076,
+      0.0151
+     ],
+     "races": 743
+    },
+    "musique, with odds minus prod, with odds": {
+     "mean": -0.0056,
+     "ci95": [
+      -0.0119,
+      0.0003
+     ],
+     "races": 743
+    },
+    "speed, with odds minus prod, with odds": {
+     "mean": -0.002,
+     "ci95": [
+      -0.0093,
+      0.0047
+     ],
+     "races": 743
+    },
+    "morning pack, with odds minus prod, with odds": {
+     "mean": -0.0075,
+     "ci95": [
+      -0.0237,
+      0.0087
+     ],
+     "races": 743
+    },
+    "prod, no odds minus market fitted (T-30)": {
+     "mean": -0.3399,
+     "ci95": [
+      -0.423,
+      -0.2595
+     ],
+     "races": 743
+    }
+   },
+   "betting": {
+    "random": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 195.6,
+     "net": -1290.4,
+     "roi": -0.868,
+     "hits": {
+      "BONUS_4SUR5": 11,
+      "BONUS_3": 11
+     },
+     "max_drawdown": -1297.6,
+     "roi_without_top1": -0.881,
+     "roi_without_top3": -0.901,
+     "largest_returns": [
+      19.4,
+      15.0,
+      15.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.9235,
+      -0.8072
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.867
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.871
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.863
+      }
+     },
+     "by_month": {
+      "2024-11": -44.8,
+      "2024-12": -62.0,
+      "2025-01": -62.0,
+      "2025-02": -50.0,
+      "2025-03": -62.0,
+      "2025-04": -45.0,
+      "2025-05": -37.4,
+      "2025-06": -57.4,
+      "2025-07": -58.4,
+      "2025-08": -48.4,
+      "2025-09": -54.2,
+      "2025-10": -27.6,
+      "2025-11": -60.0,
+      "2025-12": -62.0,
+      "2026-01": -46.2,
+      "2026-02": -41.2,
+      "2026-03": -56.0,
+      "2026-04": -60.0,
+      "2026-05": -34.8,
+      "2026-06": -60.0,
+      "2026-07": -62.0,
+      "2026-08": -47.0,
+      "2026-09": -60.0,
+      "2026-10": -62.0,
+      "2026-11": -30.0
+     },
+     "found_per_ticket": 1.69,
+     "among_12_most_played": "5/743"
+    },
+    "favourites (T-30)": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 752.8,
+     "net": -733.2,
+     "roi": -0.493,
+     "hits": {
+      "BONUS_4SUR5": 114,
+      "BONUS_3": 60,
+      "DESORDRE": 9
+     },
+     "max_drawdown": -761.4,
+     "roi_without_top1": -0.518,
+     "roi_without_top3": -0.538,
+     "largest_returns": [
+      37.6,
+      19.4,
+      11.8
+     ],
+     "roi_ci95_week_blocks": [
+      -0.573,
+      -0.4056
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.492
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.454
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.679
+      }
+     },
+     "by_month": {
+      "2024-11": -22.4,
+      "2024-12": -33.6,
+      "2025-01": -37.2,
+      "2025-02": -44.4,
+      "2025-03": -30.4,
+      "2025-04": -42.8,
+      "2025-05": -28.2,
+      "2025-06": -33.2,
+      "2025-07": -37.4,
+      "2025-08": -45.2,
+      "2025-09": -24.4,
+      "2025-10": -32.2,
+      "2025-11": -28.4,
+      "2025-12": -34.8,
+      "2026-01": -34.6,
+      "2026-02": -34.4,
+      "2026-03": -19.0,
+      "2026-04": -15.4,
+      "2026-05": -17.4,
+      "2026-06": -16.6,
+      "2026-07": -34.0,
+      "2026-08": -56.2,
+      "2026-09": -20.6,
+      "2026-10": -4.6,
+      "2026-11": -5.8
+     },
+     "found_per_ticket": 2.61,
+     "among_12_most_played": "727/743"
+    },
+    "top 5 prod, no odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 853.4,
+     "net": -632.6,
+     "roi": -0.426,
+     "hits": {
+      "BONUS_3": 41,
+      "BONUS_4SUR5": 83,
+      "DESORDRE": 6
+     },
+     "max_drawdown": -709.0,
+     "roi_without_top1": -0.515,
+     "roi_without_top3": -0.622,
+     "largest_returns": [
+      133.4,
+      131.6,
+      28.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6464,
+      -0.1331
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.399
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.549
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": 0.044
+      }
+     },
+     "by_month": {
+      "2024-11": -17.0,
+      "2024-12": -41.0,
+      "2025-01": 101.0,
+      "2025-02": -34.2,
+      "2025-03": -32.2,
+      "2025-04": -45.6,
+      "2025-05": -40.4,
+      "2025-06": -34.0,
+      "2025-07": -50.2,
+      "2025-08": 84.0,
+      "2025-09": -22.6,
+      "2025-10": -39.4,
+      "2025-11": -40.4,
+      "2025-12": -54.8,
+      "2026-01": -20.6,
+      "2026-02": -47.0,
+      "2026-03": -47.0,
+      "2026-04": -31.0,
+      "2026-05": -48.6,
+      "2026-06": -41.2,
+      "2026-07": 2.6,
+      "2026-08": -37.0,
+      "2026-09": -40.6,
+      "2026-10": -53.0,
+      "2026-11": -2.4
+     },
+     "found_per_ticket": 2.41,
+     "among_12_most_played": "336/743"
+    },
+    "top 5 prod, with odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 773.0,
+     "net": -713.0,
+     "roi": -0.48,
+     "hits": {
+      "BONUS_4SUR5": 102,
+      "BONUS_3": 63,
+      "DESORDRE": 11
+     },
+     "max_drawdown": -741.4,
+     "roi_without_top1": -0.504,
+     "roi_without_top3": -0.526,
+     "largest_returns": [
+      37.6,
+      19.4,
+      14.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5702,
+      -0.3862
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.516
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.447
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.499
+      }
+     },
+     "by_month": {
+      "2024-11": -37.0,
+      "2024-12": -43.0,
+      "2025-01": -2.8,
+      "2025-02": -49.2,
+      "2025-03": -18.2,
+      "2025-04": -42.8,
+      "2025-05": -46.4,
+      "2025-06": -21.4,
+      "2025-07": -38.6,
+      "2025-08": -49.0,
+      "2025-09": -22.8,
+      "2025-10": -31.6,
+      "2025-11": -29.6,
+      "2025-12": -52.2,
+      "2026-01": -24.2,
+      "2026-02": -17.0,
+      "2026-03": -20.8,
+      "2026-04": -24.6,
+      "2026-05": -22.8,
+      "2026-06": -13.2,
+      "2026-07": -35.6,
+      "2026-08": -47.0,
+      "2026-09": -22.0,
+      "2026-10": 5.0,
+      "2026-11": -6.2
+     },
+     "found_per_ticket": 2.59,
+     "among_12_most_played": "677/743"
+    },
+    "bon rapport (prod rule)": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 346.0,
+     "net": -1140.0,
+     "roi": -0.767,
+     "hits": {
+      "BONUS_4SUR5": 21,
+      "BONUS_3": 17
+     },
+     "max_drawdown": -1140.0,
+     "roi_without_top1": -0.783,
+     "roi_without_top3": -0.811,
+     "largest_returns": [
+      24.0,
+      21.4,
+      20.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.85,
+      -0.6683
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.775
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.75
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.817
+      }
+     },
+     "by_month": {
+      "2024-11": -29.6,
+      "2024-12": -62.0,
+      "2025-01": -56.0,
+      "2025-02": -35.8,
+      "2025-03": -62.0,
+      "2025-04": -41.4,
+      "2025-05": -48.4,
+      "2025-06": -32.2,
+      "2025-07": -57.6,
+      "2025-08": -52.6,
+      "2025-09": -60.0,
+      "2025-10": -23.0,
+      "2025-11": -24.4,
+      "2025-12": -62.0,
+      "2026-01": -39.6,
+      "2026-02": -53.8,
+      "2026-03": -60.0,
+      "2026-04": -33.4,
+      "2026-05": -62.0,
+      "2026-06": -56.4,
+      "2026-07": -19.4,
+      "2026-08": -47.0,
+      "2026-09": -60.0,
+      "2026-10": -48.8,
+      "2026-11": -12.6
+     },
+     "found_per_ticket": 1.91,
+     "among_12_most_played": "3/743"
+    },
+    "expected value > 2 € (prod, with odds)": {
+     "races": 743,
+     "bets": 46,
+     "staked": 92.0,
+     "returned": 29.6,
+     "net": -62.4,
+     "roi": -0.678,
+     "hits": {
+      "BONUS_4SUR5": 5,
+      "BONUS_3": 3
+     },
+     "max_drawdown": -62.4,
+     "roi_without_top1": -0.751,
+     "roi_without_top3": -0.837,
+     "largest_returns": [
+      7.2,
+      4.4,
+      4.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.8717,
+      -0.4714
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 4,
+       "roi": -1.0
+      },
+      "TROT": {
+       "bets": 40,
+       "roi": -0.63
+      },
+      "OBSTACLE": {
+       "bets": 2,
+       "roi": -1.0
+      }
+     },
+     "by_month": {
+      "2024-11": -3.6,
+      "2024-12": -6.0,
+      "2025-01": -2.0,
+      "2025-02": -2.0,
+      "2025-03": -2.0,
+      "2025-04": -2.0,
+      "2025-07": -2.0,
+      "2025-09": -6.0,
+      "2025-10": 0.6,
+      "2025-11": -9.8,
+      "2025-12": -4.0,
+      "2026-01": -4.0,
+      "2026-03": -4.0,
+      "2026-04": 3.2,
+      "2026-05": -2.8,
+      "2026-06": -2.0,
+      "2026-07": -4.0,
+      "2026-08": -2.0,
+      "2026-09": -2.0,
+      "2026-10": -2.0,
+      "2026-11": -4.0
+     },
+     "found_per_ticket": 2.39,
+     "among_12_most_played": "2/46"
+    },
+    "top 5 memory, no odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 826.2,
+     "net": -659.8,
+     "roi": -0.444,
+     "hits": {
+      "BONUS_3": 47,
+      "BONUS_4SUR5": 78,
+      "DESORDRE": 6
+     },
+     "max_drawdown": -664.6,
+     "roi_without_top1": -0.532,
+     "roi_without_top3": -0.619,
+     "largest_returns": [
+      131.6,
+      102.4,
+      28.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6432,
+      -0.1838
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.374
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.56
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.166
+      }
+     },
+     "by_month": {
+      "2024-11": -23.4,
+      "2024-12": -43.2,
+      "2025-01": -31.4,
+      "2025-02": -36.4,
+      "2025-03": -32.2,
+      "2025-04": -39.6,
+      "2025-05": -38.4,
+      "2025-06": -31.6,
+      "2025-07": -42.6,
+      "2025-08": 81.0,
+      "2025-09": -25.6,
+      "2025-10": -34.6,
+      "2025-11": -39.0,
+      "2025-12": -35.8,
+      "2026-01": 77.2,
+      "2026-02": -47.0,
+      "2026-03": -43.6,
+      "2026-04": -27.2,
+      "2026-05": -54.2,
+      "2026-06": -42.2,
+      "2026-07": -8.6,
+      "2026-08": -45.6,
+      "2026-09": -38.4,
+      "2026-10": -50.2,
+      "2026-11": -7.2
+     },
+     "found_per_ticket": 2.42,
+     "among_12_most_played": "360/743"
+    },
+    "top 5 field, no odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 775.4,
+     "net": -710.6,
+     "roi": -0.478,
+     "hits": {
+      "BONUS_3": 45,
+      "BONUS_4SUR5": 87,
+      "DESORDRE": 5
+     },
+     "max_drawdown": -715.4,
+     "roi_without_top1": -0.566,
+     "roi_without_top3": -0.596,
+     "largest_returns": [
+      131.6,
+      26.6,
+      18.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6285,
+      -0.245
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.357
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.535
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.649
+      }
+     },
+     "by_month": {
+      "2024-11": -22.4,
+      "2024-12": -45.6,
+      "2025-01": -26.4,
+      "2025-02": -34.2,
+      "2025-03": -26.8,
+      "2025-04": -33.8,
+      "2025-05": -31.4,
+      "2025-06": -36.8,
+      "2025-07": -39.2,
+      "2025-08": 98.2,
+      "2025-09": -18.2,
+      "2025-10": -32.4,
+      "2025-11": -38.4,
+      "2025-12": -34.0,
+      "2026-01": -22.4,
+      "2026-02": -30.8,
+      "2026-03": -38.6,
+      "2026-04": -23.4,
+      "2026-05": -48.6,
+      "2026-06": -48.2,
+      "2026-07": -37.0,
+      "2026-08": -49.6,
+      "2026-09": -35.2,
+      "2026-10": -50.2,
+      "2026-11": -5.2
+     },
+     "found_per_ticket": 2.43,
+     "among_12_most_played": "343/743"
+    },
+    "top 5 musique, no odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 844.6,
+     "net": -641.4,
+     "roi": -0.432,
+     "hits": {
+      "BONUS_3": 42,
+      "BONUS_4SUR5": 82,
+      "DESORDRE": 6
+     },
+     "max_drawdown": -713.4,
+     "roi_without_top1": -0.521,
+     "roi_without_top3": -0.628,
+     "largest_returns": [
+      133.4,
+      131.6,
+      28.4
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6526,
+      -0.1446
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.398
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.543
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.046
+      }
+     },
+     "by_month": {
+      "2024-11": -35.8,
+      "2024-12": -28.6,
+      "2025-01": 95.0,
+      "2025-02": -34.2,
+      "2025-03": -35.6,
+      "2025-04": -46.0,
+      "2025-05": -34.4,
+      "2025-06": -34.0,
+      "2025-07": -44.0,
+      "2025-08": 75.4,
+      "2025-09": -32.2,
+      "2025-10": -40.4,
+      "2025-11": -42.6,
+      "2025-12": -43.0,
+      "2026-01": -18.4,
+      "2026-02": -47.0,
+      "2026-03": -40.0,
+      "2026-04": -38.8,
+      "2026-05": -49.8,
+      "2026-06": -48.0,
+      "2026-07": 4.6,
+      "2026-08": -29.6,
+      "2026-09": -40.4,
+      "2026-10": -56.4,
+      "2026-11": 2.8
+     },
+     "found_per_ticket": 2.38,
+     "among_12_most_played": "334/743"
+    },
+    "top 5 speed, no odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 1277.8,
+     "net": -208.2,
+     "roi": -0.14,
+     "hits": {
+      "BONUS_3": 44,
+      "BONUS_4SUR5": 83,
+      "DESORDRE": 10
+     },
+     "max_drawdown": -561.4,
+     "roi_without_top1": -0.367,
+     "roi_without_top3": -0.544,
+     "largest_returns": [
+      338.0,
+      133.4,
+      131.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5467,
+      0.4595
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": 0.21
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.443
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": 0.009
+      }
+     },
+     "by_month": {
+      "2024-11": -7.4,
+      "2024-12": -17.8,
+      "2025-01": 95.0,
+      "2025-02": -34.2,
+      "2025-03": 295.2,
+      "2025-04": -43.2,
+      "2025-05": -42.0,
+      "2025-06": -31.6,
+      "2025-07": -50.0,
+      "2025-08": 87.6,
+      "2025-09": -12.2,
+      "2025-10": -33.8,
+      "2025-11": -31.0,
+      "2025-12": -49.6,
+      "2026-01": -20.6,
+      "2026-02": -47.0,
+      "2026-03": -40.2,
+      "2026-04": -21.0,
+      "2026-05": -53.0,
+      "2026-06": -53.2,
+      "2026-07": 24.4,
+      "2026-08": -29.6,
+      "2026-09": -35.2,
+      "2026-10": -52.4,
+      "2026-11": -5.4
+     },
+     "found_per_ticket": 2.44,
+     "among_12_most_played": "337/743"
+    },
+    "top 5 morning pack, no odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 761.8,
+     "net": -724.2,
+     "roi": -0.487,
+     "hits": {
+      "BONUS_3": 50,
+      "BONUS_4SUR5": 92,
+      "DESORDRE": 7
+     },
+     "max_drawdown": -729.0,
+     "roi_without_top1": -0.506,
+     "roi_without_top3": -0.536,
+     "largest_returns": [
+      28.4,
+      26.6,
+      20.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5758,
+      -0.3928
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.47
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.466
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.645
+      }
+     },
+     "by_month": {
+      "2024-11": -10.0,
+      "2024-12": -43.2,
+      "2025-01": -29.4,
+      "2025-02": -19.2,
+      "2025-03": -32.2,
+      "2025-04": -33.6,
+      "2025-05": -18.8,
+      "2025-06": -31.6,
+      "2025-07": -38.4,
+      "2025-08": -12.6,
+      "2025-09": -24.4,
+      "2025-10": -21.6,
+      "2025-11": -33.6,
+      "2025-12": -35.8,
+      "2026-01": -15.0,
+      "2026-02": -42.4,
+      "2026-03": -43.6,
+      "2026-04": -13.4,
+      "2026-05": -54.2,
+      "2026-06": -46.4,
+      "2026-07": -6.0,
+      "2026-08": -42.2,
+      "2026-09": -35.4,
+      "2026-10": -36.0,
+      "2026-11": -5.2
+     },
+     "found_per_ticket": 2.43,
+     "among_12_most_played": "340/743"
+    },
+    "top 5 memory, with odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 761.8,
+     "net": -724.2,
+     "roi": -0.487,
+     "hits": {
+      "BONUS_4SUR5": 104,
+      "BONUS_3": 66,
+      "DESORDRE": 10
+     },
+     "max_drawdown": -752.6,
+     "roi_without_top1": -0.512,
+     "roi_without_top3": -0.532,
+     "largest_returns": [
+      37.6,
+      19.4,
+      12.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5765,
+      -0.3952
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.501
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.452
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.599
+      }
+     },
+     "by_month": {
+      "2024-11": -26.4,
+      "2024-12": -43.0,
+      "2025-01": -2.8,
+      "2025-02": -49.2,
+      "2025-03": -17.8,
+      "2025-04": -47.2,
+      "2025-05": -40.6,
+      "2025-06": -21.4,
+      "2025-07": -44.6,
+      "2025-08": -49.0,
+      "2025-09": -23.8,
+      "2025-10": -31.6,
+      "2025-11": -29.6,
+      "2025-12": -52.2,
+      "2026-01": -24.2,
+      "2026-02": -41.4,
+      "2026-03": -25.6,
+      "2026-04": -28.6,
+      "2026-05": -17.6,
+      "2026-06": -16.4,
+      "2026-07": -32.6,
+      "2026-08": -43.2,
+      "2026-09": -21.6,
+      "2026-10": 12.4,
+      "2026-11": -6.2
+     },
+     "found_per_ticket": 2.59,
+     "among_12_most_played": "673/743"
+    },
+    "top 5 field, with odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 714.8,
+     "net": -771.2,
+     "roi": -0.519,
+     "hits": {
+      "BONUS_4SUR5": 98,
+      "BONUS_3": 62,
+      "DESORDRE": 9
+     },
+     "max_drawdown": -774.8,
+     "roi_without_top1": -0.532,
+     "roi_without_top3": -0.555,
+     "largest_returns": [
+      20.2,
+      19.4,
+      17.2
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5922,
+      -0.4425
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.576
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.454
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.615
+      }
+     },
+     "by_month": {
+      "2024-11": -37.0,
+      "2024-12": -32.8,
+      "2025-01": -18.4,
+      "2025-02": -44.4,
+      "2025-03": -15.4,
+      "2025-04": -38.6,
+      "2025-05": -47.2,
+      "2025-06": -15.2,
+      "2025-07": -44.4,
+      "2025-08": -28.0,
+      "2025-09": -33.4,
+      "2025-10": -30.6,
+      "2025-11": -26.0,
+      "2025-12": -52.2,
+      "2026-01": -31.4,
+      "2026-02": -28.2,
+      "2026-03": -11.8,
+      "2026-04": -32.0,
+      "2026-05": -32.2,
+      "2026-06": -23.2,
+      "2026-07": -34.8,
+      "2026-08": -49.4,
+      "2026-09": -27.0,
+      "2026-10": -31.4,
+      "2026-11": -6.2
+     },
+     "found_per_ticket": 2.59,
+     "among_12_most_played": "664/743"
+    },
+    "top 5 musique, with odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 767.4,
+     "net": -718.6,
+     "roi": -0.484,
+     "hits": {
+      "BONUS_4SUR5": 99,
+      "BONUS_3": 64,
+      "DESORDRE": 11
+     },
+     "max_drawdown": -741.2,
+     "roi_without_top1": -0.508,
+     "roi_without_top3": -0.53,
+     "largest_returns": [
+      37.6,
+      19.4,
+      14.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5746,
+      -0.3891
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.49
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.463
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.557
+      }
+     },
+     "by_month": {
+      "2024-11": -37.0,
+      "2024-12": -39.8,
+      "2025-01": -6.0,
+      "2025-02": -49.2,
+      "2025-03": -7.6,
+      "2025-04": -42.8,
+      "2025-05": -46.4,
+      "2025-06": -17.2,
+      "2025-07": -38.8,
+      "2025-08": -49.0,
+      "2025-09": -18.0,
+      "2025-10": -31.6,
+      "2025-11": -31.8,
+      "2025-12": -52.2,
+      "2026-01": -29.4,
+      "2026-02": -22.6,
+      "2026-03": -24.8,
+      "2026-04": -17.2,
+      "2026-05": -26.0,
+      "2026-06": -13.2,
+      "2026-07": -35.0,
+      "2026-08": -54.0,
+      "2026-09": -25.6,
+      "2026-10": 2.8,
+      "2026-11": -6.2
+     },
+     "found_per_ticket": 2.58,
+     "among_12_most_played": "670/743"
+    },
+    "top 5 speed, with odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 754.6,
+     "net": -731.4,
+     "roi": -0.492,
+     "hits": {
+      "BONUS_4SUR5": 103,
+      "BONUS_3": 65,
+      "DESORDRE": 9
+     },
+     "max_drawdown": -755.0,
+     "roi_without_top1": -0.517,
+     "roi_without_top3": -0.539,
+     "largest_returns": [
+      37.6,
+      19.4,
+      14.6
+     ],
+     "roi_ci95_week_blocks": [
+      -0.5762,
+      -0.4043
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.526
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.465
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.499
+      }
+     },
+     "by_month": {
+      "2024-11": -37.0,
+      "2024-12": -34.8,
+      "2025-01": -2.8,
+      "2025-02": -49.2,
+      "2025-03": -18.2,
+      "2025-04": -42.8,
+      "2025-05": -42.6,
+      "2025-06": -21.4,
+      "2025-07": -39.0,
+      "2025-08": -49.0,
+      "2025-09": -27.6,
+      "2025-10": -31.6,
+      "2025-11": -29.6,
+      "2025-12": -52.2,
+      "2026-01": -24.2,
+      "2026-02": -32.4,
+      "2026-03": -21.0,
+      "2026-04": -27.2,
+      "2026-05": -22.8,
+      "2026-06": -13.2,
+      "2026-07": -34.8,
+      "2026-08": -51.6,
+      "2026-09": -20.4,
+      "2026-10": 5.0,
+      "2026-11": -11.0
+     },
+     "found_per_ticket": 2.58,
+     "among_12_most_played": "671/743"
+    },
+    "top 5 morning pack, with odds": {
+     "races": 743,
+     "bets": 743,
+     "staked": 1486.0,
+     "returned": 701.8,
+     "net": -784.2,
+     "roi": -0.528,
+     "hits": {
+      "BONUS_4SUR5": 100,
+      "BONUS_3": 60,
+      "DESORDRE": 9
+     },
+     "max_drawdown": -787.8,
+     "roi_without_top1": -0.541,
+     "roi_without_top3": -0.561,
+     "largest_returns": [
+      20.2,
+      19.4,
+      12.0
+     ],
+     "roi_ci95_week_blocks": [
+      -0.6015,
+      -0.4525
+     ],
+     "by_family": {
+      "PLAT": {
+       "bets": 288,
+       "roi": -0.546
+      },
+      "TROT": {
+       "bets": 373,
+       "roi": -0.473
+      },
+      "OBSTACLE": {
+       "bets": 82,
+       "roi": -0.713
+      }
+     },
+     "by_month": {
+      "2024-11": -30.2,
+      "2024-12": -38.0,
+      "2025-01": -10.6,
+      "2025-02": -49.2,
+      "2025-03": -12.0,
+      "2025-04": -50.4,
+      "2025-05": -43.4,
+      "2025-06": -26.0,
+      "2025-07": -45.0,
+      "2025-08": -32.4,
+      "2025-09": -35.8,
+      "2025-10": -25.8,
+      "2025-11": -36.2,
+      "2025-12": -51.4,
+      "2026-01": -28.8,
+      "2026-02": -37.6,
+      "2026-03": -11.0,
+      "2026-04": -29.4,
+      "2026-05": -32.2,
+      "2026-06": -16.4,
+      "2026-07": -29.4,
+      "2026-08": -50.4,
+      "2026-09": -27.0,
+      "2026-10": -33.6,
+      "2026-11": -2.0
+     },
+     "found_per_ticket": 2.57,
+     "among_12_most_played": "636/743"
+    }
+   },
+   "betting_differences": {
+    "top 5 prod, with odds minus favourites (T-30)": {
+     "net_eur_per_race": 0.027,
+     "ci95": [
+      -0.1061,
+      0.1577
+     ]
+    },
+    "top 5 memory, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.037,
+     "ci95": [
+      -0.5062,
+      0.3895
+     ]
+    },
+    "top 5 field, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.105,
+     "ci95": [
+      -0.5068,
+      0.1643
+     ]
+    },
+    "top 5 musique, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.012,
+     "ci95": [
+      -0.1287,
+      0.0907
+     ]
+    },
+    "top 5 speed, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": 0.571,
+     "ci95": [
+      0.0514,
+      1.5595
+     ]
+    },
+    "top 5 morning pack, no odds minus top 5 prod, no odds": {
+     "net_eur_per_race": -0.123,
+     "ci95": [
+      -0.6842,
+      0.2811
+     ]
+    },
+    "top 5 memory, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.015,
+     "ci95": [
+      -0.0997,
+      0.0636
+     ]
+    },
+    "top 5 field, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.078,
+     "ci95": [
+      -0.2317,
+      0.0641
+     ]
+    },
+    "top 5 musique, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.008,
+     "ci95": [
+      -0.0755,
+      0.0604
+     ]
+    },
+    "top 5 speed, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.025,
+     "ci95": [
+      -0.0804,
+      0.025
+     ]
+    },
+    "top 5 morning pack, with odds minus top 5 prod, with odds": {
+     "net_eur_per_race": -0.096,
+     "ci95": [
+      -0.2506,
+      0.045
+     ]
+    }
+   }
+  }
+ },
+ "candidates": {
+  "files": [
+   "research/ideas.py"
+  ],
+  "models": [
+   "memory, no odds",
+   "field, no odds",
+   "musique, no odds",
+   "speed, no odds",
+   "morning pack, no odds",
+   "memory, with odds",
+   "field, with odds",
+   "musique, with odds",
+   "speed, with odds",
+   "morning pack, with odds"
+  ],
+  "strategies": [
+   "top 5 memory, no odds",
+   "top 5 field, no odds",
+   "top 5 musique, no odds",
+   "top 5 speed, no odds",
+   "top 5 morning pack, no odds",
+   "top 5 memory, with odds",
+   "top 5 field, with odds",
+   "top 5 musique, with odds",
+   "top 5 speed, with odds",
+   "top 5 morning pack, with odds"
+  ]
+ }
+}
