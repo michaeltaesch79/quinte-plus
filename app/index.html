@@ -46,30 +46,11 @@
     </div>
   </section>
 
-  <!-- ============ ÉCRAN 2 : MES NUMÉROS ============ -->
-  <section id="v-saisie" class="view" hidden>
-    <div class="race">
-      <div class="eyebrow" id="saisie-eyebrow"></div>
-      <h1>Mes numéros</h1>
-    </div>
-    <div class="card">
-      <div class="seg" role="group" aria-label="Quel prono saisir">
-        <button id="who-veinard" aria-pressed="true">Le Veinard</button>
-        <button id="who-moi" aria-pressed="false">Mon jeu</button>
-      </div>
-      <div class="small muted" id="pad-help"></div>
-      <div class="pad" id="pad"></div>
-      <div class="chips" id="pick-chips" aria-live="polite"></div>
-      <div class="row"><button class="btn" id="clear">Effacer</button><button class="btn primary" id="save">Enregistrer</button></div>
-      <div class="saved" id="saved" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <!-- ============ ÉCRAN 3 : LE MATCH ============ -->
+  <!-- ============ ÉCRAN 2 : HISTORIQUE ============ -->
   <section id="v-match" class="view" hidden>
     <div class="race">
       <div class="eyebrow">Qui joue le mieux ?</div>
-      <h1>Le match</h1>
+      <h1>Historique</h1>
     </div>
     <div class="card">
       <div class="eyebrow" id="y-label"></div>
@@ -84,7 +65,7 @@
       <div class="small muted" id="season-note"></div>
     </div>
     <div class="card">
-      <h2>Historique</h2>
+      <h2>Jour par jour</h2>
       <div class="small muted">Chaque jour : l'arrivée, le ticket de l'IA et celui des favoris des parieurs (2 € chacun), et ce qu'ils ont rapporté. En vert : les chevaux trouvés parmi les 5 premiers.</div>
       <div id="history"></div>
     </div>
@@ -104,8 +85,7 @@
 
 <div class="tabs"><nav role="tablist">
   <button role="tab" aria-selected="true" data-v="v-quinte">Le Quinté</button>
-  <button role="tab" aria-selected="false" data-v="v-saisie">Mes numéros</button>
-  <button role="tab" aria-selected="false" data-v="v-match">Le match</button>
+  <button role="tab" aria-selected="false" data-v="v-match">Historique</button>
 </nav></div>
 
 <div class="scrim" id="scrim" hidden></div>

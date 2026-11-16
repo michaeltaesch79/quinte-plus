@@ -1,8 +1,8 @@
 # Le Quinté du Jour — phone web app
 
 Private web app for one person: the day's Quinté+ with the AI's picks, a one-tap explanation
-per horse, input for Le Veinard's picks, and a scoreboard that sets the AI against the bettors'
-favourites (the five shortest odds). French UI, phone-sized, no login, no build step.
+per horse, and a history with a scoreboard that sets the AI against the bettors' favourites (the five
+shortest odds). French UI, phone-sized, no login, no build step.
 
 ## Run it locally
 The app loads its data with `fetch()`, which browsers block for files opened directly
@@ -19,7 +19,7 @@ Open http://localhost:8000. To try it on a phone on the same Wi-Fi, open
 ## Files
 | File | Role |
 |---|---|
-| `index.html` | Page shell: three tabs (Le Quinté, Mes numéros, Le match) and the horse sheet. |
+| `index.html` | Page shell: two tabs (Le Quinté, Historique) and the horse sheet. |
 | `styles.css` | All styling. Colors are tokens on `:root`, with a dark-mode set. |
 | `app.js` | Reads `data/today.json` and renders everything. Holds no race data. |
 | `data/today.json` | The day's race, runners, picks, tickets, explanations, yesterday's result, scoreboard. **Written by the data pipeline (phase 7 of `BRIEF.md`).** |
@@ -38,7 +38,7 @@ ranks, chances, verdicts and factor explanations all come from the pipeline.
   "generated_by": "free text: model name/version",
   "odds_updated": "11h42",           // Paris time of the odds behind the prono; null if no odds yet
   "race": {
-    "date": "YYYY-MM-DD",            // also used as the key for saved picks on the phone
+    "date": "YYYY-MM-DD",
     "date_label": "Mardi 27 octobre",
     "reunion": "R1", "course": "C1",
     "hippodrome": "Deauville", "prix": "Prix d'Utah Beach",
@@ -104,8 +104,6 @@ Mode object:
 `factors[].sign`: `plus` = helps, `minus` = hurts, `eq` = neutral or uncertain, `q` = data not available yet.
 
 ## Known limits of the prototype
-- Picks for the phone ("Le Veinard", "Mon jeu") are saved in that phone's browser only.
-  The scoreboard can't count them until they're sent somewhere durable (phase 7).
 - The fatigue and ground/weather factors are placeholders until the history data exists.
 - "Les favoris des parieurs" on the tips page use the odds behind the prono; on the scoreboard they
   are the five shortest odds 30 minutes before the start, taken when the result is recorded.

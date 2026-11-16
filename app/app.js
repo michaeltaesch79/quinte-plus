@@ -7,10 +7,6 @@ const DATA_URL = "data/today.json";
 const el = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const kg = n => String(n).replace(".", ",");
-const store = {
-  get(k, fallback) { try { const v = localStorage.getItem(k); return v == null ? fallback : JSON.parse(v); } catch (e) { return fallback; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage blocked: keep going */ } }
-};
 
 let D, BY_NUM = {};
 
@@ -133,7 +129,6 @@ function renderRace() {
   el("race-eyebrow").textContent = `Quinté+ · ${r.date_label}`;
   el("race-title").textContent = `${r.hippodrome} · ${r.prix}`;
   el("race-facts").innerHTML = `<span><b>${esc(r.start_time)}</b></span><span>${r.distance_m.toLocaleString("fr-FR")} m ${esc(r.surface)}</span><span>${esc(r.race_type)}</span><span><b>${r.runners_count} partants</b></span>`;
-  el("saisie-eyebrow").textContent = `${r.date_label} · ${r.hippodrome}`;
   document.title = `Quinté · ${r.hippodrome}`;
 
   el("mode-prono").innerHTML = modeHTML(D.modes.prono, "Touchez un numéro pour savoir pourquoi.", refreshHTML());
@@ -141,48 +136,9 @@ function renderRace() {
   el("cmp-note").textContent = D.other_tips.note || "";
 }
 
-let picks, who = "veinard";
-const picksKey = () => `q-picks-${D.race.date}`;
-
 function renderCompare() {
   const AI = D.modes.prono.picks;
-  const rows = D.other_tips.sources.map(s => [s.source, s.picks]);
-  if (picks.veinard.length) rows.push(["Le Veinard", picks.veinard.slice(0, 5)]);
-  if (picks.moi.length) rows.push(["Mon jeu", picks.moi.slice(0, 5)]);
-  let html = rows.map(([s, l]) => `<tr><td class="src">${esc(s)}<br><span class="pill">${common(l, AI)} en commun avec l'IA</span></td><td>${minis(l, AI)}</td></tr>`).join("");
-  if (!picks.veinard.length) html += `<tr><td class="src">Le Veinard</td><td><span class="pill grey">À saisir dans « Mes numéros »</span></td></tr>`;
-  el("cmp").innerHTML = html;
-}
-
-function renderPad() {
-  const l = picks[who];
-  el("pad").querySelectorAll("button").forEach(b => {
-    const n = +b.dataset.n, i = l.indexOf(n);
-    b.setAttribute("aria-pressed", i >= 0); b.querySelector(".rank").textContent = i >= 0 ? i + 1 : "";
-  });
-  el("pick-chips").innerHTML = l.map(n => cloth(n, "sm")).join("") || `<span class="small muted">Aucun cheval choisi</span>`;
-  el("who-veinard").setAttribute("aria-pressed", who === "veinard");
-  el("who-moi").setAttribute("aria-pressed", who === "moi");
-  el("pad-help").textContent = who === "veinard" ? "Touchez les chevaux dans l'ordre du journal (jusqu'à 8)." : "Touchez vos chevaux dans votre ordre (jusqu'à 8).";
-}
-
-function renderInput() {
-  picks = store.get(picksKey(), { veinard: [], moi: [] });
-  el("pad").innerHTML = D.runners.map(h => `<button id="p${h.num}" data-n="${h.num}" aria-pressed="false" ${h.non_runner ? "disabled" : ""} aria-label="Cheval ${h.num} ${esc(h.name)}">${h.num}<span class="rank"></span></button>`).join("");
-  el("pad").addEventListener("click", e => {
-    const b = e.target.closest("button"); if (!b || b.disabled) return;
-    const n = +b.dataset.n, l = picks[who], i = l.indexOf(n);
-    if (i >= 0) l.splice(i, 1); else if (l.length < 8) l.push(n);
-    el("saved").textContent = ""; renderPad();
-  });
-  el("who-veinard").onclick = () => { who = "veinard"; el("saved").textContent = ""; renderPad(); };
-  el("who-moi").onclick = () => { who = "moi"; el("saved").textContent = ""; renderPad(); };
-  el("clear").onclick = () => { picks[who] = []; el("saved").textContent = ""; renderPad(); };
-  el("save").onclick = () => {
-    store.set(picksKey(), picks); renderCompare();
-    el("saved").textContent = picks[who].length ? "Enregistré. Comparaison mise à jour dans « Le Quinté »." : "Enregistré.";
-  };
-  renderPad();
+  el("cmp").innerHTML = D.other_tips.sources.map(s => `<tr><td class="src">${esc(s.source)}<br><span class="pill">${common(s.picks, AI)} en commun avec l'IA</span></td><td>${minis(s.picks, AI)}</td></tr>`).join("");
 }
 
 const euros = v => `${Number(v).toLocaleString("fr-FR", { maximumFractionDigits: 2 })} €`;
@@ -249,7 +205,7 @@ async function boot() {
     return;
   }
   D.runners.forEach(r => BY_NUM[r.num] = r);
-  renderRace(); renderInput(); renderCompare(); renderMatch(); wire();
+  renderRace(); renderCompare(); renderMatch(); wire();
   checkOdds();
   document.addEventListener("visibilitychange", () => { if (!document.hidden) checkOdds(); });  // app reopened later
 }
